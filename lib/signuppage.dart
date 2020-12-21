@@ -13,6 +13,33 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   @override
+  var _viewpass = Icons.visibility_off;
+  bool _obscureText = true;
+  var _viewpass1 = Icons.visibility_off;
+  bool _obscureText1 = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+      if (_obscureText) {
+        _viewpass = Icons.visibility_off;
+      } else {
+        _viewpass = Icons.visibility;
+      }
+    });
+  }
+
+  void _toggle1() {
+    setState(() {
+      _obscureText1 = !_obscureText1;
+      if (_obscureText1) {
+        _viewpass1 = Icons.visibility_off;
+      } else {
+        _viewpass1 = Icons.visibility;
+      }
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -30,15 +57,13 @@ class _SignupPageState extends State<SignupPage> {
                 child: Image.asset("assets/Plusfit_logo.png")),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
-              child: 
-              Container(
+              child: Container(
                 height: 320,
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
-                child: 
-                Column(
+                child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -63,13 +88,16 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     TextFieldContainer(
                       child: TextField(
-                        obscureText: true,
+                        obscureText: _obscureText,
                         style: new TextStyle(color: Colors.black, fontSize: 18),
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             prefixIcon: Icon(Icons.lock_outline),
-                            suffixIcon: Icon(Icons.visibility_off),
+                            suffixIcon: IconButton(
+                              onPressed: _toggle,
+                              icon: Icon(_viewpass),
+                            ),
                             labelText: 'Senha',
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),
@@ -79,13 +107,16 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     TextFieldContainer(
                       child: TextField(
-                        obscureText: true,
+                        obscureText: _obscureText1,
                         style: new TextStyle(color: Colors.black, fontSize: 18),
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             prefixIcon: Icon(Icons.lock_outline),
-                            suffixIcon: Icon(Icons.visibility_off),
+                            suffixIcon: IconButton(
+                              onPressed: _toggle1,
+                              icon: Icon(_viewpass1),
+                            ),
                             labelText: 'Confirmar Senha',
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),
@@ -114,43 +145,38 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             SizedBox(
-                      height: 65,
-                    ),
+              height: 65,
+            ),
             Container(
-                      height: 32,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 110,
-                          ),
-                          Text(
-                            "Have an account ?",
-                            textAlign: TextAlign.right,
-                            style: TextStyle(color: pyellow),
-                          ),
-
-                          Container(
-                          alignment: Alignment.topLeft,
-                          width: 80,
-                          child:  
-                            TextButton(
-                            onPressed: (){
-                              // Navigator.pushNamed(context, '/login');
-                            },
-                            child: Text(
-                              "Sing in",
-                              style: TextStyle(
-                                    color: pyellow,
-                                    fontWeight: FontWeight.bold
-                              ),
-                            ),
-                        ),
-                        
-                        ),
-                          
-                        ],
+              height: 32,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 110,
+                  ),
+                  Text(
+                    "Have an account ?",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(color: pyellow),
+                  ),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    width: 80,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/login');
+                      },
+                      child: Text(
+                        "Sing in",
+                        style: TextStyle(
+                            color: pyellow, fontWeight: FontWeight.bold),
                       ),
                     ),
+                  ),
+                ],
+              ),
+            ),
           ])),
     );
   }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/assets.dart';
 import 'package:plusfit/components/constants.dart';
 
-
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
 
@@ -14,6 +13,20 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   @override
+  var _viewpass = Icons.visibility_off;
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+      if (_obscureText) {
+        _viewpass = Icons.visibility_off;
+      } else {
+        _viewpass = Icons.visibility;
+      }
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -47,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextFieldContainer(
                       child: TextField(
+                        keyboardType: TextInputType.emailAddress,
                         style: new TextStyle(color: Colors.black, fontSize: 18),
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -62,13 +76,15 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextFieldContainer(
                       child: TextField(
-                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: _obscureText,
                         style: new TextStyle(color: Colors.black, fontSize: 18),
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             prefixIcon: Icon(Icons.lock_outline),
-                            suffixIcon: Icon(Icons.visibility_off),
+                            suffixIcon: IconButton(
+                                onPressed: _toggle, icon: Icon(_viewpass)),
                             labelText: 'Senha',
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),
@@ -111,45 +127,39 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(
-                      height: 100,
-                    ),
+              height: 100,
+            ),
             Container(
-                      height: 32,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 100,
-                          ),
-                          Text(
-                            "Don't have an account ?",
-                            textAlign: TextAlign.right,
-                            style: TextStyle(color: pyellow),
-                          ),
-
-                          Container(
-                          alignment: Alignment.topLeft,
-                          width: 80,
-                          child:  
-                            TextButton(
-                            onPressed: (){
-                              // Navigator.pushNamed(context, '/signup');
-                            },
-                            child: Text(
-                              "Sing up",
-                              style: TextStyle(
-                                    color: pyellow,
-                                    fontWeight: FontWeight.bold
-                              ),
-                            ),
-                        ),
-                        
-                        ),
-                          
-                        ],
+              height: 32,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 100,
+                  ),
+                  Text(
+                    "Don't have an account ?",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(color: pyellow),
+                  ),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    width: 80,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/signup');
+                      },
+                      child: Text(
+                        "Sing up",
+                        style: TextStyle(
+                            color: pyellow, fontWeight: FontWeight.bold),
                       ),
                     ),
+                  ),
+                ],
+              ),
+            ),
           ])),
-          
     );
   }
 }
