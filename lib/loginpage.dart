@@ -84,7 +84,9 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(30)),
                             prefixIcon: Icon(Icons.lock_outline),
                             suffixIcon: IconButton(
-                                onPressed: _toggle, icon: Icon(_viewpass)),
+                                onPressed: _toggle, 
+                                icon: Icon(_viewpass),
+                                 ),
                             labelText: 'Senha',
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),
@@ -97,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                         highlightColor: Colors.white,
                         onPressed: () {},
                         child: Text(
-                          "Forgot Password?",
+                          "Esqueceu a Senha?",
                           textAlign: TextAlign.right,
                           style: TextStyle(color: pgreytextfield),
                         ),
@@ -118,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25))),
                           onPressed: () {},
-                          child: Text("Sign in"),
+                          child: Text("Entrar"),
                         ),
                       ],
                     ))
@@ -137,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: 100,
                   ),
                   Text(
-                    "Don't have an account ?",
+                    "Não possui uma conta?",
                     textAlign: TextAlign.right,
                     style: TextStyle(color: pyellow),
                   ),
@@ -150,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.pushNamed(context, '/signup');
                       },
                       child: Text(
-                        "Sing up",
+                        "Cadastrar",
                         style: TextStyle(
                             color: pyellow, fontWeight: FontWeight.bold),
                       ),

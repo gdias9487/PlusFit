@@ -136,7 +136,7 @@ class _SignupPageState extends State<SignupPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25))),
                           onPressed: () {},
-                          child: Text("Sign up"),
+                          child: Text("Cadastrar"),
                         ),
                       ],
                     ))
@@ -155,7 +155,7 @@ class _SignupPageState extends State<SignupPage> {
                     width: 110,
                   ),
                   Text(
-                    "Have an account ?",
+                    "Possui uma Conta?",
                     textAlign: TextAlign.right,
                     style: TextStyle(color: pyellow),
                   ),
@@ -168,7 +168,7 @@ class _SignupPageState extends State<SignupPage> {
                         Navigator.pushNamed(context, '/login');
                       },
                       child: Text(
-                        "Sing in",
+                        "Entrar",
                         style: TextStyle(
                             color: pyellow, fontWeight: FontWeight.bold),
                       ),

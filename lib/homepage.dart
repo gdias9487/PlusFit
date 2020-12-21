@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Navigator.pushNamed(context, '/signup');
                           },
-                          child: Text("Sign up")),
+                          child: Text("Cadastrar")),
                       SizedBox(
                         height: 20,
                       ),
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Navigator.pushNamed(context, '/login');
                           },
-                          child: Text("Sign in"))
+                          child: Text("Entrar"))
                     ],
                   ),
                 )
