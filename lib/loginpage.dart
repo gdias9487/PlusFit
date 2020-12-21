@@ -84,9 +84,9 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(30)),
                             prefixIcon: Icon(Icons.lock_outline),
                             suffixIcon: IconButton(
-                                onPressed: _toggle, 
-                                icon: Icon(_viewpass),
-                                 ),
+                              onPressed: _toggle,
+                              icon: Icon(_viewpass),
+                            ),
                             labelText: 'Senha',
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),

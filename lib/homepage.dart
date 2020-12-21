@@ -44,8 +44,8 @@ class _HomePageState extends State<HomePage> {
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               side: BorderSide(color: porange, width: 1),
-                              primary: Colors.white,
-                              onPrimary: porange,
+                              primary: porange,
+                              onPrimary: Colors.white,
                               textStyle: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                               minimumSize: Size(320, 50),
