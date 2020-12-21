@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/assets.dart';
 import 'package:plusfit/components/constants.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
+class ResetPassword extends StatefulWidget {
+  ResetPassword({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _ResetPasswordState createState() => _ResetPasswordState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ResetPasswordState extends State<ResetPassword> {
   @override
   var _viewpass = Icons.visibility_off;
   bool _obscureText = true;
@@ -39,13 +39,13 @@ class _LoginPageState extends State<LoginPage> {
               height: 30,
             ),
             SizedBox(
-                height: 150,
+                height: 170,
                 width: 150,
                 child: Image.asset("assets/Plusfit_logo.png")),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
               child: Container(
-                height: 280,
+                height: 270,
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -57,6 +57,32 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
                     SizedBox(
                       height: 10,
+                    ),
+                    Text(
+                      'Redefinir Senha',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        ),
+                    ),
+                     SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                      child: Text(
+                      'Insira seu endereço de email para redefinir a senha',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black54,
+                      ),
+                    ),
+                    ),
+                    
+                    SizedBox(
+                      height: 20,
                     ),
                     TextFieldContainer(
                       child: TextField(
@@ -74,41 +100,6 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: paddefault,
                     ),
-                    TextFieldContainer(
-                      child: TextField(
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: _obscureText,
-                        style: new TextStyle(color: Colors.black, fontSize: 18),
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            prefixIcon: Icon(Icons.lock_outline),
-                            suffixIcon: IconButton(
-                              onPressed: _toggle,
-                              icon: Icon(_viewpass),
-                            ),
-                            labelText: 'Senha',
-                            labelStyle: TextStyle(color: pgreytextfield)),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.topRight,
-                      height: 32,
-                      decoration: BoxDecoration(color: Colors.white),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/reset');
-                        },
-                        child: Text(
-                          "Esqueceu a Senha?",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(color: pgreytextfield),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: padbutton,
-                    ),
                     Container(
                         child: Column(
                       children: <Widget>[
@@ -120,46 +111,16 @@ class _LoginPageState extends State<LoginPage> {
                               minimumSize: Size(320, 50),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25))),
-                          onPressed: () {},
-                          child: Text("Entrar"),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                          child: Text("Redefinir Senha"),
                         ),
                       ],
                     ))
                   ],
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 100,
-            ),
-            Container(
-              height: 32,
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 100,
-                  ),
-                  Text(
-                    "Não possui uma conta?",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(color: pyellow),
-                  ),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    width: 80,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.pushNamed(context, '/signup');
-                      },
-                      child: Text(
-                        "Cadastrar",
-                        style: TextStyle(
-                            color: pyellow, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ),
           ])),
