@@ -13,41 +13,25 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
   @override
-  var _viewpass = Icons.visibility_off;
-  bool _obscureText = true;
-  var _viewpass1 = Icons.visibility_off;
-  bool _obscureText1 = true;
-
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-      if (_obscureText) {
-        _viewpass = Icons.visibility_off;
-      } else {
-        _viewpass = Icons.visibility;
-      }
-    });
-  }
-
-  void _toggle1() {
-    setState(() {
-      _obscureText1 = !_obscureText1;
-      if (_obscureText1) {
-        _viewpass1 = Icons.visibility_off;
-      } else {
-        _viewpass1 = Icons.visibility;
-      }
-    });
-  }
-
   Widget build(BuildContext context) {
+    final ScrollController cont = ScrollController();
+    void scroll() {
+      cont.animateTo(0,
+          duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
+    }
+
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red,
+        onPressed: () => {scroll()},
+        child: Icon(Icons.arrow_upward),
+      ),
       body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/sign_up_background.png"),
                   fit: BoxFit.cover)),
-          child: ListView(children: <Widget>[
+          child: ListView(controller: cont, children: <Widget>[
             SizedBox(
               height: 30,
             ),
@@ -58,7 +42,7 @@ class _AboutPageState extends State<AboutPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
               child: Container(
-                  height: 1200,
+                  height: 2000,
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -71,6 +55,7 @@ class _AboutPageState extends State<AboutPage> {
                       SizedBox(
                         height: 10,
                       ),
+                      Text(''),
                     ],
                   )),
             ),
