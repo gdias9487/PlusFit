@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             ),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/background.png"),
+                    image: AssetImage("assets/main_menu_background.png"),
                     fit: BoxFit.cover))));
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/assets.dart';
 import 'package:plusfit/components/constants.dart';
 
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
 
@@ -18,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/background2.png"),
+                  image: AssetImage("assets/login_background.png"),
                   fit: BoxFit.cover)),
           child: ListView(children: <Widget>[
             SizedBox(
@@ -109,7 +110,46 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+            SizedBox(
+                      height: 100,
+                    ),
+            Container(
+                      height: 32,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                          ),
+                          Text(
+                            "Don't have an account ?",
+                            textAlign: TextAlign.right,
+                            style: TextStyle(color: pyellow),
+                          ),
+
+                          Container(
+                          alignment: Alignment.topLeft,
+                          width: 80,
+                          child:  
+                            TextButton(
+                            onPressed: (){
+                              // Navigator.pushNamed(context, '/signup');
+                            },
+                            child: Text(
+                              "Sing up",
+                              style: TextStyle(
+                                    color: pyellow,
+                                    fontWeight: FontWeight.bold
+                              ),
+                            ),
+                        ),
+                        
+                        ),
+                          
+                        ],
+                      ),
+                    ),
           ])),
+          
     );
   }
 }

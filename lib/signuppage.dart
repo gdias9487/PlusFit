@@ -18,7 +18,7 @@ class _SignupPageState extends State<SignupPage> {
       body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/background1.png"),
+                  image: AssetImage("assets/sign_up_background.png"),
                   fit: BoxFit.cover)),
           child: ListView(children: <Widget>[
             SizedBox(
@@ -30,13 +30,15 @@ class _SignupPageState extends State<SignupPage> {
                 child: Image.asset("assets/Plusfit_logo.png")),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
-              child: Container(
+              child: 
+              Container(
                 height: 320,
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
-                child: Column(
+                child: 
+                Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -111,6 +113,44 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
             ),
+            SizedBox(
+                      height: 65,
+                    ),
+            Container(
+                      height: 32,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 110,
+                          ),
+                          Text(
+                            "Have an account ?",
+                            textAlign: TextAlign.right,
+                            style: TextStyle(color: pyellow),
+                          ),
+
+                          Container(
+                          alignment: Alignment.topLeft,
+                          width: 80,
+                          child:  
+                            TextButton(
+                            onPressed: (){
+                              // Navigator.pushNamed(context, '/login');
+                            },
+                            child: Text(
+                              "Sing in",
+                              style: TextStyle(
+                                    color: pyellow,
+                                    fontWeight: FontWeight.bold
+                              ),
+                            ),
+                        ),
+                        
+                        ),
+                          
+                        ],
+                      ),
+                    ),
           ])),
     );
   }
