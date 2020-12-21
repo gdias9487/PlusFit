@@ -57,7 +57,23 @@ class _HomePageState extends State<HomePage> {
                           child: Text("Entrar"))
                     ],
                   ),
-                )
+                ),
+                SizedBox(height: 65),
+                Container(
+                  alignment: Alignment.center,
+                  width: 80,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/about');
+                    },
+                    child: Text(
+                      "Sobre o Aplicativo",
+                      style: TextStyle(
+                          color: pyellow, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
               ],
             ),
             decoration: BoxDecoration(
