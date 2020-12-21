@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/assets.dart';
 import 'package:plusfit/components/constants.dart';
 
-class SignupPage extends StatefulWidget {
-  SignupPage({Key key, this.title}) : super(key: key);
+class SignupprfPage extends StatefulWidget {
+  SignupprfPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _SignupPageState createState() => _SignupPageState();
+  _SignupprfPageState createState() => _SignupprfPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignupprfPageState extends State<SignupprfPage> {
   @override
   var _viewpass = Icons.visibility_off;
   bool _obscureText = true;
@@ -79,45 +79,61 @@ class _SignupPageState extends State<SignupPage> {
                                 borderRadius: BorderRadius.circular(30)),
                             fillColor: Colors.blue,
                             prefixIcon: Icon(Icons.account_circle),
-                            labelText: 'E-mail',
+                            labelText: 'Nome completo',
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),
                     ),
                     SizedBox(
                       height: paddefault,
                     ),
-                    TextFieldContainer(
-                      child: TextField(
-                        obscureText: _obscureText,
-                        style: new TextStyle(color: Colors.black, fontSize: 18),
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            prefixIcon: Icon(Icons.lock_outline),
-                            suffixIcon: IconButton(
-                              onPressed: _toggle,
-                              icon: Icon(_viewpass),
-                            ),
-                            labelText: 'Senha',
-                            labelStyle: TextStyle(color: pgreytextfield)),
-                      ),
+                    Row(
+                      children: <Widget>[
+                        TextFieldContainer(
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            style: new TextStyle(
+                                color: Colors.black, fontSize: 18),
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30)),
+                                fillColor: Colors.blue,
+                                prefixIcon: Icon(Icons.line_weight),
+                                labelText: 'Peso (kg)',
+                                labelStyle: TextStyle(color: pgreytextfield)),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        TextFieldContainer(
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            style: new TextStyle(
+                                color: Colors.black, fontSize: 18),
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30)),
+                                fillColor: Colors.blue,
+                                prefixIcon: Icon(Icons.height),
+                                labelText: 'Altura (cm)',
+                                labelStyle: TextStyle(color: pgreytextfield)),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: paddefault,
                     ),
                     TextFieldContainer(
                       child: TextField(
-                        obscureText: _obscureText1,
+                        keyboardType: TextInputType.datetime,
                         style: new TextStyle(color: Colors.black, fontSize: 18),
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30)),
-                            prefixIcon: Icon(Icons.lock_outline),
-                            suffixIcon: IconButton(
-                              onPressed: _toggle1,
-                              icon: Icon(_viewpass1),
-                            ),
-                            labelText: 'Confirmar Senha',
+                            fillColor: Colors.blue,
+                            prefixIcon: Icon(Icons.calendar_today),
+                            labelText: 'Data de Nascimento (DD/MM/AAAA)',
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),
                     ),
@@ -135,10 +151,8 @@ class _SignupPageState extends State<SignupPage> {
                               minimumSize: Size(320, 50),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25))),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/signupprf');
-                          },
-                          child: Text("Avançar"),
+                          onPressed: () {},
+                          child: Text("Cadastrar"),
                         ),
                       ],
                     ))
@@ -166,6 +180,7 @@ class _SignupPageState extends State<SignupPage> {
                     width: 80,
                     child: TextButton(
                       onPressed: () {
+                        Navigator.pop(context);
                         Navigator.pop(context);
                         Navigator.pushNamed(context, '/login');
                       },
