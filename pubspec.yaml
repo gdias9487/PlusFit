@@ -84,3 +84,6 @@ flutter:
 
   assets:
     - assets/Plusfit_logo.png
+    - assets/background.png
+    - assets/background1.png
+    - assets/background2.png
