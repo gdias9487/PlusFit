@@ -64,7 +64,6 @@ class _HomePageState extends State<HomePage> {
                   width: 80,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pop(context);
                       Navigator.pushNamed(context, '/about');
                     },
                     child: Text(
