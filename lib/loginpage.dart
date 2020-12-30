@@ -120,7 +120,9 @@ class _LoginPageState extends State<LoginPage> {
                               minimumSize: Size(320, 50),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25))),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/exercises');
+                          },
                           child: Text("Entrar"),
                         ),
                       ],
