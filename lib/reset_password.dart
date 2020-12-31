@@ -13,19 +13,6 @@ class ResetPassword extends StatefulWidget {
 
 class _ResetPasswordState extends State<ResetPassword> {
   @override
-  var _viewpass = Icons.visibility_off;
-  bool _obscureText = true;
-
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-      if (_obscureText) {
-        _viewpass = Icons.visibility_off;
-      } else {
-        _viewpass = Icons.visibility;
-      }
-    });
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(

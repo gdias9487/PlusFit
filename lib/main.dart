@@ -4,6 +4,8 @@ import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/homepage.dart';
 import 'package:plusfit/mainpage.dart';
 import 'package:plusfit/reset_password.dart';
+import 'package:plusfit/about.dart';
+import 'package:plusfit/exercises.dart';
 import 'package:plusfit/signuppage.dart';
 import 'package:plusfit/signuppageprf.dart';
 
@@ -20,6 +22,9 @@ class PFApp extends StatelessWidget {
         '/home': (context) => HomePage(),
         '/login': (context) => LoginPage(),
         '/signup': (context) => SignupPage(),
+        '/reset': (context) => ResetPassword(),
+        '/about': (context) => AboutPage(),
+        '/exercises': (context) => ExercisePage(),
         '/signupprf': (context) => SignupprfPage(),
         '/reset': (context) => ResetPassword(),
         '/main': (context) => MainPage()
