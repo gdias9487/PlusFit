@@ -120,7 +120,9 @@ class _LoginPageState extends State<LoginPage> {
                               minimumSize: Size(320, 50),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25))),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/main');
+                          },
                           child: Text("Entrar"),
                         ),
                       ],
@@ -137,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                 children: [
                   SizedBox(
-                    width: 100,
+                    width: 75,
                   ),
                   Text(
                     "Não possui uma conta?",
