@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25))),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/main');
+                            Navigator.pushNamed(context, '/exercises');
                           },
                           child: Text("Entrar"),
                         ),
