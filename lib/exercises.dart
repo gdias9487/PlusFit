@@ -21,32 +21,42 @@ class _ExercisePageState extends State<ExercisePage> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Olá, Usuário !"),
-            elevation: 0,
-            backgroundColor: Colors.black,
-            leading: IconButton(icon: Icon(Icons.supervised_user_circle),
-            onPressed: (){Navigator.pushNamed(context, '/perfil');},
-            ),
-          ),
-
-      body:Container(
-        
+      appBar: AppBar(
+        title: Text("Olá, Usuário !"),
+        elevation: 0,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pushNamed(context, '/login');
+          },
+        ),
+      ),
+      body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/sign_up_background.png"),
                   fit: BoxFit.cover)),
           child: Container(
-            
             child: ListView(controller: cont, children: <Widget>[
+              Container(
+                  height: 130,
+                  width: 130,
+                  child: Column(
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.person),
+                        tooltip: 'Profile page',
+                        color: porange,
+                        iconSize: 110.0,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/perfil');
+                        },
+                      ),
+                    ],
+                  )),
               SizedBox(
-                
-                  height: 100,
-                  width: 100,
-                  child: Image.asset("assets/Plusfit_logo.png")
-                  ),
-              
-              SizedBox(
-                height: 15,
+                height: 5,
               ),
               TextFieldContainer(
                 child: TextField(
@@ -70,8 +80,8 @@ class _ExercisePageState extends State<ExercisePage> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: porange,
-                        textStyle:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        textStyle: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                         minimumSize: Size(150, 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25))),
@@ -80,6 +90,9 @@ class _ExercisePageState extends State<ExercisePage> {
                   ),
                 ],
               )),
+              SizedBox(
+                height: 35,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Container(
