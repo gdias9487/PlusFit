@@ -32,7 +32,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
               child: Container(
-                height: 270,
+                height: 290,
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -51,23 +51,23 @@ class _ResetPasswordState extends State<ResetPassword> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        ),
+                      ),
                     ),
-                     SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                       child: Text(
-                      'Insira seu endereço de email para redefinir a senha',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black54,
+                        'Insira seu endereço de email para redefinir a senha',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black54,
+                        ),
                       ),
                     ),
-                    ),
-                    
                     SizedBox(
                       height: 20,
                     ),

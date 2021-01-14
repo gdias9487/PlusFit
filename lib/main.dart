@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/loginpage.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/homepage.dart';
+import 'package:plusfit/mainpage.dart';
 import 'package:plusfit/perfil.dart';
 import 'package:plusfit/reset_password.dart';
 import 'package:plusfit/about.dart';
@@ -26,8 +27,8 @@ class PFApp extends StatelessWidget {
         '/about': (context) => AboutPage(),
         '/exercises': (context) => ExercisePage(),
         '/signupprf': (context) => SignupprfPage(),
-        '/reset': (context) => ResetPassword(),
-        '/perfil': (context) => PerfilPage(),
+        '/main': (context) => MainPage(),
+        '/perfil': (context) => PerfilPage()
       },
       title: 'PlusFit v1.0',
       theme: ThemeData(

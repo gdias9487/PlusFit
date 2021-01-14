@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                 children: [
                   SizedBox(
-                    width: 100,
+                    width: 75,
                   ),
                   Text(
                     "Não possui uma conta?",
