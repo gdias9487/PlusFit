@@ -40,24 +40,21 @@ class _ExercisePageState extends State<ExercisePage> {
           child: Container(
             child: ListView(controller: cont, children: <Widget>[
               Container(
-                  height: 130,
-                  width: 130,
+                  height: 110,
+                  width: 110,
                   child: Column(
                     children: <Widget>[
                       IconButton(
                         icon: Icon(Icons.person),
                         tooltip: 'Profile page',
                         color: porange,
-                        iconSize: 110.0,
+                        iconSize: 90.0,
                         onPressed: () {
                           Navigator.pushNamed(context, '/perfil');
                         },
                       ),
                     ],
                   )),
-              SizedBox(
-                height: 5,
-              ),
               TextFieldContainer(
                 child: TextField(
                   keyboardType: TextInputType.emailAddress,
