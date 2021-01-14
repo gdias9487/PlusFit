@@ -21,30 +21,27 @@ class _ExercisePageState extends State<ExercisePage> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Olá, Usuário !"),
-            elevation: 0,
-            backgroundColor: Colors.black,
-            leading: IconButton(icon: Icon(Icons.supervised_user_circle),
-            onPressed: (){Navigator.pushNamed(context, '/perfil');},
-            ),
-          ),
-
-      body:Container(
-        
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.supervised_user_circle),
+          onPressed: () {
+            Navigator.pushNamed(context, '/perfil');
+          },
+        ),
+      ),
+      body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/sign_up_background.png"),
                   fit: BoxFit.cover)),
           child: Container(
-            
             child: ListView(controller: cont, children: <Widget>[
               SizedBox(
-                
                   height: 100,
                   width: 100,
-                  child: Image.asset("assets/Plusfit_logo.png")
-                  ),
-              
+                  child: Image.asset("assets/Plusfit_logo.png")),
               SizedBox(
                 height: 15,
               ),
@@ -70,8 +67,8 @@ class _ExercisePageState extends State<ExercisePage> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: porange,
-                        textStyle:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        textStyle: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                         minimumSize: Size(150, 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25))),

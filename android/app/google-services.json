@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "842068768846",
+    "project_id": "plusfit-2fbeb",
+    "storage_bucket": "plusfit-2fbeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842068768846:android:9bc03097038c60cf90ab1f",
+        "android_client_info": {
+          "package_name": "com.example.plusfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842068768846-e62pqutg4f450qihmf063l14q7dfpem0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU2H-usfCQJaq3P2leadrjsM1gD60fiks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842068768846-e62pqutg4f450qihmf063l14q7dfpem0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
