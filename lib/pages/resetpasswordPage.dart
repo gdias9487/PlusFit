@@ -73,7 +73,8 @@ class _ResetPasswordState extends State<ResetPassword> {
 
                      DefaultTextField(
                       obscureText: false,
-                      text: "Email"
+                      text: "Email",
+                      prefixicon: Icons.account_circle_sharp,
                     ),
                     
                     SizedBox(

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:plusfit/authentication.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TextField.dart';
-import 'package:plusfit/widgets/Buttons.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:provider/provider.dart';
+
+import '../components/constants.dart';
 
 class SignupPage extends StatefulWidget {
   SignupPage({Key key, this.title}) : super(key: key);
+
+  
 
   final String title;
 
@@ -14,7 +19,12 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+
   @override
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   var _viewpass = Icons.visibility_off;
   bool _obscureText = true;
   var _viewpass1 = Icons.visibility_off;
@@ -41,6 +51,7 @@ class _SignupPageState extends State<SignupPage> {
       }
     });
   }
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,15 +86,19 @@ class _SignupPageState extends State<SignupPage> {
                     ),
 
                     DefaultTextField(
+                      controler: emailController,
                       obscureText: false,
-                      text: "Email"
+                      text: "Email",
+                      prefixicon: Icons.account_circle_sharp,
                     ),
                     
                     SizedBox(
                       height: paddefault,
                     ),
+
                     TextFieldContainer(
                       child: TextField(
+                        controller: passwordController,
                         obscureText: _obscureText,
                         style: new TextStyle(color: Colors.black, fontSize: 18),
                         decoration: InputDecoration(
@@ -98,6 +113,7 @@ class _SignupPageState extends State<SignupPage> {
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),
                     ),
+
                     SizedBox(
                       height: paddefault,
                     ),
@@ -122,15 +138,22 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     Container(
                         child: Column(
-                      children: <Widget>[
-                        DefaultElevatedButton(
-                            color: porange,
-                            fontSize: 20,
-                            height: 320,
-                            radius: 25,
-                            width: 50,
-                            route: '/signup2',
-                            text: 'Avançar'),
+                        children: <Widget>[
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                          primary: porange,
+                          textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          minimumSize: Size(320, 50),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25))),
+                          onPressed: () { 
+                            context.read<AuthenticationService>().singUp(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            );
+                          },
+                          child: Text("Cadastro"),
+                        ),
                       ],
                     ))
                   ],

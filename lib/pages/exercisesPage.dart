@@ -81,6 +81,21 @@ class _ExercisePageState extends State<ExercisePage> {
               SizedBox(
                 height: paddefault,
               ),
+<<<<<<< HEAD
+=======
+              Container(
+                  child: Column(
+                children: <Widget>[
+                  DefaultElevatedButton(
+                      color: porange,
+                      fontSize: 20,
+                      height: 150,
+                      radius: 25,
+                      width: 50,
+                      text: 'Buscar'),
+                ],
+              )),
+>>>>>>> 893cfbacec4fec9c5f5f2736506a722816a2ef72
               SizedBox(
                 height: 15,
               ),

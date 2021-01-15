@@ -63,7 +63,8 @@ class _LoginPageState extends State<LoginPage> {
                     
                     DefaultTextField(
                       obscureText: false,
-                      text: "Email"
+                      text: "Email",
+                      prefixicon: Icons.account_circle_sharp,
                     ),
                     
                     SizedBox(
@@ -95,7 +96,6 @@ class _LoginPageState extends State<LoginPage> {
                         height: 320,
                         radius: 25,
                         width: 50,
-                        route: '/exercises',
                         text: 'Entrar'),
                     Container(
                       alignment: Alignment.topRight,
