@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plusfit/widgets/Buttons.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 import 'package:plusfit/components/constants.dart';
@@ -75,17 +76,14 @@ class _ExercisePageState extends State<ExercisePage> {
               Container(
                   child: Column(
                 children: <Widget>[
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: porange,
-                        textStyle: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                        minimumSize: Size(150, 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25))),
-                    onPressed: () {},
-                    child: Text("Buscar"),
-                  ),
+                  DefaultElevatedButton(
+                      color: porange,
+                      fontSize: 20,
+                      height: 150,
+                      radius: 25,
+                      width: 50,
+                      route: '',
+                      text: 'Buscar'),
                 ],
               )),
               SizedBox(

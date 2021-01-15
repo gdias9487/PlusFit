@@ -25,7 +25,7 @@ class PFApp extends StatelessWidget {
         '/reset': (context) => ResetPassword(),
         '/about': (context) => AboutPage(),
         '/exercises': (context) => ExercisePage(),
-        '/signupprf': (context) => SignupprfPage(),
+        '/signup2': (context) => SignupprfPage(),
         '/perfil': (context) => PerfilPage()
       },
       title: 'PlusFit v1.0',
