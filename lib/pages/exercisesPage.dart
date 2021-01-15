@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plusfit/widgets/Buttons.dart';
+import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 import 'package:plusfit/components/constants.dart';
@@ -57,18 +58,10 @@ class _ExercisePageState extends State<ExercisePage> {
                       ),
                     ],
                   )),
-              TextFieldContainer(
-                child: TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  style: new TextStyle(color: Colors.black, fontSize: 18),
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      fillColor: Colors.blue,
-                      prefixIcon: Icon(Icons.search),
-                      labelText: 'Buscar Treino',
-                      labelStyle: TextStyle(color: pgreytextfield)),
-                ),
+              DefaultTextField(
+                obscureText: false,
+                text: 'Buscar treino',
+                suffixicon: Icons.search,
               ),
               SizedBox(
                 height: paddefault,
