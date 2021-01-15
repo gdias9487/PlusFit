@@ -6,6 +6,7 @@ class DefaultTextField extends StatelessWidget {
   final Key key;
   final bool obscureText;
   final String text;
+  final action;
   final prefixicon;
   final suffixicon;
 
@@ -13,6 +14,7 @@ class DefaultTextField extends StatelessWidget {
       {this.key,
       @required this.obscureText,
       @required this.text,
+      this.action,
       this.prefixicon,
       this.suffixicon});
 
@@ -29,6 +31,7 @@ class DefaultTextField extends StatelessWidget {
             suffixIcon: Icon(suffixicon),
             labelText: text,
             labelStyle: TextStyle(color: pgreytextfield)),
+            
       ),
     );
   }

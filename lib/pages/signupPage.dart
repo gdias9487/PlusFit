@@ -83,6 +83,7 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(
                       height: paddefault,
                     ),
+
                     TextFieldContainer(
                       child: TextField(
                         obscureText: _obscureText,
@@ -99,6 +100,7 @@ class _SignupPageState extends State<SignupPage> {
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),
                     ),
+                    
                     SizedBox(
                       height: paddefault,
                     ),
