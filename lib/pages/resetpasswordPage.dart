@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
+import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -70,19 +71,12 @@ class _ResetPasswordState extends State<ResetPassword> {
                     SizedBox(
                       height: 20,
                     ),
-                    TextFieldContainer(
-                      child: TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        style: new TextStyle(color: Colors.black, fontSize: 18),
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            fillColor: Colors.blue,
-                            prefixIcon: Icon(Icons.account_circle),
-                            labelText: 'E-mail',
-                            labelStyle: TextStyle(color: pgreytextfield)),
-                      ),
+
+                     DefaultTextField(
+                      obscureText: false,
+                      text: "Email"
                     ),
+                    
                     SizedBox(
                       height: paddefault,
                     ),
