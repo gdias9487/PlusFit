@@ -58,38 +58,43 @@ class _ExercisePageState extends State<ExercisePage> {
                       ),
                     ],
                   )),
-              DefaultTextField(
-                obscureText: false,
-                text: 'Buscar treino',
-                suffixicon: Icons.search,
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                child: Row(children: <Widget>[
+                  Expanded(
+                    flex: 8,
+                    child: DefaultTextField(
+                        obscureText: false,
+                        text: 'Buscar treino...',
+                        suffixicon: Icons.search),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: IconButton(
+                        icon: Icon(
+                      Icons.filter_alt_sharp,
+                      color: porange,
+                    )),
+                  )
+                ]),
               ),
               SizedBox(
                 height: paddefault,
               ),
-              Container(
-                  child: Column(
-                children: <Widget>[
-                  DefaultElevatedButton(
-                      color: porange,
-                      fontSize: 20,
-                      height: 150,
-                      radius: 25,
-                      width: 50,
-                      route: '',
-                      text: 'Buscar'),
-                ],
-              )),
               SizedBox(
-                height: 35,
+                height: 15,
               ),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 1'),
+                  height: 150, horizontal: 15, vertical: 10, text: 'Peitoral'),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 2'),
+                  height: 150, horizontal: 15, vertical: 10, text: 'Costas'),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 3'),
+                  height: 150, horizontal: 15, vertical: 10, text: 'Pernas'),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 4'),
+                  height: 150,
+                  horizontal: 15,
+                  vertical: 10,
+                  text: 'Cardiovascular'),
             ]),
           )),
     );
