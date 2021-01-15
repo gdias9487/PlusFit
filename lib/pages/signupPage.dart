@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
+import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
 
 class SignupPage extends StatefulWidget {
@@ -71,18 +72,12 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    TextFieldContainer(
-                      child: TextField(
-                        style: new TextStyle(color: Colors.black, fontSize: 18),
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            fillColor: Colors.blue,
-                            prefixIcon: Icon(Icons.account_circle),
-                            labelText: 'E-mail',
-                            labelStyle: TextStyle(color: pgreytextfield)),
-                      ),
+
+                    DefaultTextField(
+                      obscureText: false,
+                      text: "Email"
                     ),
+                    
                     SizedBox(
                       height: paddefault,
                     ),

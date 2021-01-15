@@ -34,5 +34,6 @@ class TrainingContainer extends StatelessWidget {
             ],
           )),
     );
+    
   }
 }
