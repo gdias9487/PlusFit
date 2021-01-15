@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:plusfit/loginpage.dart';
+import 'package:plusfit/pages/loginpage.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:plusfit/homepage.dart';
-import 'package:plusfit/mainpage.dart';
-import 'package:plusfit/perfil.dart';
-import 'package:plusfit/reset_password.dart';
-import 'package:plusfit/about.dart';
-import 'package:plusfit/exercises.dart';
-import 'package:plusfit/signuppage.dart';
-import 'package:plusfit/signuppageprf.dart';
+import 'package:plusfit/pages/homepage.dart';
+import 'package:plusfit/pages/mainpage.dart';
+import 'package:plusfit/pages/profilePage.dart';
+import 'package:plusfit/pages/resetpasswordPage.dart';
+import 'package:plusfit/pages/aboutPage.dart';
+import 'package:plusfit/pages/exercisesPage.dart';
+import 'package:plusfit/pages/signupPage.dart';
+import 'package:plusfit/pages/signupPage2.dart';
 
 void main() {
   runApp(PFApp());
