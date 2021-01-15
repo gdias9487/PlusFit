@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plusfit/components/assets.dart';
-import 'package:plusfit/components/constants.dart';
 
 class AboutPage extends StatefulWidget {
   AboutPage({Key key, this.title}) : super(key: key);

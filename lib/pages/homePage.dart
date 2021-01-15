@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plusfit/main.dart';
-import 'package:plusfit/pages/loginpage.dart';
 import 'package:plusfit/components/constants.dart';
 
 class HomePage extends StatefulWidget {

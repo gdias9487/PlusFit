@@ -13,33 +13,6 @@ class SignupprfPage extends StatefulWidget {
 
 class _SignupprfPageState extends State<SignupprfPage> {
   @override
-  var _viewpass = Icons.visibility_off;
-  bool _obscureText = true;
-  var _viewpass1 = Icons.visibility_off;
-  bool _obscureText1 = true;
-
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-      if (_obscureText) {
-        _viewpass = Icons.visibility_off;
-      } else {
-        _viewpass = Icons.visibility;
-      }
-    });
-  }
-
-  void _toggle1() {
-    setState(() {
-      _obscureText1 = !_obscureText1;
-      if (_obscureText1) {
-        _viewpass1 = Icons.visibility_off;
-      } else {
-        _viewpass1 = Icons.visibility;
-      }
-    });
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(

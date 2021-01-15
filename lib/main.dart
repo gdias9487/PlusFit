@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:plusfit/pages/loginpage.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:plusfit/pages/homepage.dart';
-import 'package:plusfit/pages/mainpage.dart';
+import 'package:plusfit/pages/loginpage.dart';
+import 'package:plusfit/pages/homePage.dart';
 import 'package:plusfit/pages/profilePage.dart';
 import 'package:plusfit/pages/resetpasswordPage.dart';
 import 'package:plusfit/pages/aboutPage.dart';
@@ -27,7 +26,6 @@ class PFApp extends StatelessWidget {
         '/about': (context) => AboutPage(),
         '/exercises': (context) => ExercisePage(),
         '/signupprf': (context) => SignupprfPage(),
-        '/main': (context) => MainPage(),
         '/perfil': (context) => PerfilPage()
       },
       title: 'PlusFit v1.0',
