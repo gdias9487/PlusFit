@@ -32,29 +32,6 @@ class _MainPageState extends State<MainPage> {
               image: DecorationImage(
                   image: AssetImage("assets/home_background.png"),
                   fit: BoxFit.cover)),
-          // child: ListView(
-          //   children: <Widget>[
-          //     SizedBox(
-          //       height: 590,
-          //     ),
-          //     Row(
-          //       children: <Widget>[
-          //         SizedBox(
-          //           width: 20,
-          //         ),
-          //         Container(
-          //           alignment: Alignment.center,
-          //           height: 60,
-          //           width: 350,
-          //           child: Text("fodase"),
-          //           decoration: BoxDecoration(
-          //               borderRadius: BorderRadius.circular(40),
-          //               color: Colors.white30.withOpacity(0.5)),
-          //         )
-          //       ],
-          //     ),
-          //   ],
-          // ),
         ));
   }
 }
