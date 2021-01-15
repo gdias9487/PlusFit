@@ -63,7 +63,8 @@ class _LoginPageState extends State<LoginPage> {
                     
                     DefaultTextField(
                       obscureText: false,
-                      text: "Email"
+                      text: "Email",
+                      prefixicon: Icons.account_circle_sharp,
                     ),
                     
                     SizedBox(

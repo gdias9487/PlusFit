@@ -76,7 +76,8 @@ class _SignupPageState extends State<SignupPage> {
 
                     DefaultTextField(
                       obscureText: false,
-                      text: "Email"
+                      text: "Email",
+                      prefixicon: Icons.account_circle_sharp,
                     ),
                     
                     SizedBox(
