@@ -75,7 +75,6 @@ class _ExercisePageState extends State<ExercisePage> {
                       height: 150,
                       radius: 25,
                       width: 50,
-                      route: '',
                       text: 'Buscar'),
                 ],
               )),

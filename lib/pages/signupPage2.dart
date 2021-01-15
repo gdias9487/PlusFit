@@ -123,7 +123,6 @@ class _SignupprfPageState extends State<SignupprfPage> {
                             height: 320,
                             radius: 25,
                             width: 50,
-                            route: '',
                             text: 'Cadastrar'),
                       ],
                     ))

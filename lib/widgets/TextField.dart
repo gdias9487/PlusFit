@@ -9,6 +9,7 @@ class DefaultTextField extends StatelessWidget {
   final action;
   final prefixicon;
   final suffixicon;
+  final controler;
 
   const DefaultTextField(
       {this.key,
@@ -16,12 +17,14 @@ class DefaultTextField extends StatelessWidget {
       @required this.text,
       this.action,
       this.prefixicon,
-      this.suffixicon});
+      this.suffixicon,
+      this.controler});
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
+        controller: controler,
         obscureText: obscureText,
         style: new TextStyle(color: Colors.black, fontSize: 18),
         decoration: InputDecoration(

@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:plusfit/authentication.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/pages/loginpage.dart';
 import 'package:plusfit/pages/homePage.dart';
@@ -8,15 +10,29 @@ import 'package:plusfit/pages/aboutPage.dart';
 import 'package:plusfit/pages/exercisesPage.dart';
 import 'package:plusfit/pages/signupPage.dart';
 import 'package:plusfit/pages/signupPage2.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(PFApp());
 }
 
 class PFApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+      providers: [
+        Provider<AuthenticationService>(
+          create: (_) => AuthenticationService(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) => context.read<AuthenticationService>().authStateChanges
+          ),
+      ],
+      child:
+      MaterialApp(
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
         '/home': (context) => HomePage(),
@@ -35,6 +51,6 @@ class PFApp extends StatelessWidget {
       ),
       home: HomePage(title: 'PlusFit'),
       debugShowCheckedModeBanner: false,
-    );
+    ));
   }
 }

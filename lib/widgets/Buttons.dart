@@ -6,9 +6,9 @@ class DefaultElevatedButton extends StatelessWidget {
   final double width;
   final double height;
   final double radius;
-  final String route;
   final String text;
   final color;
+  final action;
 
   const DefaultElevatedButton(
       {this.key,
@@ -17,7 +17,7 @@ class DefaultElevatedButton extends StatelessWidget {
       @required this.height,
       @required this.radius,
       @required this.width,
-      @required this.route,
+      this.action,
       @required this.text});
 
   @override
@@ -29,9 +29,7 @@ class DefaultElevatedButton extends StatelessWidget {
           minimumSize: Size(height, width),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius))),
-      onPressed: () {
-        Navigator.pushNamed(context, route);
-      },
+      onPressed: () { action; },
       child: Text(text),
     );
   }

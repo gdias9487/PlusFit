@@ -41,7 +41,6 @@ class _HomePageState extends State<HomePage> {
                           height: 320,
                           radius: 25,
                           width: 50,
-                          route: '/login',
                           text: 'Entrar')
                     ],
                   ),

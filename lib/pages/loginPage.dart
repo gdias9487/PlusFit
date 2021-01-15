@@ -96,7 +96,6 @@ class _LoginPageState extends State<LoginPage> {
                         height: 320,
                         radius: 25,
                         width: 50,
-                        route: '/exercises',
                         text: 'Entrar'),
                     Container(
                       alignment: Alignment.topRight,
