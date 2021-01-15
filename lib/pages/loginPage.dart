@@ -1,8 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:plusfit/pages/exercisesPage.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/widgets/Buttons.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:provider/provider.dart';
+
+import '../authentication.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -15,6 +20,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   @override
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   var _viewpass = Icons.visibility_off;
   bool _obscureText = true;
 
@@ -30,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
     return Scaffold(
       body: Container(
           decoration: BoxDecoration(
@@ -37,6 +45,16 @@ class _LoginPageState extends State<LoginPage> {
                   image: AssetImage("assets/login_background.png"),
                   fit: BoxFit.cover)),
           child: ListView(children: <Widget>[
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              alignment: Alignment.topLeft,
+              color: Colors.white,
+              icon: Icon(Icons.arrow_back_ios),
+              splashRadius: 20,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             SizedBox(
               height: 30,
             ),
@@ -60,18 +78,18 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    
                     DefaultTextField(
+                      controler: emailController,
                       obscureText: false,
                       text: "Email",
                       prefixicon: Icons.account_circle_sharp,
                     ),
-                    
                     SizedBox(
                       height: paddefault,
                     ),
                     TextFieldContainer(
                       child: TextField(
+                        controller: passwordController,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: _obscureText,
                         style: new TextStyle(color: Colors.black, fontSize: 18),
@@ -90,13 +108,25 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: padbutton,
                     ),
-                    DefaultElevatedButton(
-                        color: porange,
-                        fontSize: 20,
-                        height: 320,
-                        radius: 25,
-                        width: 50,
-                        text: 'Entrar'),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: porange,
+                          textStyle: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                          minimumSize: Size(320, 50),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25))),
+                      onPressed: () {
+                        context.read<AuthenticationService>().singIn(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            );
+                        if (firebaseUser != null) {
+                          Navigator.pushNamed(context, '/exercises');
+                        }
+                      },
+                      child: Text("Entrar"),
+                    ),
                     Container(
                       alignment: Alignment.topRight,
                       height: 32,

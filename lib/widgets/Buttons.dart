@@ -29,7 +29,9 @@ class DefaultElevatedButton extends StatelessWidget {
           minimumSize: Size(height, width),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius))),
-      onPressed: () { action; },
+      onPressed: () {
+        action;
+      },
       child: Text(text),
     );
   }

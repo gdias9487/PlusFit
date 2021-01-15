@@ -4,13 +4,11 @@ import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:provider/provider.dart';
-
+import 'package:form_field_validator/form_field_validator.dart';
 import '../components/constants.dart';
 
 class SignupPage extends StatefulWidget {
   SignupPage({Key key, this.title}) : super(key: key);
-
-  
 
   final String title;
 
@@ -19,9 +17,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-
   @override
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -52,7 +48,6 @@ class _SignupPageState extends State<SignupPage> {
     });
   }
 
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -61,6 +56,16 @@ class _SignupPageState extends State<SignupPage> {
                   image: AssetImage("assets/sign_up_background.png"),
                   fit: BoxFit.cover)),
           child: ListView(children: <Widget>[
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              alignment: Alignment.topLeft,
+              color: Colors.white,
+              icon: Icon(Icons.arrow_back_ios),
+              splashRadius: 20,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             SizedBox(
               height: 30,
             ),
@@ -84,18 +89,15 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(
                       height: 10,
                     ),
-
                     DefaultTextField(
                       controler: emailController,
                       obscureText: false,
                       text: "Email",
                       prefixicon: Icons.account_circle_sharp,
                     ),
-                    
                     SizedBox(
                       height: paddefault,
                     ),
-
                     TextFieldContainer(
                       child: TextField(
                         controller: passwordController,
@@ -113,7 +115,6 @@ class _SignupPageState extends State<SignupPage> {
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),
                     ),
-
                     SizedBox(
                       height: paddefault,
                     ),
@@ -138,19 +139,20 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     Container(
                         child: Column(
-                        children: <Widget>[
+                      children: <Widget>[
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                          primary: porange,
-                          textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                          minimumSize: Size(320, 50),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25))),
-                          onPressed: () { 
+                              primary: porange,
+                              textStyle: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                              minimumSize: Size(320, 50),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25))),
+                          onPressed: () {
                             context.read<AuthenticationService>().singUp(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                );
                           },
                           child: Text("Cadastro"),
                         ),

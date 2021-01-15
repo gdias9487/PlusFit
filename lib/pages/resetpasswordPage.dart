@@ -21,8 +21,18 @@ class _ResetPasswordState extends State<ResetPassword> {
                   image: AssetImage("assets/login_background.png"),
                   fit: BoxFit.cover)),
           child: ListView(children: <Widget>[
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              alignment: Alignment.topLeft,
+              color: Colors.white,
+              icon: Icon(Icons.arrow_back_ios),
+              splashRadius: 20,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             SizedBox(
-              height: 30,
+              height: 20,
             ),
             SizedBox(
                 height: 170,
@@ -70,13 +80,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                     SizedBox(
                       height: 20,
                     ),
-
-                     DefaultTextField(
+                    DefaultTextField(
                       obscureText: false,
                       text: "Email",
                       prefixicon: Icons.account_circle_sharp,
                     ),
-                    
                     SizedBox(
                       height: paddefault,
                     ),

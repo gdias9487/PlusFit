@@ -13,7 +13,7 @@ import 'package:plusfit/pages/signupPage2.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(PFApp());
@@ -23,34 +23,33 @@ class PFApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        Provider<AuthenticationService>(
-          create: (_) => AuthenticationService(FirebaseAuth.instance),
-        ),
-        StreamProvider(
-          create: (context) => context.read<AuthenticationService>().authStateChanges
+        providers: [
+          Provider<AuthenticationService>(
+            create: (_) => AuthenticationService(FirebaseAuth.instance),
           ),
-      ],
-      child:
-      MaterialApp(
-      initialRoute: '/',
-      routes: <String, WidgetBuilder>{
-        '/home': (context) => HomePage(),
-        '/login': (context) => LoginPage(),
-        '/signup': (context) => SignupPage(),
-        '/reset': (context) => ResetPassword(),
-        '/about': (context) => AboutPage(),
-        '/exercises': (context) => ExercisePage(),
-        '/signup2': (context) => SignupprfPage(),
-        '/perfil': (context) => PerfilPage()
-      },
-      title: 'PlusFit v1.0',
-      theme: ThemeData(
-        primaryColor: porange,
-        primarySwatch: Colors.deepOrange,
-      ),
-      home: HomePage(title: 'PlusFit'),
-      debugShowCheckedModeBanner: false,
-    ));
+          StreamProvider(
+              create: (context) =>
+                  context.read<AuthenticationService>().authStateChanges),
+        ],
+        child: MaterialApp(
+          initialRoute: '/',
+          routes: <String, WidgetBuilder>{
+            '/home': (context) => HomePage(),
+            '/login': (context) => LoginPage(),
+            '/signup': (context) => SignupPage(),
+            '/reset': (context) => ResetPassword(),
+            '/about': (context) => AboutPage(),
+            '/exercises': (context) => ExercisePage(),
+            '/signup2': (context) => SignupprfPage(),
+            '/perfil': (context) => PerfilPage()
+          },
+          title: 'PlusFit v1.0',
+          theme: ThemeData(
+            primaryColor: porange,
+            primarySwatch: Colors.deepOrange,
+          ),
+          home: HomePage(title: 'PlusFit'),
+          debugShowCheckedModeBanner: false,
+        ));
   }
 }

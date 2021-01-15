@@ -210,6 +210,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  form_field_validator:
+    dependency: "direct main"
+    description:
+      name: form_field_validator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   fuchsia_remote_debug_protocol:
     dependency: transitive
     description: flutter
