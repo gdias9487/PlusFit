@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
+import 'package:plusfit/widgets/Buttons.dart';
 import 'package:plusfit/components/constants.dart';
 
 class LoginPage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
               child: Container(
-                height: 280,
+                height: 290,
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -91,6 +92,17 @@ class _LoginPageState extends State<LoginPage> {
                             labelStyle: TextStyle(color: pgreytextfield)),
                       ),
                     ),
+                    SizedBox(
+                      height: padbutton,
+                    ),
+                    DefaultElevatedButton(
+                        color: porange,
+                        fontSize: 20,
+                        height: 320,
+                        radius: 25,
+                        width: 50,
+                        route: '/exercises',
+                        text: 'Entrar'),
                     Container(
                       alignment: Alignment.topRight,
                       height: 32,
@@ -111,21 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Container(
                         child: Column(
-                      children: <Widget>[
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: porange,
-                              textStyle: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                              minimumSize: Size(320, 50),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25))),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/exercises');
-                          },
-                          child: Text("Entrar"),
-                        ),
-                      ],
+                      children: <Widget>[],
                     ))
                   ],
                 ),

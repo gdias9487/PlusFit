@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:plusfit/widgets/Buttons.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -23,36 +24,25 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   child: Column(
                     children: <Widget>[
-                      OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                              primary: Colors.white,
-                              side: BorderSide(color: Colors.white),
-                              textStyle: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                              minimumSize: Size(320, 50),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25))),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/signup');
-                          },
-                          child: Text("Cadastrar")),
+                      DefaultOutlinedButton(
+                          color: Colors.white,
+                          fontSize: 20,
+                          height: 320,
+                          radius: 25,
+                          width: 50,
+                          route: '/signup',
+                          text: 'Cadastrar'),
                       SizedBox(
                         height: 20,
                       ),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              side: BorderSide(color: porange, width: 1),
-                              primary: porange,
-                              onPrimary: Colors.white,
-                              textStyle: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                              minimumSize: Size(320, 50),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25))),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/login');
-                          },
-                          child: Text("Entrar"))
+                      DefaultElevatedButton(
+                          color: porange,
+                          fontSize: 20,
+                          height: 320,
+                          radius: 25,
+                          width: 50,
+                          route: '/login',
+                          text: 'Entrar')
                     ],
                   ),
                 ),
