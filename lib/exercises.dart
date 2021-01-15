@@ -22,12 +22,13 @@ class _ExercisePageState extends State<ExercisePage> {
 
     return Scaffold(
       appBar: AppBar(
+        title: Text("Olá, Usuário!"),
         elevation: 0,
         backgroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(Icons.supervised_user_circle),
+          icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pushNamed(context, '/perfil');
+            Navigator.pop(context, '/login');
           },
         ),
       ),
@@ -38,13 +39,22 @@ class _ExercisePageState extends State<ExercisePage> {
                   fit: BoxFit.cover)),
           child: Container(
             child: ListView(controller: cont, children: <Widget>[
-              SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Image.asset("assets/Plusfit_logo.png")),
-              SizedBox(
-                height: 15,
-              ),
+              Container(
+                  height: 110,
+                  width: 110,
+                  child: Column(
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.person),
+                        tooltip: 'Profile page',
+                        color: porange,
+                        iconSize: 90.0,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/perfil');
+                        },
+                      ),
+                    ],
+                  )),
               TextFieldContainer(
                 child: TextField(
                   keyboardType: TextInputType.emailAddress,
@@ -77,6 +87,9 @@ class _ExercisePageState extends State<ExercisePage> {
                   ),
                 ],
               )),
+              SizedBox(
+                height: 35,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Container(
@@ -93,7 +106,7 @@ class _ExercisePageState extends State<ExercisePage> {
                         SizedBox(
                           height: 5,
                         ),
-                        Text('TREINO 1',
+                        Text('TREINO',
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                       ],
