@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plusfit/components/assets.dart';
+import 'package:plusfit/widgets/TextFormFieldContainer.dart';
+import 'package:plusfit/widgets/TrainingContainer.dart';
 import 'package:plusfit/components/constants.dart';
 
 class ExercisePage extends StatefulWidget {
@@ -90,85 +91,14 @@ class _ExercisePageState extends State<ExercisePage> {
               SizedBox(
                 height: 35,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Container(
-                    height: 150,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: Colors.blueGrey[50],
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('TREINO',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ],
-                    )),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Container(
-                    height: 150,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: Colors.blueGrey[50],
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Text("TREINO 2",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ],
-                    )),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Container(
-                    height: 150,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: Colors.blueGrey[50],
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Text('TREINO 3',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ],
-                    )),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Container(
-                    height: 150,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: Colors.blueGrey[50],
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Text('TREINO 4',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ],
-                    )),
-              ),
+              TrainingContainer(
+                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 1'),
+              TrainingContainer(
+                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 2'),
+              TrainingContainer(
+                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 3'),
+              TrainingContainer(
+                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 4'),
             ]),
           )),
     );
