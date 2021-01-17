@@ -24,6 +24,7 @@ class _SignupPageState extends State<SignupPage> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordController1 = TextEditingController();
 
   var _viewpass = Icons.visibility_off;
   bool _obscureText = true;
@@ -103,7 +104,7 @@ class _SignupPageState extends State<SignupPage> {
                         style: new TextStyle(color: Colors.black, fontSize: 18),
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
+                                borderRadius: BorderRadius.circular(35)),
                             prefixIcon: Icon(Icons.lock_outline),
                             suffixIcon: IconButton(
                               onPressed: _toggle,
@@ -147,10 +148,17 @@ class _SignupPageState extends State<SignupPage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25))),
                           onPressed: () { 
+                            if (passwordController.text.trim() == passwordController1.text.trim()){
                             context.read<AuthenticationService>().singUp(
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),
                             );
+                            }
+                            else{
+                              AlertDialog(
+                                title: Text(''),
+                              );
+                            }
                           },
                           child: Text("Cadastro"),
                         ),
