@@ -23,7 +23,7 @@ class DefaultTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
         controller: controler,
         obscureText: obscureText,
         style: new TextStyle(color: Colors.black, fontSize: 18),
@@ -34,7 +34,6 @@ class DefaultTextField extends StatelessWidget {
             suffixIcon: Icon(suffixicon),
             labelText: text,
             labelStyle: TextStyle(color: pgreytextfield)),
-            
       ),
     );
   }

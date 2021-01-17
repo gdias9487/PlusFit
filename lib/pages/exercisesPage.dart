@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/widgets/Buttons.dart';
 import 'package:plusfit/widgets/TextField.dart';
@@ -25,13 +26,24 @@ class _ExercisePageState extends State<ExercisePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Olá, Usuário!"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.account_circle_sharp),
+            color: Colors.white,
+            splashRadius: 20,
+            iconSize: 35,
+            onPressed: () {
+              Navigator.pushNamed(context, '/perfil');
+            },
+          ),
+        ],
         elevation: 0,
         backgroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
+          splashRadius: 20,
           onPressed: () {
-            Navigator.pop(context, '/login');
+            Navigator.pop(context);
           },
         ),
       ),
@@ -42,53 +54,23 @@ class _ExercisePageState extends State<ExercisePage> {
                   fit: BoxFit.cover)),
           child: Container(
             child: ListView(controller: cont, children: <Widget>[
-              Container(
-                  height: 110,
-                  width: 110,
-                  child: Column(
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.person),
-                        tooltip: 'Profile page',
-                        color: porange,
-                        iconSize: 90.0,
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/perfil');
-                        },
-                      ),
-                    ],
-                  )),
-              DefaultTextField(
-                obscureText: false,
-                text: 'Buscar treino',
-                suffixicon: Icons.search,
-              ),
               SizedBox(
                 height: paddefault,
               ),
-              Container(
-                  child: Column(
-                children: <Widget>[
-                  DefaultElevatedButton(
-                      color: porange,
-                      fontSize: 20,
-                      height: 150,
-                      radius: 25,
-                      width: 50,
-                      text: 'Buscar'),
-                ],
-              )),
               SizedBox(
-                height: 35,
+                height: 15,
               ),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 1'),
+                  height: 150, horizontal: 15, vertical: 10, text: 'Peitoral'),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 2'),
+                  height: 150, horizontal: 15, vertical: 10, text: 'Costas'),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 3'),
+                  height: 150, horizontal: 15, vertical: 10, text: 'Pernas'),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'TREINO 4'),
+                  height: 150,
+                  horizontal: 15,
+                  vertical: 10,
+                  text: 'Cardiovascular'),
             ]),
           )),
     );

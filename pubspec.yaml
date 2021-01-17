@@ -17,7 +17,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  form_field_validator: ^1.0.1
   provider: ^4.3.2+1
   cupertino_icons: ^1.0.1
 

@@ -35,13 +35,19 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: 20,
                       ),
-                      DefaultElevatedButton(
-                          color: porange,
-                          fontSize: 20,
-                          height: 320,
-                          radius: 25,
-                          width: 50,
-                          text: 'Entrar')
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: porange,
+                            textStyle: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                            minimumSize: Size(320, 50),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25))),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        child: Text("Entrar"),
+                      ),
                     ],
                   ),
                 ),
