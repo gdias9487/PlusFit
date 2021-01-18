@@ -12,6 +12,7 @@ import 'package:plusfit/pages/signupPage.dart';
 import 'package:plusfit/pages/signupPage2.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:plusfit/pages/editperfilPage.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +43,8 @@ class PFApp extends StatelessWidget {
             '/about': (context) => AboutPage(),
             '/exercises': (context) => ExercisePage(),
             '/signup2': (context) => SignupprfPage(),
-            '/perfil': (context) => PerfilPage()
+            '/perfil': (context) => PerfilPage(),
+            '/edit': (context) => EditProfile()
           },
           title: 'PlusFit v1.0',
           theme: ThemeData(

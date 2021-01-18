@@ -14,7 +14,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: Text("Profile",),
         elevation: 0,
         backgroundColor: Colors.black,
         leading: IconButton(
@@ -60,26 +60,41 @@ class _MyPerfilPageState extends State<PerfilPage> {
                     children: <Widget>[
                       Text(
                         "Carlos Dias Ernandes",
-                        style: TextStyle(fontSize: 20.0),
+                        style: TextStyle(fontSize: 20.0, color: Colors.white),
+                        
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      Container(
+                      ButtonTheme(
                         height: 30.0,
-                        width: 60.0,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.red),
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(20.0)),
-                        child: Center(
+                        child: RaisedButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/edit");
+                            },
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0),side: BorderSide(color: Colors.red)),
                           child: Text(
                             "Edit",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 12.0),
+                            style: TextStyle(color: Colors.black, fontSize: 12.0),
                           ),
                         ),
                       ),
+                      //Container(
+                       // height: 30.0,
+                       // width: 60.0,
+                       // decoration: BoxDecoration(
+                           // border: Border.all(color: Colors.red),
+                           // color: Colors.grey[100],
+                           // borderRadius: BorderRadius.circular(20.0)),
+                        //child: Center(
+                         // child: Text(
+                            //"Edit",
+                           // style:
+                                //TextStyle(color: Colors.black, fontSize: 12.0),
+                          //),
+                        //),
+                      //),
                     ],
                   ),
                 ],
@@ -87,7 +102,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
               SizedBox(height: 20.0),
               Text(
                 "Account",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.white),
               ),
               SizedBox(height: 10.0),
               Card(
@@ -140,7 +155,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
               SizedBox(height: 20.0),
               Text(
                 "Notification",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               SizedBox(height: 10.0),
               Card(
