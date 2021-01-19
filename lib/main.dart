@@ -44,7 +44,7 @@ class PFApp extends StatelessWidget {
             '/exercises': (context) => ExercisePage(),
             '/signup2': (context) => SignupprfPage(),
             '/perfil': (context) => PerfilPage(),
-            '/edit': (context) => EditProfile()
+            '/edit': (context) => EditPage()
           },
           title: 'PlusFit v1.0',
           theme: ThemeData(
