@@ -61,11 +61,23 @@ class _ExercisePageState extends State<ExercisePage> {
                 height: 15,
               ),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'Peitoral'),
+                height: 150,
+                horizontal: 15,
+                vertical: 10,
+                text: 'Superior',
+                action: () {
+                  Navigator.pushNamed(context, '/superior');
+                },
+              ),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'Costas'),
-              TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'Pernas'),
+                height: 150,
+                horizontal: 15,
+                vertical: 10,
+                text: 'Inferior',
+                action: () {
+                  Navigator.pushNamed(context, '/inferior');
+                },
+              ),
               TrainingContainer(
                   height: 150,
                   horizontal: 15,

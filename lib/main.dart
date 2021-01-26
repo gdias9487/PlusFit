@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/authentication.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:plusfit/pages/inferior.dart';
 import 'package:plusfit/pages/loginpage.dart';
 import 'package:plusfit/pages/homePage.dart';
 import 'package:plusfit/pages/profilePage.dart';
@@ -11,10 +12,11 @@ import 'package:plusfit/pages/exercisesPage.dart';
 import 'package:plusfit/pages/signupPage.dart';
 import 'package:plusfit/pages/signupPage2.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:plusfit/pages/superior.dart';
 import 'package:provider/provider.dart';
 import 'package:plusfit/pages/editperfilPage.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(PFApp());
@@ -29,11 +31,10 @@ class PFApp extends StatelessWidget {
             create: (_) => AuthenticationService(FirebaseAuth.instance),
           ),
           StreamProvider(
-              create: (context) => context.read<AuthenticationService>().authStateChanges
-              ),
+              create: (context) =>
+                  context.read<AuthenticationService>().authStateChanges),
         ],
-        child: 
-        MaterialApp(
+        child: MaterialApp(
           initialRoute: '/',
           routes: <String, WidgetBuilder>{
             '/home': (context) => HomePage(),
@@ -44,7 +45,9 @@ class PFApp extends StatelessWidget {
             '/exercises': (context) => ExercisePage(),
             '/signup2': (context) => SignupprfPage(),
             '/perfil': (context) => PerfilPage(),
-            '/edit': (context) => EditPage()
+            '/edit': (context) => EditPage(),
+            '/superior': (context) => SuperiorPage(),
+            '/inferior': (context) => InferiorPage(),
           },
           title: 'PlusFit v1.0',
           theme: ThemeData(

@@ -6,9 +6,11 @@ class TrainingContainer extends StatelessWidget {
   final double horizontal;
   final double vertical;
   final String text;
+  final action;
 
   const TrainingContainer(
       {this.key,
+      this.action,
       @required this.height,
       @required this.horizontal,
       @required this.vertical,
@@ -17,9 +19,7 @@ class TrainingContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
+        onTap: action,
         child: Padding(
           padding:
               EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
