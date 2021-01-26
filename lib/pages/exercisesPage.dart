@@ -79,10 +79,14 @@ class _ExercisePageState extends State<ExercisePage> {
                 },
               ),
               TrainingContainer(
-                  height: 150,
-                  horizontal: 15,
-                  vertical: 10,
-                  text: 'Cardiovascular'),
+                height: 150,
+                horizontal: 15,
+                vertical: 10,
+                text: 'Cardiovascular',
+                action: () {
+                  Navigator.pushNamed(context, '/cardio');
+                },
+              ),
             ]),
           )),
     );

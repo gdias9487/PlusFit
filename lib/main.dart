@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/authentication.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:plusfit/pages/cardiovascular.dart';
 import 'package:plusfit/pages/inferior.dart';
 import 'package:plusfit/pages/loginpage.dart';
 import 'package:plusfit/pages/homePage.dart';
@@ -48,6 +49,7 @@ class PFApp extends StatelessWidget {
             '/edit': (context) => EditPage(),
             '/superior': (context) => SuperiorPage(),
             '/inferior': (context) => InferiorPage(),
+            '/cardio': (context) => CardiovascularPage(),
           },
           title: 'PlusFit v1.0',
           theme: ThemeData(
