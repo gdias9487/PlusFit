@@ -63,6 +63,7 @@ class _ExercisePageState extends State<ExercisePage> {
                 height: 15,
               ),
               TrainingContainer(
+                width: 1,
                 height: 150,
                 horizontal: 15,
                 vertical: 10,
@@ -72,6 +73,7 @@ class _ExercisePageState extends State<ExercisePage> {
                 },
               ),
               TrainingContainer(
+                width: 1,
                 height: 150,
                 horizontal: 15,
                 vertical: 10,
@@ -81,6 +83,7 @@ class _ExercisePageState extends State<ExercisePage> {
                 },
               ),
               TrainingContainer(
+                width: 1,
                 height: 150,
                 horizontal: 15,
                 vertical: 10,
