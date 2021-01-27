@@ -1,13 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:plusfit/pages/exercisesPage.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TextField.dart';
-import 'package:plusfit/widgets/Buttons.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:provider/provider.dart';
+// import 'package:form_field_validator/form_field_validator.dart';
 
-import '../authentication.dart';
+import 'package:plusfit/authentication.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -19,11 +18,53 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  @override
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   var _viewpass = Icons.visibility_off;
   bool _obscureText = true;
+
+  @override
+  // ignore: override_on_non_overriding_member
+  bool validateAndSave() {
+    if (_formkey.currentState.validate()) {
+      _formkey.currentState.save();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void validadeAndSubmit() {
+    if (validateAndSave()) {
+      try {
+        context.read<AuthenticationService>().singIn(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim());
+        Navigator.pushNamed(context, '/exercises');
+      } catch (e) {}
+    }
+  }
+
+  // ignore: missing_return
+  String validateemail(value) {
+    if (value.isEmpty) {
+      return "Campo obrigatório *";
+    } else if (!(value.contains('@') && value.contains('.com'))) {
+      return "Digite um email válido *";
+    } else {
+      return null;
+    }
+  }
+
+  String validatepass(value) {
+    if (value.isEmpty) {
+      return "Este campo não pode estar vazio *";
+    } else {
+      return null;
+    }
+  }
 
   void _toggle() {
     setState(() {
@@ -65,93 +106,97 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
               child: Container(
-                height: 290,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 10,
-                    ),
-                    DefaultTextField(
-                      controler: emailController,
-                      obscureText: false,
-                      text: "Email",
-                      prefixicon: Icons.account_circle_sharp,
-                    ),
-                    SizedBox(
-                      height: paddefault,
-                    ),
-                    TextFieldContainer(
-                      child: TextField(
-                        controller: passwordController,
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: _obscureText,
-                        style: new TextStyle(color: Colors.black, fontSize: 18),
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            prefixIcon: Icon(Icons.lock_outline),
-                            suffixIcon: IconButton(
-                              onPressed: _toggle,
-                              icon: Icon(_viewpass),
-                            ),
-                            labelText: 'Senha',
-                            labelStyle: TextStyle(color: pgreytextfield)),
-                      ),
-                    ),
-                    SizedBox(
-                      height: padbutton,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: porange,
-                          textStyle: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                          minimumSize: Size(320, 50),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25))),
-                      onPressed: () {
-                        context.read<AuthenticationService>().singIn(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
-                        if (firebaseUser != null) {
-                          Navigator.pushNamed(context, '/exercises');
-                        }
-                      },
-                      child: Text("Entrar"),
-                    ),
-                    Container(
-                      alignment: Alignment.topRight,
-                      height: 32,
-                      decoration: BoxDecoration(color: Colors.white),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/reset');
-                        },
-                        child: Text(
-                          "Esqueceu a Senha?",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(color: pgreytextfield),
+                  height: 400,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Form(
+                    key: _formkey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
+                        TextFormField(
+                          validator: validateemail,
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          obscureText: false,
+                          style:
+                              new TextStyle(color: Colors.black, fontSize: 18),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              prefixIcon: Icon(Icons.account_circle_sharp),
+                              labelText: 'Email',
+                              labelStyle: TextStyle(color: pgreytextfield)),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          validator: validatepass,
+                          controller: passwordController,
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: _obscureText,
+                          style:
+                              new TextStyle(color: Colors.black, fontSize: 18),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              prefixIcon: Icon(Icons.lock_outline),
+                              suffixIcon: IconButton(
+                                onPressed: _toggle,
+                                icon: Icon(_viewpass),
+                              ),
+                              labelText: 'Senha',
+                              labelStyle: TextStyle(color: pgreytextfield)),
+                        ),
+                        SizedBox(
+                          height: padbutton,
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: porange,
+                              textStyle: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                              minimumSize: Size(320, 50),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25))),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/exercises');
+                          },
+                          child: Text("Entrar"),
+                        ),
+                        Container(
+                          alignment: Alignment.topRight,
+                          height: 32,
+                          decoration: BoxDecoration(color: Colors.white),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/reset');
+                            },
+                            child: Text(
+                              "Esqueceu a Senha?",
+                              textAlign: TextAlign.right,
+                              style: TextStyle(color: pgreytextfield),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: padbutton,
+                        ),
+                        Container(
+                            child: Column(
+                          children: <Widget>[],
+                        ))
+                      ],
                     ),
-                    SizedBox(
-                      height: padbutton,
-                    ),
-                    Container(
-                        child: Column(
-                      children: <Widget>[],
-                    ))
-                  ],
-                ),
-              ),
+                  )),
             ),
             SizedBox(
               height: 100,

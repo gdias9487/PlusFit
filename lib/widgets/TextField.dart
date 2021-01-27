@@ -10,6 +10,7 @@ class DefaultTextField extends StatelessWidget {
   final prefixicon;
   final suffixicon;
   final controler;
+  final validator;
 
   const DefaultTextField(
       {this.key,
@@ -18,7 +19,8 @@ class DefaultTextField extends StatelessWidget {
       this.action,
       this.prefixicon,
       this.suffixicon,
-      this.controler});
+      this.controler,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {

@@ -78,14 +78,23 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
               },
             ),
             TrainingContainer(
-                height: 150, horizontal: 40, vertical: 10, text: 'Básico'),
+                width: 1,
+                height: 150,
+                horizontal: 40,
+                vertical: 10,
+                text: 'Básico'),
             TrainingContainer(
+                width: 1,
                 height: 150,
                 horizontal: 40,
                 vertical: 10,
                 text: 'Intermediário'),
             TrainingContainer(
-                height: 150, horizontal: 40, vertical: 10, text: 'Avançado'),
+                width: 1,
+                height: 150,
+                horizontal: 40,
+                vertical: 10,
+                text: 'Avançado'),
             SizedBox(
               height: 50,
             ),
