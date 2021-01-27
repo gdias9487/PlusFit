@@ -20,7 +20,6 @@ class TrainingContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return Hero(
       tag: "training-${text}",
       child: GestureDetector(
@@ -47,29 +46,5 @@ class TrainingContainer extends StatelessWidget {
                 )),
           )),
     );
-=======
-    return GestureDetector(
-        onTap: action,
-        child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
-          child: Container(
-              height: height,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: Colors.blueGrey[50].withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(text,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                ],
-              )),
-        ));
->>>>>>> 32db69fda2f40e5c30b5f328e020108b811d9065
   }
 }

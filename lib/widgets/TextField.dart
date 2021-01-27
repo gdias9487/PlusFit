@@ -24,22 +24,6 @@ class DefaultTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return TextFormField(
-      validator: validator,
-      controller: controler,
-      obscureText: obscureText,
-      style: new TextStyle(color: Colors.black, fontSize: 18),
-      decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-          fillColor: Colors.blue,
-          prefixIcon: Icon(prefixicon),
-          prefix: prefix,
-          suffix: suffix,
-          suffixIcon: Icon(suffixicon),
-          labelText: text,
-          labelStyle: TextStyle(color: pgreytextfield)),
-=======
     return TextFieldContainer(
       child: TextFormField(
         controller: controler,
@@ -53,7 +37,6 @@ class DefaultTextField extends StatelessWidget {
             labelText: text,
             labelStyle: TextStyle(color: pgreytextfield)),
       ),
->>>>>>> 32db69fda2f40e5c30b5f328e020108b811d9065
     );
   }
 }
