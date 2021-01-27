@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:plusfit/authentication.dart';
+import 'package:plusfit/widgets/Buttons.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class PerfilPage extends StatefulWidget {
   PerfilPage({Key key, this.title}) : super(key: key);
@@ -12,6 +16,7 @@ class PerfilPage extends StatefulWidget {
 class _MyPerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
@@ -65,21 +70,36 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        height: 30.0,
-                        width: 60.0,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.red),
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(20.0)),
-                        child: Center(
-                          child: Text(
-                            "Edit",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 12.0),
+                      Row(
+                        children: <Widget>[
+                          DefaultElevatedButton(
+                              color: Colors.black,
+                              fontSize: 12,
+                              height: 60,
+                              radius: 25,
+                              width: 30,
+                              text: 'Editar',
+                              action: () {}),
+                          SizedBox(
+                            width: 25,
                           ),
-                        ),
-                      ),
+                          DefaultElevatedButton(
+                            color: Colors.black,
+                            fontSize: 12,
+                            height: 60,
+                            radius: 25,
+                            width: 30,
+                            text: 'Desconectar',
+                            action: () {
+                              context.read<AuthenticationService>().signOut();
+                              if (firebaseUser == null) {
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              }
+                            },
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ],
