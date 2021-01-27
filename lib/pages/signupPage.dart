@@ -76,7 +76,7 @@ class _SignupPageState extends State<SignupPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
                 child: Container(
-                    height: 380,
+                    height: 340,
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -173,9 +173,6 @@ class _SignupPageState extends State<SignupPage> {
                                 ),
                               ],
                             ),
-                          ),
-                          SizedBox(
-                            height: 65,
                           ),
                         ])),
               ),
