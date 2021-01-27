@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/pages/cardiovascular.dart';
@@ -12,8 +11,8 @@ import 'package:plusfit/pages/exercisesPage.dart';
 import 'package:plusfit/pages/signupPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:plusfit/pages/superior.dart';
-import 'package:provider/provider.dart';
 import 'package:plusfit/pages/editperfilPage.dart';
+import 'package:plusfit/pages/configPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +37,7 @@ class PFApp extends StatelessWidget {
         '/superior': (context) => SuperiorPage(),
         '/inferior': (context) => InferiorPage(),
         '/cardio': (context) => CardiovascularPage(),
+        '/config': (context) => ConfigPage()
       },
       title: 'PlusFit v1.0',
       theme: ThemeData(

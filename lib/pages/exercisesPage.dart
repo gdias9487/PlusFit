@@ -38,6 +38,15 @@ class _ExercisePageState extends State<ExercisePage> {
               Navigator.pushNamed(context, '/perfil');
             },
           ),
+          IconButton(
+            icon: Icon(Icons.settings),
+            color: Colors.white,
+            splashRadius: 20,
+            iconSize: 35,
+            onPressed: () {
+              Navigator.pushNamed(context, '/config');
+            },
+          ),
         ],
         elevation: 0,
         backgroundColor: Colors.black,
