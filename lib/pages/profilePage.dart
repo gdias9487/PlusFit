@@ -16,6 +16,7 @@ class PerfilPage extends StatefulWidget {
 class _MyPerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     final firebaseUser = context.watch<User>();
     return Container(
       child: Scaffold(
@@ -28,6 +29,25 @@ class _MyPerfilPageState extends State<PerfilPage> {
             onPressed: () {
               Navigator.pop(context);
             },
+=======
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Profile",),
+        elevation: 0,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/backperfil.png"), fit: BoxFit.cover),
+>>>>>>> 32db69fda2f40e5c30b5f328e020108b811d9065
           ),
         ),
         body: SingleChildScrollView(
@@ -104,6 +124,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                         )
                       ],
                     ),
+<<<<<<< HEAD
                   ],
                 ),
                 SizedBox(height: 20.0),
@@ -121,6 +142,32 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           leading: Icon(
                             Icons.assignment_turned_in_sharp,
                             color: Colors.black,
+=======
+                  ),
+                  SizedBox(width: 20.0),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Carlos Dias Ernandes",
+                        style: TextStyle(fontSize: 20.0, color: Colors.white),
+                        
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ButtonTheme(
+                        height: 30.0,
+                        child: RaisedButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/edit");
+                            },
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0),side: BorderSide(color: Colors.red)),
+                          child: Text(
+                            "Edit",
+                            style: TextStyle(color: Colors.black, fontSize: 12.0),
+>>>>>>> 32db69fda2f40e5c30b5f328e020108b811d9065
                           ),
                           title: Text(
                             "Training",
@@ -128,6 +175,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           ),
                           onTap: () {},
                         ),
+<<<<<<< HEAD
                         Divider(height: 10.0, color: Colors.grey),
                         ListTile(
                           leading: Icon(Icons.vpn_key, color: Colors.black),
@@ -136,6 +184,56 @@ class _MyPerfilPageState extends State<PerfilPage> {
                             style: TextStyle(fontSize: 19.0),
                           ),
                           onTap: () {},
+=======
+                      ),
+                      //Container(
+                       // height: 30.0,
+                       // width: 60.0,
+                       // decoration: BoxDecoration(
+                           // border: Border.all(color: Colors.red),
+                           // color: Colors.grey[100],
+                           // borderRadius: BorderRadius.circular(20.0)),
+                        //child: Center(
+                         // child: Text(
+                            //"Edit",
+                           // style:
+                                //TextStyle(color: Colors.black, fontSize: 12.0),
+                          //),
+                        //),
+                      //),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.0),
+              Text(
+                "Account",
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.white),
+              ),
+              SizedBox(height: 10.0),
+              Card(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: <Widget>[
+                      ListTile(
+                        leading: Icon(
+                          Icons.assignment_turned_in_sharp,
+                          color: Colors.black,
+                        ),
+                        title: Text(
+                          "Training",
+                          style: TextStyle(fontSize: 19.0),
+                        ),
+                        onTap: () {},
+                      ),
+                      Divider(height: 10.0, color: Colors.grey),
+                      ListTile(
+                        leading: Icon(Icons.vpn_key, color: Colors.black),
+                        title: Text(
+                          "Change Password",
+                          style: TextStyle(fontSize: 19.0),
+>>>>>>> 32db69fda2f40e5c30b5f328e020108b811d9065
                         ),
                         Divider(height: 10.0, color: Colors.grey),
                         ListTile(
@@ -159,6 +257,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                     ),
                   ),
                 ),
+<<<<<<< HEAD
                 SizedBox(height: 20.0),
                 Text(
                   "Notification",
@@ -186,6 +285,35 @@ class _MyPerfilPageState extends State<PerfilPage> {
                         ),
                       ],
                     ),
+=======
+              ),
+              SizedBox(height: 20.0),
+              Text(
+                "Notification",
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              SizedBox(height: 10.0),
+              Card(
+                elevation: 3.0,
+                child: Padding(
+                  padding: EdgeInsets.all(14.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "App Notification",
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                          Switch(
+                            value: true,
+                            onChanged: (bool value) {},
+                          ),
+                        ],
+                      ),
+                    ],
+>>>>>>> 32db69fda2f40e5c30b5f328e020108b811d9065
                   ),
                 ),
               ],

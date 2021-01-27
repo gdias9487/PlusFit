@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:plusfit/authentication.dart';
 
 class DefaultTextField extends StatelessWidget {
   final Key key;
@@ -11,8 +9,6 @@ class DefaultTextField extends StatelessWidget {
   final action;
   final prefixicon;
   final suffixicon;
-  final prefix;
-  final suffix;
   final controler;
   final validator;
 
@@ -22,14 +18,13 @@ class DefaultTextField extends StatelessWidget {
       @required this.text,
       this.action,
       this.prefixicon,
-      this.prefix,
-      this.suffix,
       this.suffixicon,
       this.controler,
       this.validator});
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return TextFormField(
       validator: validator,
       controller: controler,
@@ -44,6 +39,21 @@ class DefaultTextField extends StatelessWidget {
           suffixIcon: Icon(suffixicon),
           labelText: text,
           labelStyle: TextStyle(color: pgreytextfield)),
+=======
+    return TextFieldContainer(
+      child: TextFormField(
+        controller: controler,
+        obscureText: obscureText,
+        style: new TextStyle(color: Colors.black, fontSize: 18),
+        decoration: InputDecoration(
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+            fillColor: Colors.blue,
+            prefixIcon: Icon(prefixicon),
+            suffixIcon: Icon(suffixicon),
+            labelText: text,
+            labelStyle: TextStyle(color: pgreytextfield)),
+      ),
+>>>>>>> 32db69fda2f40e5c30b5f328e020108b811d9065
     );
   }
 }

@@ -63,6 +63,7 @@ class _ExercisePageState extends State<ExercisePage> {
                 height: 15,
               ),
               TrainingContainer(
+<<<<<<< HEAD
                 action: () {
                   Navigator.pushNamed(context, '/chest');
                 },
@@ -78,20 +79,42 @@ class _ExercisePageState extends State<ExercisePage> {
                 vertical: 10,
                 text: 'Costas',
                 width: null,
+=======
+                height: 150,
+                horizontal: 15,
+                vertical: 10,
+                text: 'Superior',
+                action: () {
+                  Navigator.pushNamed(context, '/superior');
+                },
+>>>>>>> 32db69fda2f40e5c30b5f328e020108b811d9065
               ),
               TrainingContainer(
                 height: 150,
                 horizontal: 15,
                 vertical: 10,
+<<<<<<< HEAD
                 text: 'Pernas',
                 width: null,
+=======
+                text: 'Inferior',
+                action: () {
+                  Navigator.pushNamed(context, '/inferior');
+                },
+>>>>>>> 32db69fda2f40e5c30b5f328e020108b811d9065
               ),
               TrainingContainer(
                 height: 150,
                 horizontal: 15,
                 vertical: 10,
                 text: 'Cardiovascular',
+<<<<<<< HEAD
                 width: null,
+=======
+                action: () {
+                  Navigator.pushNamed(context, '/cardio');
+                },
+>>>>>>> 32db69fda2f40e5c30b5f328e020108b811d9065
               ),
             ]),
           )),

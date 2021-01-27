@@ -15,7 +15,8 @@ class TextFieldContainer extends StatelessWidget {
       width: 130,
       decoration: BoxDecoration(
         color: Color(0xFFDEDEDE),
-        borderRadius: BorderRadius.circular(29),
+        borderRadius: BorderRadius.circular(35),
+      
       ),
       child: child,
     );
