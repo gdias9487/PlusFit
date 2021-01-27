@@ -1,12 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:plusfit/widgets/TextFormFieldContainer.dart';
-import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:provider/provider.dart';
-// import 'package:form_field_validator/form_field_validator.dart';
-
-import 'package:plusfit/authentication.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -33,17 +26,6 @@ class _LoginPageState extends State<LoginPage> {
       return true;
     } else {
       return false;
-    }
-  }
-
-  void validadeAndSubmit() {
-    if (validateAndSave()) {
-      try {
-        context.read<AuthenticationService>().singIn(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim());
-        Navigator.pushNamed(context, '/exercises');
-      } catch (e) {}
     }
   }
 
@@ -78,7 +60,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User>();
     return Scaffold(
       body: Container(
           decoration: BoxDecoration(

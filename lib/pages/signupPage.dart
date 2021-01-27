@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:plusfit/authentication.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:provider/provider.dart';
 import '../components/constants.dart';
 
 class SignupPage extends StatefulWidget {
@@ -143,34 +141,21 @@ class _SignupPageState extends State<SignupPage> {
                             child: Column(
                               children: <Widget>[
                                 ElevatedButton(
-                                  child: Text("Cadastrar"),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: porange,
-                                    textStyle: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                    minimumSize: Size(320, 50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(25)),
-                                  ),
-                                  onPressed: () {
-                                    if (passwordController.text.trim() ==
-                                        passwordController1.text.trim()) {
-                                      context
-                                          .read<AuthenticationService>()
-                                          .singUp(
-                                            email: emailController.text.trim(),
-                                            password:
-                                                passwordController.text.trim(),
-                                          );
-                                    } else {
-                                      AlertDialog(
-                                        title: Text(''),
-                                      );
-                                    }
-                                  },
-                                ),
+                                    child: Text("Cadastrar"),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: porange,
+                                      textStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                      minimumSize: Size(320, 50),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pushReplacementNamed(
+                                          context, '/');
+                                    }),
                               ],
                             ),
                           ),
