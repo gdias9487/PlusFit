@@ -14,6 +14,7 @@ class DefaultTextField extends StatelessWidget {
   final prefix;
   final suffix;
   final controler;
+  final validator;
 
   const DefaultTextField(
       {this.key,
@@ -24,25 +25,25 @@ class DefaultTextField extends StatelessWidget {
       this.prefix,
       this.suffix,
       this.suffixicon,
-      this.controler});
+      this.controler,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
-    return TextFieldContainer(
-      child: TextFormField(
-        controller: controler,
-        obscureText: obscureText,
-        style: new TextStyle(color: Colors.black, fontSize: 18),
-        decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-            fillColor: Colors.blue,
-            prefixIcon: Icon(prefixicon),
-            prefix: prefix,
-            suffix: suffix,
-            suffixIcon: Icon(suffixicon),
-            labelText: text,
-            labelStyle: TextStyle(color: pgreytextfield)),
-      ),
+    return TextFormField(
+      validator: validator,
+      controller: controler,
+      obscureText: obscureText,
+      style: new TextStyle(color: Colors.black, fontSize: 18),
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+          fillColor: Colors.blue,
+          prefixIcon: Icon(prefixicon),
+          prefix: prefix,
+          suffix: suffix,
+          suffixIcon: Icon(suffixicon),
+          labelText: text,
+          labelStyle: TextStyle(color: pgreytextfield)),
     );
   }
 }

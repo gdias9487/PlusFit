@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:plusfit/widgets/Buttons.dart';
-import 'package:plusfit/widgets/TextField.dart';
-import 'package:plusfit/widgets/TextFormFieldContainer.dart';
+
 import 'package:plusfit/widgets/TrainingContainer.dart';
 import 'package:plusfit/components/constants.dart';
 
@@ -16,6 +14,10 @@ class ExercisePage extends StatefulWidget {
 }
 
 class _ExercisePageState extends State<ExercisePage> {
+  AnimationController _controler;
+
+  bool _profileContainerOpenned = false;
+
   @override
   Widget build(BuildContext context) {
     final ScrollController cont = ScrollController();
@@ -61,16 +63,36 @@ class _ExercisePageState extends State<ExercisePage> {
                 height: 15,
               ),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'Peitoral'),
+                action: () {
+                  Navigator.pushNamed(context, '/chest');
+                },
+                height: 150,
+                horizontal: 15,
+                vertical: 10,
+                text: 'Peitoral',
+                width: null,
+              ),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'Costas'),
+                height: 150,
+                horizontal: 15,
+                vertical: 10,
+                text: 'Costas',
+                width: null,
+              ),
               TrainingContainer(
-                  height: 150, horizontal: 15, vertical: 10, text: 'Pernas'),
+                height: 150,
+                horizontal: 15,
+                vertical: 10,
+                text: 'Pernas',
+                width: null,
+              ),
               TrainingContainer(
-                  height: 150,
-                  horizontal: 15,
-                  vertical: 10,
-                  text: 'Cardiovascular'),
+                height: 150,
+                horizontal: 15,
+                vertical: 10,
+                text: 'Cardiovascular',
+                width: null,
+              ),
             ]),
           )),
     );
