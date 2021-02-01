@@ -3,6 +3,7 @@ import 'package:plusfit/authentication.dart';
 import 'package:plusfit/widgets/Buttons.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:plusfit/pages/editperfilPage.dart';
 
 class PerfilPage extends StatefulWidget {
   PerfilPage({Key key, this.title}) : super(key: key);
@@ -81,7 +82,9 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                 radius: 25,
                                 width: 30,
                                 text: 'Editar',
-                                action: () {}),
+                                action: () {
+                                  Navigator.pushNamed(context, "/edit");
+                                }),
                             SizedBox(
                               width: 25,
                             ),

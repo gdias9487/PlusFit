@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plusfit/widgets/Buttons.dart';
 
 
 class EditPage extends StatefulWidget {
@@ -61,7 +62,14 @@ class _MyEditPageState extends State<EditPage> {
                         border: Border.all(width: 4, color: Theme.of(context).scaffoldBackgroundColor),
                         color: Colors.red,
                       ),
-                      child: IconButton(icon: Icon(Icons.edit),color: Colors.white, onPressed: () {},),
+                      child: IconButton(icon: Icon(Icons.edit),color: Colors.white, 
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: ((builder) => Bordaedit()),
+                        );
+                      },
+                      ),
                   ),),
                 ],
               ),
