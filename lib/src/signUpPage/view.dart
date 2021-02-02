@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:plusfit/authentication.dart';
+// import 'package:plusfit/authentication.dart';
+
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
+
+import 'package:plusfit/src/signUpPage/controller.dart';
 import 'package:provider/provider.dart';
-import '../components/constants.dart';
+
+import '../../components/constants.dart';
 
 class SignupPage extends StatefulWidget {
   SignupPage({Key key, this.title}) : super(key: key);
@@ -16,37 +20,16 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  @override
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController passwordController1 = TextEditingController();
 
-  var _viewpass = Icons.visibility_off;
+  Controller _controller = Controller();
+
+  var _viewPass = Icons.visibility_off;
+  var _viewPass1 = Icons.visibility_off;
   bool _obscureText = true;
-  var _viewpass1 = Icons.visibility_off;
   bool _obscureText1 = true;
-
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-      if (_obscureText) {
-        _viewpass = Icons.visibility_off;
-      } else {
-        _viewpass = Icons.visibility;
-      }
-    });
-  }
-
-  void _toggle1() {
-    setState(() {
-      _obscureText1 = !_obscureText1;
-      if (_obscureText1) {
-        _viewpass1 = Icons.visibility_off;
-      } else {
-        _viewpass1 = Icons.visibility;
-      }
-    });
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +40,7 @@ class _SignupPageState extends State<SignupPage> {
                     fit: BoxFit.cover)),
             child: ListView(children: <Widget>[
               IconButton(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 alignment: Alignment.topLeft,
                 color: Colors.white,
                 icon: Icon(Icons.arrow_back_ios),
@@ -70,7 +53,7 @@ class _SignupPageState extends State<SignupPage> {
                 height: 30,
               ),
               SizedBox(
-                  height: 150,
+                  height: 110,
                   width: 150,
                   child: Image.asset("assets/Plusfit_logo.png")),
               Padding(
@@ -109,8 +92,14 @@ class _SignupPageState extends State<SignupPage> {
                                       borderRadius: BorderRadius.circular(35)),
                                   prefixIcon: Icon(Icons.lock_outline),
                                   suffixIcon: IconButton(
-                                    onPressed: _toggle,
-                                    icon: Icon(_viewpass),
+                                    onPressed: () {
+                                      setState(() {
+                                        _viewPass =
+                                            _controller.toggle(_obscureText);
+                                        _obscureText = !_obscureText;
+                                      });
+                                    },
+                                    icon: Icon(_viewPass),
                                   ),
                                   labelText: 'Senha',
                                   labelStyle: TextStyle(color: pgreytextfield)),
@@ -129,8 +118,14 @@ class _SignupPageState extends State<SignupPage> {
                                       borderRadius: BorderRadius.circular(30)),
                                   prefixIcon: Icon(Icons.lock_outline),
                                   suffixIcon: IconButton(
-                                    onPressed: _toggle1,
-                                    icon: Icon(_viewpass1),
+                                    onPressed: () {
+                                      setState(() {
+                                        _viewPass1 =
+                                            _controller.toggle(_obscureText1);
+                                        _obscureText1 = !_obscureText1;
+                                      });
+                                    },
+                                    icon: Icon(_viewPass1),
                                   ),
                                   labelText: 'Confirmar Senha',
                                   labelStyle: TextStyle(color: pgreytextfield)),
@@ -143,34 +138,22 @@ class _SignupPageState extends State<SignupPage> {
                             child: Column(
                               children: <Widget>[
                                 ElevatedButton(
-                                  child: Text("Cadastrar"),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: porange,
-                                    textStyle: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                    minimumSize: Size(320, 50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(25)),
-                                  ),
-                                  onPressed: () {
-                                    if (passwordController.text.trim() ==
-                                        passwordController1.text.trim()) {
-                                      context
-                                          .read<AuthenticationService>()
-                                          .singUp(
-                                            email: emailController.text.trim(),
-                                            password:
-                                                passwordController.text.trim(),
-                                          );
-                                    } else {
-                                      AlertDialog(
-                                        title: Text(''),
-                                      );
-                                    }
-                                  },
-                                ),
+                                    child: Text("Cadastrar"),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: porange,
+                                      textStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                      minimumSize: Size(320, 50),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                    ),
+                                    onPressed: () {
+
+                                      _controller.singIn(emailController.text,passwordController.text);
+                                     
+                                    }),
                               ],
                             ),
                           ),
@@ -196,8 +179,7 @@ class _SignupPageState extends State<SignupPage> {
                       width: 80,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
-                          Navigator.pushNamed(context, '/login');
+                          Navigator.popAndPushNamed(context, '/login');
                         },
                         child: Text(
                           "Entrar",
