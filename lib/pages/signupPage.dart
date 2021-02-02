@@ -143,20 +143,18 @@ class _SignupPageState extends State<SignupPage> {
                             child: Column(
                               children: <Widget>[
                                 ElevatedButton(
-                                  child: Text("Cadastrar"),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: porange,
-                                    textStyle: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                    minimumSize: Size(320, 50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(25)),
-                                  ),
-                                  onPressed: () {
-                                    if (passwordController.text.trim() ==
-                                        passwordController1.text.trim()) {
+                                    child: Text("Cadastrar"),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: porange,
+                                      textStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                      minimumSize: Size(320, 50),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                    ),
+                                    onPressed: () {
                                       context
                                           .read<AuthenticationService>()
                                           .singUp(
@@ -164,13 +162,7 @@ class _SignupPageState extends State<SignupPage> {
                                             password:
                                                 passwordController.text.trim(),
                                           );
-                                    } else {
-                                      AlertDialog(
-                                        title: Text(''),
-                                      );
-                                    }
-                                  },
-                                ),
+                                    }),
                               ],
                             ),
                           ),

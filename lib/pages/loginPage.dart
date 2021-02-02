@@ -168,7 +168,10 @@ class _LoginPageState extends State<LoginPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25))),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/exercises');
+                            context.read<AuthenticationService>().singIn(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                );
                           },
                           child: Text("Entrar"),
                         ),
