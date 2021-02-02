@@ -11,11 +11,13 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  mvc_pattern: ^6.0.0
   google_sign_in: ^4.5.9
   firebase_auth: ^0.20.0+1  
   cloud_firestore: ^0.16.0
   flutter:
     sdk: flutter
+  image_picker: ^0.6.7+22
 
   form_field_validator: ^1.0.1
   provider: ^4.3.2+1
@@ -49,3 +51,4 @@ flutter:
     - assets/backperfil.png
     - assets/homem.png
     - assets/backedit.png
+    - assets/correndo.jpg

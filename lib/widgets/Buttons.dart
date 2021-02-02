@@ -1,5 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:plusfit/pages/editperfilPage.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DefaultElevatedButton extends StatelessWidget {
   final Key key;
@@ -73,8 +75,18 @@ class DefaultOutlinedButton extends StatelessWidget {
         child: Text(text));
   }
 }
-class Bordaedit extends StatelessWidget {
-  Widget build(BuildContext context){
+
+
+class Bordaedit extends StatefulWidget {
+  @override
+  _BordaeditState createState() => _BordaeditState();
+}
+
+class _BordaeditState extends State<Bordaedit> {
+    PickedFile _imagefile;
+  final ImagePicker _picker = ImagePicker();
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: 100.0,
       width: MediaQuery.of(context).size.width,
@@ -84,24 +96,25 @@ class Bordaedit extends StatelessWidget {
       ),
       child: Column(
         children: <Widget>[
-          Text("Escolha uma foto de perfil",style: TextStyle(
+          Text("Escolha uma opção",style: TextStyle(
             fontSize: 20.0
           ),
           ),
           SizedBox(height:20),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton.icon(
                 icon: Icon(Icons.camera),
                 onPressed: () {
-
+                  takedPhoto(ImageSource.camera);
                 },
                 label: Text("Camera"),
               ),
               FlatButton.icon(
                 icon: Icon(Icons.image),
                 onPressed: () {
-
+                  takedPhoto(ImageSource.gallery);
                 },
                 label: Text("Galeria"),
               ),
@@ -109,6 +122,41 @@ class Bordaedit extends StatelessWidget {
           ),
         ],
       ),
+    );  
+    
+  }
+  Widget imagemPerfil() {
+    return Center(
+      child: Stack(
+        children: <Widget>[
+          CircleAvatar(
+            radius: 80.0,
+            backgroundImage: _imagefile ==null? AssetImage("assets/homem.png") : FileImage(File(_imagefile.path)),
+          ),
+          Positioned(
+            bottom: 20.0,
+            right: 20.0,
+            child: InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: ((builder) => Bordaedit()),
+                );
+              },
+              child: Icon(Icons.edit, color: Colors.teal, size: 28.0,),
+            ),
+          ),
+        ],
+      ),
     );
   }
+  void takedPhoto (ImageSource source) async {
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
+      setState(() {
+        _imagefile = pickedFile;
+      });
+    }
 }
+

@@ -3,7 +3,7 @@ import 'package:plusfit/authentication.dart';
 import 'package:plusfit/widgets/Buttons.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:plusfit/pages/editperfilPage.dart';
+
 
 class PerfilPage extends StatefulWidget {
   PerfilPage({Key key, this.title}) : super(key: key);

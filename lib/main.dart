@@ -1,21 +1,23 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:plusfit/authentication.dart';
-import 'package:plusfit/components/constants.dart';
-import 'package:plusfit/pages/cardiovascular.dart';
-import 'package:plusfit/pages/inferior.dart';
-import 'package:plusfit/pages/loginpage.dart';
-import 'package:plusfit/pages/homePage.dart';
-import 'package:plusfit/pages/profilePage.dart';
-import 'package:plusfit/pages/resetpasswordPage.dart';
-import 'package:plusfit/pages/aboutPage.dart';
-import 'package:plusfit/pages/exercisesPage.dart';
-import 'package:plusfit/pages/signupPage.dart';
-import 'package:plusfit/pages/signupPage2.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:plusfit/pages/superior.dart';
 import 'package:provider/provider.dart';
-import 'package:plusfit/pages/editperfilPage.dart';
+
+import 'package:flutter/material.dart';
+
+import 'package:plusfit/components/constants.dart';
+
+import 'package:plusfit/src/exercise/cardiovascular/view.dart';
+import 'package:plusfit/src/exercise/inferior/view.dart';
+import 'package:plusfit/src/signInPage/view.dart';
+import 'package:plusfit/src/homePage/view.dart';
+import 'package:plusfit/src/profilePage/view.dart';
+import 'package:plusfit/src/resetPasswordPage/view.dart';
+import 'package:plusfit/src/aboutPage/view.dart';
+import 'package:plusfit/src/exercisePage/view.dart';
+import 'package:plusfit/src/signUpPage/view.dart';
+import 'package:plusfit/src/signUpPage2/view.dart';
+import 'package:plusfit/src/exercise/superior/view.dart';
+import 'package:plusfit/src/editProfilePage/view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +31,7 @@ class PFApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           Provider<AuthenticationService>(
-            create: (_) => AuthenticationService(FirebaseAuth.instance),
+            create: (_) => AuthenticationService(),
           ),
           StreamProvider(
               create: (context) =>
@@ -55,6 +57,7 @@ class PFApp extends StatelessWidget {
           theme: ThemeData(
             primaryColor: porange,
             primarySwatch: Colors.deepOrange,
+
           ),
           home: HomePage(title: 'PlusFit'),
           debugShowCheckedModeBanner: false,
