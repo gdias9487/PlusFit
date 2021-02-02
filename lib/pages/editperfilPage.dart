@@ -202,7 +202,7 @@ class _MyEditPageState extends State<EditPage> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  builder: ((builder) => Bordaedit()),
+                  builder: ((builder) => bordaEdit()),
                 );
               },
               child: Icon(Icons.edit, color: Colors.teal, size: 28.0,),

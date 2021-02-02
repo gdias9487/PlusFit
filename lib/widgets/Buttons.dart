@@ -152,9 +152,9 @@ class _BordaeditState extends State<Bordaedit> {
     );
   }
   void takedPhoto (ImageSource source) async {
-      final pickedFile = await _picker.getImage(
-        source: source,
-      );
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
       setState(() {
         _imagefile = pickedFile;
       });
