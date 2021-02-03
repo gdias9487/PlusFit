@@ -3,6 +3,10 @@ import 'package:plusfit/authentication.dart';
 import 'package:plusfit/widgets/Buttons.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:plusfit/components/constants.dart';
+
+import '../../components/constants.dart';
+import '../../components/constants.dart';
 
 
 class PerfilPage extends StatefulWidget {
@@ -15,6 +19,25 @@ class PerfilPage extends StatefulWidget {
 }
 
 class _MyPerfilPageState extends State<PerfilPage> {
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context){
+        return AlertDialog(
+          title: new Text("Desconectar"),
+          content: new Text("Você Deseja Realmente Sair ?"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Sim, Sair"),
+              onPressed: () {
+                Navigator.pushNamed(context, '/home'); 
+              },
+            ),
+          ],
+        );
+      }
+    );
+  }
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
@@ -68,7 +91,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       children: <Widget>[
                         Text(
                           "Carlos Dias Ernandes",
-                          style: TextStyle(fontSize: 20.0),
+                          style: TextStyle(fontSize: 20.0, color: Colors.white),
                         ),
                         SizedBox(
                           height: 10,
@@ -76,7 +99,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                         Row(
                           children: <Widget>[
                             DefaultElevatedButton(
-                                color: Colors.black,
+                                color: porange,
                                 fontSize: 12,
                                 height: 60,
                                 radius: 25,
@@ -89,18 +112,14 @@ class _MyPerfilPageState extends State<PerfilPage> {
                               width: 25,
                             ),
                             DefaultElevatedButton(
-                              color: Colors.black,
+                              color: porange,
                               fontSize: 12,
                               height: 60,
                               radius: 25,
                               width: 30,
                               text: 'Desconectar',
                               action: () {
-                                context.read<AuthenticationService>().signOut();
-                                if (firebaseUser == null) {
-                                  Navigator.pop(context);
-                                  Navigator.pop(context);
-                                }
+                                _showDialog();
                               },
                             ),
                           ],
@@ -112,7 +131,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                 SizedBox(height: 20.0),
                 Text(
                   "Account",
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.white),
                 ),
                 SizedBox(height: 10.0),
                 Card(
@@ -142,19 +161,19 @@ class _MyPerfilPageState extends State<PerfilPage> {
                         ),
                         Divider(height: 10.0, color: Colors.grey),
                         ListTile(
-                          leading: Icon(Icons.verified, color: Colors.black),
+                          leading: Icon(Icons.headset_mic, color: Colors.black),
                           title: Text(
-                            "Upgrade Account",
+                            "Support",
                             style: TextStyle(fontSize: 19.0),
                           ),
                           onTap: () {},
                         ),
                         Divider(height: 10.0, color: Colors.grey),
                         ListTile(
-                          leading: Icon(Icons.headset_mic, color: Colors.black),
+                          leading: Icon(Icons.block_outlined, color: Colors.red),
                           title: Text(
-                            "Support",
-                            style: TextStyle(fontSize: 19.0),
+                            "Deletar Conta",
+                            style: TextStyle(fontSize: 19.0,color: Colors.red),
                           ),
                           onTap: () {},
                         ),
@@ -165,7 +184,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                 SizedBox(height: 20.0),
                 Text(
                   "Notification",
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 SizedBox(height: 10.0),
                 Card(
