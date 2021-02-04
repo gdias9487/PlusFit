@@ -4,6 +4,9 @@ import 'package:plusfit/widgets/Buttons.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:plusfit/src/editProfilePage/view.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 import '../../components/constants.dart';
 import '../../components/constants.dart';
@@ -18,7 +21,10 @@ class PerfilPage extends StatefulWidget {
   _MyPerfilPageState createState() => _MyPerfilPageState();
 }
 
+
 class _MyPerfilPageState extends State<PerfilPage> {
+  PickedFile _imagefile;
+  final ImagePicker _picker = ImagePicker();
   void _showDialog() {
     showDialog(
       context: context,
@@ -38,6 +44,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
       }
     );
   }
+  
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
@@ -68,23 +75,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Container(
-                      height: 130.0,
-                      width: 130.0,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(65.0),
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 3.0,
-                              offset: Offset(0, 5.0),
-                              color: Colors.black38),
-                        ],
-                        image: DecorationImage(
-                            image: AssetImage("assets/homem.png"),
-                            fit: BoxFit.cover),
-                      ),
-                    ),
+                    perfilImagem(),
                     SizedBox(width: 20.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,4 +208,73 @@ class _MyPerfilPageState extends State<PerfilPage> {
       ),
     );
   }
+   Widget perfilImagem() {
+    return Stack(
+      children: <Widget>[
+          CircleAvatar(
+            radius: 80.0,
+            backgroundImage: _imagefile == null ? AssetImage("assets/homem.png") : FileImage(File(_imagefile.path)),
+          ),
+          Positioned(
+            bottom: 20.0,
+            right: 20.0,
+            child: InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: ((builder) => bordaEdit()),
+                );
+              },
+              child: Icon(Icons.edit, color: Colors.teal, size: 28.0,),
+            ),
+          ),
+        ],
+    );
+  }
+  Widget bordaEdit() {
+    return Container(
+      height: 100.0,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: <Widget>[
+          Text("Escolha uma opção",style: TextStyle(
+            fontSize: 20.0
+          ),
+          ),
+          SizedBox(height:20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FlatButton.icon(
+                icon: Icon(Icons.camera),
+                onPressed: () {
+                  takedPhoto(ImageSource.camera);
+                },
+                label: Text("Camera"),
+              ),
+              FlatButton.icon(
+                icon: Icon(Icons.image),
+                onPressed: () {
+                  takedPhoto(ImageSource.gallery);
+                },
+                label: Text("Galeria"),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+  void takedPhoto (ImageSource source) async {
+      final pickedFile = await _picker.getImage(
+        source: source,
+      );
+      setState(() {
+        _imagefile = pickedFile;
+      });
+    }
 }
