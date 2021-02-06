@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:plusfit/authentication.dart';
-
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
-
 import 'package:plusfit/src/signUpPage/controller.dart';
-import 'package:provider/provider.dart';
-
 import '../../components/constants.dart';
 
 class SignupPage extends StatefulWidget {
@@ -150,19 +145,8 @@ class _SignupPageState extends State<SignupPage> {
                                               BorderRadius.circular(25)),
                                     ),
                                     onPressed: () {
-<<<<<<< HEAD:lib/pages/signupPage.dart
-                                      context
-                                          .read<AuthenticationService>()
-                                          .singUp(
-                                            email: emailController.text.trim(),
-                                            password:
-                                                passwordController.text.trim(),
-                                          );
-=======
-
-                                      _controller.singIn(emailController.text,passwordController.text);
-                                     
->>>>>>> e5dd6b4be8d8139e8fc5a71c12ed3ff8fb23d73f:lib/src/signUpPage/view.dart
+                                      _controller.singIn(emailController.text,
+                                          passwordController.text);
                                     }),
                               ],
                             ),
