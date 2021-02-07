@@ -1,11 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:plusfit/widgets/TextFormFieldContainer.dart';
-import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:plusfit/widgets/AlertDialog.dart';
 import 'package:provider/provider.dart';
-// import 'package:form_field_validator/form_field_validator.dart';
-
 import 'package:plusfit/authentication.dart';
 
 class LoginPage extends StatefulWidget {
@@ -26,6 +23,16 @@ class _LoginPageState extends State<LoginPage> {
   bool _obscureText = true;
 
   @override
+  void _showDialog(text) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Alert_Box(
+            text: text,
+          );
+        });
+  }
+
   // ignore: override_on_non_overriding_member
   bool validateAndSave() {
     if (_formkey.currentState.validate()) {
@@ -36,13 +43,18 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void validadeAndSubmit() {
+  void validateAndSubmit() async {
     if (validateAndSave()) {
       try {
-        context.read<AuthenticationService>().singIn(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim());
-        Navigator.pushNamed(context, '/exercises');
+        context
+            .read<AuthenticationService>()
+            .singIn(
+                email: emailController.text.trim(),
+                password: passwordController.text.trim())
+            .then((value) => Navigator.pushNamed(context, '/exercises'))
+            .catchError((e) => _showDialog(error));
+
+        return null;
       } catch (e) {}
     }
   }
@@ -168,10 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25))),
                           onPressed: () {
-                            context.read<AuthenticationService>().singIn(
-                                  email: emailController.text.trim(),
-                                  password: passwordController.text.trim(),
-                                );
+                            validateAndSubmit();
                           },
                           child: Text("Entrar"),
                         ),
