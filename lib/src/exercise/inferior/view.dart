@@ -11,6 +11,10 @@ class InferiorPage extends StatefulWidget {
 }
 
 class _InferiorPageState extends State<InferiorPage> {
+  double _minutosinferior = 0;
+  double _intervaloinferior = 0;
+  String _cursor = "minutos";
+
   @override
   Widget build(BuildContext context) {
     final ScrollController cont = ScrollController();
@@ -76,6 +80,52 @@ class _InferiorPageState extends State<InferiorPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
+            ),
+            Center(
+              child: Text(
+                "Tempo disponível em minutos:",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Slider(
+              onChanged: (t) {
+                setState(() {
+                  _minutosinferior = t;
+                });
+              },
+              value: _minutosinferior,
+              min: 0,
+              label: "$_minutosinferior minutos",
+              max: 50,
+              divisions: 10,
+              inactiveColor: Colors.grey,
+              activeColor: Colors.red,
+            ),
+            Center(
+              child: Text(
+                "Tempo dos intervalos:",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Slider(
+              onChanged: (t) {
+                setState(() {
+                  _intervaloinferior = t;
+                });
+              },
+              value: _intervaloinferior,
+              min: 0,
+              label: " intervalo: $_intervaloinferior $_cursor",
+              max: 5,
+              divisions: 5,
+              inactiveColor: Colors.grey,
+              activeColor: Colors.red,
             ),
             TrainingContainer(
                 width: 1,
