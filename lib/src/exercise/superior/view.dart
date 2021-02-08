@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plusfit/src/exercise/superior/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 
 class SuperiorPage extends StatefulWidget {
@@ -135,7 +136,10 @@ class _SuperiorPageState extends State<SuperiorPage> {
                 vertical: 10,
                 text: 'Básico',
                 action: () {
-                  Navigator.pushNamed(context, '/superior_ex');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Superior(nivel: "basico")));
                 }),
             TrainingContainer(
                 width: 1,
@@ -144,7 +148,11 @@ class _SuperiorPageState extends State<SuperiorPage> {
                 vertical: 10,
                 text: 'Intermediário',
                 action: () {
-                  Navigator.pushNamed(context, '/superior_ex');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Superior(nivel: "intermediario")));
                 }),
             TrainingContainer(
                 width: 1,
@@ -153,7 +161,10 @@ class _SuperiorPageState extends State<SuperiorPage> {
                 vertical: 10,
                 text: 'Avançado',
                 action: () {
-                  Navigator.pushNamed(context, '/superior_ex');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Superior(nivel: "avancado")));
                 }),
             SizedBox(
               height: 50,

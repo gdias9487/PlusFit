@@ -116,7 +116,7 @@ class _SignupPageState extends State<SignupPage> {
                 key: _formkey,
                 child: ListView(children: <Widget>[
                   IconButton(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                    padding: EdgeInsets.only(left: 20, top: 30),
                     alignment: Alignment.topLeft,
                     color: Colors.white,
                     icon: Icon(Icons.arrow_back_ios),
@@ -126,16 +126,16 @@ class _SignupPageState extends State<SignupPage> {
                     },
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 5,
                   ),
                   SizedBox(
-                      height: 110,
-                      width: 150,
+                      height: 160,
+                      width: 200,
                       child: Image.asset("assets/Plusfit_logo.png")),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
+                    padding: EdgeInsets.only(left: 35, right: 35, top: 10),
                     child: Container(
-                        height: 422,
+                        height: 370,
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -214,48 +214,39 @@ class _SignupPageState extends State<SignupPage> {
                               SizedBox(
                                 height: padbutton,
                               ),
-                              Container(
-                                child: Column(
-                                  children: <Widget>[
-                                    ElevatedButton(
-                                        child: Text("Cadastrar"),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: porange,
-                                          textStyle: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
-                                          minimumSize: Size(320, 50),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                        ),
-                                        onPressed: () {
-                                          validateAndSubmit();
-                                        }),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 65,
+                              Align(
+                                  alignment: Alignment.bottomCenter,
+                                    child: ElevatedButton(
+                                    child: Text("Cadastrar"),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: porange,
+                                      textStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                      minimumSize: Size(320, 50),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                    ),
+                                    onPressed: () {
+                                      validateAndSubmit();
+                                    }),
                               ),
                             ])),
                   ),
                   Container(
-                    height: 32,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 110,
-                        ),
-                        Text(
-                          "Possui uma Conta?",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(color: pyellow),
-                        ),
-                        Container(
-                          alignment: Alignment.topLeft,
-                          width: 80,
-                          child: TextButton(
+                      width: double.infinity,
+                      height: 50,
+                      child: Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 110,
+                          ),
+                          Text(
+                            "Possui uma Conta?",
+                            style: TextStyle(color: pyellow),
+                          ),
+                          TextButton(
                             onPressed: () {
                               Navigator.popAndPushNamed(context, '/login');
                             },
@@ -265,10 +256,8 @@ class _SignupPageState extends State<SignupPage> {
                                   color: pyellow, fontWeight: FontWeight.bold),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
+                        ],
+                      )),
                 ]))));
   }
 }

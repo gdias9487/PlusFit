@@ -3,20 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/src/exercise/superior/exerciseList/controller.dart';
 
 class Superior extends StatefulWidget {
-  Superior({Key key, this.title}) : super(key: key);
-
   final String title;
+  final String nivel;
+
+  Superior({Key key, this.title, this.nivel}) : super(key: key);
 
   @override
-  _SuperiorPageState createState() => _SuperiorPageState();
+  _SuperiorPageState createState() => _SuperiorPageState(nivel);
 }
 
 class _SuperiorPageState extends State<Superior> {
+  final String nivel;
+
+  _SuperiorPageState(this.nivel);
+
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
-    return snapshot.data.docs.map<Widget>((document) {
+    return snapshot.data.docs.get("Nome").map<Widget>((document) {
       return ListTile(
-        title: Text(document['nome']),
-        subtitle: Text(document['nivel']),
+        title: Text(document['Nome']),
+        subtitle: Text(document['Nivel']),
       );
     }).toList();
   }
@@ -63,9 +68,9 @@ class _SuperiorPageState extends State<Superior> {
       body: Container(
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('treinos')
-                .where('nivel', isEqualTo: 'basico')
-                .where('tipo', isEqualTo: 'cardio')
+                .collection('exercicios')
+                .where('Nivel', isEqualTo: nivel)
+                .where('Tipo', isEqualTo: 'superior')
                 .snapshots(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {

@@ -67,7 +67,7 @@ class _ExercisePageState extends State<ExercisePage> {
                 height: 150,
                 horizontal: 15,
                 vertical: 10,
-                text: 'Superior',
+                text: 'Superiores',
                 action: () {
                   Navigator.pushNamed(context, '/superior');
                 },
@@ -77,7 +77,7 @@ class _ExercisePageState extends State<ExercisePage> {
                 height: 150,
                 horizontal: 15,
                 vertical: 10,
-                text: 'Inferior',
+                text: 'Inferiores',
                 action: () {
                   Navigator.pushNamed(context, '/inferior');
                 },
