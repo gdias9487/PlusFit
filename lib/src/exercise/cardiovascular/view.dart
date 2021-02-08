@@ -13,6 +13,10 @@ class CardiovascularPage extends StatefulWidget {
 }
 
 class _CardiovascularPageState extends State<CardiovascularPage> {
+  double _minutoscardio = 0;
+  double _intervalocardio = 0;
+  String _cursor = "minutos";
+
   @override
   Widget build(BuildContext context) {
     final ScrollController cont = ScrollController();
@@ -80,6 +84,52 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
                 Navigator.pushNamed(context, '/treino');
                 //exercicio.getAll();
               },
+            ),
+            Center(
+              child: Text(
+                "Tempo disponível em minutos:",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Slider(
+              onChanged: (t) {
+                setState(() {
+                  _minutoscardio = t;
+                });
+              },
+              value: _minutoscardio,
+              min: 0,
+              label: "$_minutoscardio minutos",
+              max: 50,
+              divisions: 10,
+              inactiveColor: Colors.grey,
+              activeColor: Colors.red,
+            ),
+            Center(
+              child: Text(
+                "Tempo dos intervalos:",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Slider(
+              onChanged: (t) {
+                setState(() {
+                  _intervalocardio = t;
+                });
+              },
+              value: _intervalocardio,
+              min: 0,
+              label: " intervalo: $_intervalocardio $_cursor",
+              max: 5,
+              divisions: 5,
+              inactiveColor: Colors.grey,
+              activeColor: Colors.red,
             ),
             TrainingContainer(
                 width: 1,

@@ -11,6 +11,11 @@ class SuperiorPage extends StatefulWidget {
 }
 
 class _SuperiorPageState extends State<SuperiorPage> {
+  double _slideValue = 0;
+  double _slideValue1 = 0;
+
+  String _cursor = "minutos";
+
   @override
   Widget build(BuildContext context) {
     final ScrollController cont = ScrollController();
@@ -76,6 +81,52 @@ class _SuperiorPageState extends State<SuperiorPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
+            ),
+            Center(
+              child: Text(
+                "Tempo disponível em minutos:",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Slider(
+              onChanged: (t) {
+                setState(() {
+                  _slideValue = t;
+                });
+              },
+              value: _slideValue,
+              min: 0,
+              label: "$_slideValue minutos",
+              max: 50,
+              divisions: 10,
+              inactiveColor: Colors.grey,
+              activeColor: Colors.red,
+            ),
+            Center(
+              child: Text(
+                "Tempo dos intervalos:",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Slider(
+              onChanged: (t) {
+                setState(() {
+                  _slideValue1 = t;
+                });
+              },
+              value: _slideValue1,
+              min: 0,
+              label: " intervalo: $_slideValue1 $_cursor",
+              max: 5,
+              divisions: 5,
+              inactiveColor: Colors.grey,
+              activeColor: Colors.red,
             ),
             TrainingContainer(
                 width: 1,

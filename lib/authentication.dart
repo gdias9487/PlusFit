@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
+String error;
+
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -12,88 +14,108 @@ class AuthenticationService {
 
   Future<String> singIn({String email, String password}) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      final cebola = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      return 'Signed In';
+      return "Logged in";
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case "ERROR_EMAIL_ALREADY_IN_USE":
         case "account-exists-with-different-credential":
         case "email-already-in-use":
-          return "Email already used. Go to login page.";
+          error =
+              "Este e-mail já está sendo utilizado. Vá para a página de login.";
           break;
         case "ERROR_WRONG_PASSWORD":
         case "wrong-password":
-          return "Wrong email/password combination.";
+          error = "Combinação de e-mail/senha incorretos.";
+
           break;
         case "ERROR_USER_NOT_FOUND":
         case "user-not-found":
-          return "No user found with this email.";
+          error = "Nenhum usuário foi encontrado com este endereço de e-mail.";
+
           break;
         case "ERROR_USER_DISABLED":
         case "user-disabled":
-          return "User disabled.";
+          error = "Usuário desativado.";
+
           break;
         case "ERROR_TOO_MANY_REQUESTS":
         case "operation-not-allowed":
-          return "Too many requests to log into this account.";
+          error =
+              "Foram realizadas muitas requisições para acessar esta conta.";
+
           break;
         case "ERROR_OPERATION_NOT_ALLOWED":
         case "operation-not-allowed":
-          return "Server error, please try again later.";
+          error = "Erro de servidor, tente novamente mais tarde.";
+
           break;
         case "ERROR_INVALID_EMAIL":
         case "invalid-email":
-          return "Email address is invalid.";
+          error = "E-mail inválido.";
+
           break;
         default:
-          return "Login failed. Please try again.";
+          error = "O login falhou, tente novamente.";
+
           break;
       }
-      ;
+    }
+    if (error != null) {
+      return Future.error(error);
+    } else {
+      return null;
     }
   }
 
-  Future<String> singUp({String email, String password}) async {
+  Future<String> signUp({String email, String password}) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      final cebola = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return "Signed Up";
+      return "Cadastrado";
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case "ERROR_EMAIL_ALREADY_IN_USE":
         case "account-exists-with-different-credential":
         case "email-already-in-use":
-          return "Email already used. Go to login page.";
+          error =
+              "Este e-mail já está sendo utilizado. Vá para a página de login.";
           break;
         case "ERROR_WRONG_PASSWORD":
         case "wrong-password":
-          return "Wrong email/password combination.";
+          error = "Combinação de e-mail/senha incorretos.";
           break;
         case "ERROR_USER_NOT_FOUND":
         case "user-not-found":
-          return "No user found with this email.";
+          error = "Nenhum usuário foi encontrado com este endereço de e-mail.";
           break;
         case "ERROR_USER_DISABLED":
         case "user-disabled":
-          return "User disabled.";
+          error = "Usuário desativado.";
           break;
         case "ERROR_TOO_MANY_REQUESTS":
         case "operation-not-allowed":
-          return "Too many requests to log into this account.";
+          error =
+              "Foram realizadas muitas requisições para acessar esta conta.";
           break;
         case "ERROR_OPERATION_NOT_ALLOWED":
         case "operation-not-allowed":
-          return "Server error, please try again later.";
+          error = "Erro de servidor, tente novamente mais tarde.";
           break;
         case "ERROR_INVALID_EMAIL":
         case "invalid-email":
-          return "Email address is invalid.";
+          error = "E-mail inválido.";
           break;
         default:
-          return "Login failed. Please try again.";
+          error = "O login falhou, tente novamente.";
           break;
       }
+    }
+    if (error != null) {
+      return Future.error(error);
+    } else {
+      return null;
     }
   }
 }
