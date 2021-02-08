@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
 import 'package:plusfit/authentication.dart';
 import 'package:plusfit/widgets/AlertDialog.dart';
->>>>>>> a2022aa04a764d61725d0c5876ca5ac161c58561
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
@@ -187,16 +184,6 @@ class _SignupPageState extends State<SignupPage> {
                                       onPressed: _toggle,
                                       icon: Icon(_viewpass),
                                     ),
-<<<<<<< HEAD
-                                    onPressed: () {
-                                      _controller.singUp(
-                                        emailController.text,
-                                        passwordController.text,
-                                        passwordController1,
-                                      );
-                                    }),
-                              ],
-=======
                                     labelText: 'Senha',
                                     labelStyle:
                                         TextStyle(color: pgreytextfield)),
@@ -276,7 +263,6 @@ class _SignupPageState extends State<SignupPage> {
                               "Entrar",
                               style: TextStyle(
                                   color: pyellow, fontWeight: FontWeight.bold),
->>>>>>> a2022aa04a764d61725d0c5876ca5ac161c58561
                             ),
                           ),
                         ),
