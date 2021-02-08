@@ -1,7 +1,6 @@
 import 'package:plusfit/authentication.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:plusfit/src/exercise/inferior/exerciseList/view.dart';
-import 'package:plusfit/src/exercise/superior/exerciseList/models.dart';
 import 'package:plusfit/src/exercise/superior/exerciseList/view.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +19,6 @@ import 'package:plusfit/src/exercisePage/view.dart';
 import 'package:plusfit/src/signUpPage/view.dart';
 import 'package:plusfit/src/signUpPage2/view.dart';
 import 'package:plusfit/src/exercise/superior/view.dart';
-import 'package:plusfit/src/editProfilePage/view.dart';
 
 import 'src/exercise/cardiovascular/exerciseList/view.dart';
 
@@ -53,20 +51,17 @@ class PFApp extends StatelessWidget {
             '/exercises': (context) => ExercisePage(),
             '/signup2': (context) => SignupprfPage(),
             '/perfil': (context) => PerfilPage(),
-            '/edit': (context) => EditPage(),
             '/superior': (context) => SuperiorPage(),
             '/inferior': (context) => InferiorPage(),
             '/cardio': (context) => CardiovascularPage(),
             '/cardio_ex': (context) => Cardio(),
             '/inferior_ex': (context) => Inferior(),
             '/superior_ex': (context) => Superior(),
-
           },
           title: 'PlusFit v1.0',
           theme: ThemeData(
             primaryColor: porange,
             primarySwatch: Colors.deepOrange,
-
           ),
           home: HomePage(title: 'PlusFit'),
           debugShowCheckedModeBanner: false,
