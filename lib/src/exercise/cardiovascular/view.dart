@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plusfit/src/exercise/superior/exerciseList/controller.dart';
+import 'package:plusfit/src/exercise/cardiovascular/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
-
 
 class CardiovascularPage extends StatefulWidget {
   CardiovascularPage({Key key, this.title}) : super(key: key);
@@ -82,7 +81,6 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
               splashRadius: 20,
               onPressed: () {
                 Navigator.pushNamed(context, '/treino');
-                //exercicio.getAll();
               },
             ),
             Center(
@@ -132,36 +130,35 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
               activeColor: Colors.red,
             ),
             TrainingContainer(
-                width: 1,
-                height: 150,
-                horizontal: 40,
-                vertical: 10,
-                text: 'Básico',
-                action: (){
-                  Navigator.pushNamed(context, '/cardio_ex');
-                },
-                ),
-                
+              width: 1,
+              height: 150,
+              horizontal: 40,
+              vertical: 10,
+              text: 'Básico',
+              action: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Cardio(nivel: "basico")));
+              },
+            ),
             TrainingContainer(
-                width: 1,
-                height: 150,
-                horizontal: 40,
-                vertical: 10,
-                text: 'Intermediário',
-                action: (){
-                  Navigator.pushNamed(context, '/cardio_ex');
-                },
-                ),
+              width: 1,
+              height: 150,
+              horizontal: 40,
+              vertical: 10,
+              text: 'Intermediário',
+              action: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Cardio(nivel: "intermediario")));
+              },
+            ),
             TrainingContainer(
-                width: 1,
-                height: 150,
-                horizontal: 40,
-                vertical: 10,
-                text: 'Avançado',
-                action: (){
-                  Navigator.pushNamed(context, '/cardio_ex');
-                },
-                ),
+              width: 1,
+              height: 150,
+              horizontal: 40,
+              vertical: 10,
+              text: 'Avançado',
+              action: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Cardio(nivel: "avancado")));
+              },
+            ),
             SizedBox(
               height: 50,
             ),

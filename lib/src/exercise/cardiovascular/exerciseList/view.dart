@@ -1,17 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:plusfit/src/exercise/superior/exerciseList/controller.dart';
 
 class Cardio extends StatefulWidget {
-  Cardio({Key key, this.title}) : super(key: key);
-
   final String title;
+  final String nivel;
+
+  const Cardio({Key key, this.title, this.nivel}) : super(key: key);
 
   @override
-  _CardioPageState createState() => _CardioPageState();
+  _CardioPageState createState() => _CardioPageState(nivel);
 }
 
 class _CardioPageState extends State<Cardio> {
+  final String nivel;
+
+  _CardioPageState(this.nivel);
+
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
       return ListTile(
@@ -29,6 +33,7 @@ class _CardioPageState extends State<Cardio> {
           duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
     }
 
+    print(nivel);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -64,7 +69,7 @@ class _CardioPageState extends State<Cardio> {
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('treinos')
-                .where('nivel', isEqualTo: 'basico')
+                .where('nivel', isEqualTo: nivel)
                 .where('tipo', isEqualTo: 'cardio')
                 .snapshots(),
             builder: (context, snapshot) {

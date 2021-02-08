@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plusfit/src/exercise/inferior/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 
 class InferiorPage extends StatefulWidget {
@@ -134,7 +135,7 @@ class _InferiorPageState extends State<InferiorPage> {
               vertical: 10,
               text: 'Básico',
               action: () {
-                Navigator.pushNamed(context, "/inferior_ex");
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Inferior(nivel: "basico")));
               },
             ),
             TrainingContainer(
@@ -144,7 +145,7 @@ class _InferiorPageState extends State<InferiorPage> {
               vertical: 10,
               text: 'Intermediário',
               action: () {
-                Navigator.pushNamed(context, "/inferior_ex");
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Inferior(nivel: "intermediario")));
               },
             ),
             TrainingContainer(
@@ -154,7 +155,7 @@ class _InferiorPageState extends State<InferiorPage> {
               vertical: 10,
               text: 'Avançado',
               action: () {
-                Navigator.pushNamed(context, "/inferior_ex");
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Inferior(nivel: "avancado")));
               },
             ),
             SizedBox(
