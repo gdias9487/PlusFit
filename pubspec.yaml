@@ -11,10 +11,11 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  rflutter_alert: ^1.1.0
   mvc_pattern: ^6.0.0
   google_sign_in: ^4.5.9
   firebase_auth: ^0.20.0+1  
-  cloud_firestore: ^0.16.0
+  cloud_firestore: 
   flutter:
     sdk: flutter
   image_picker: ^0.6.7+22
@@ -52,3 +53,4 @@ flutter:
     - assets/homem.png
     - assets/backedit.png
     - assets/correndo.jpg
+    - assets/signup.jpg

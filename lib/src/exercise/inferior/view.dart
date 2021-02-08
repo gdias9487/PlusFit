@@ -78,23 +78,35 @@ class _InferiorPageState extends State<InferiorPage> {
               },
             ),
             TrainingContainer(
-                width: 1,
-                height: 150,
-                horizontal: 40,
-                vertical: 10,
-                text: 'Básico'),
+              width: 1,
+              height: 150,
+              horizontal: 40,
+              vertical: 10,
+              text: 'Básico',
+              action: () {
+                Navigator.pushNamed(context, "/inferior_ex");
+              },
+            ),
             TrainingContainer(
-                width: 1,
-                height: 150,
-                horizontal: 40,
-                vertical: 10,
-                text: 'Intermediário'),
+              width: 1,
+              height: 150,
+              horizontal: 40,
+              vertical: 10,
+              text: 'Intermediário',
+              action: () {
+                Navigator.pushNamed(context, "/inferior_ex");
+              },
+            ),
             TrainingContainer(
-                width: 1,
-                height: 150,
-                horizontal: 40,
-                vertical: 10,
-                text: 'Avançado'),
+              width: 1,
+              height: 150,
+              horizontal: 40,
+              vertical: 10,
+              text: 'Avançado',
+              action: () {
+                Navigator.pushNamed(context, "/inferior_ex");
+              },
+            ),
             SizedBox(
               height: 50,
             ),

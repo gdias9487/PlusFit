@@ -28,7 +28,7 @@ class DefaultTextField extends StatelessWidget {
       child: TextFormField(
         controller: controler,
         obscureText: obscureText,
-        style: new TextStyle(color: Colors.black, fontSize: 18),
+        style: new TextStyle(color: Colors.black, fontSize: 16),
         decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
             fillColor: Colors.blue,

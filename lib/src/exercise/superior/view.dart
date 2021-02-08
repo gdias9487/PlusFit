@@ -82,19 +82,28 @@ class _SuperiorPageState extends State<SuperiorPage> {
                 height: 150,
                 horizontal: 40,
                 vertical: 10,
-                text: 'Básico'),
+                text: 'Básico',
+                action: () {
+                  Navigator.pushNamed(context, '/superior_ex');
+                }),
             TrainingContainer(
                 width: 1,
                 height: 150,
                 horizontal: 40,
                 vertical: 10,
-                text: 'Intermediário'),
+                text: 'Intermediário',
+                action: () {
+                  Navigator.pushNamed(context, '/superior_ex');
+                }),
             TrainingContainer(
                 width: 1,
                 height: 150,
                 horizontal: 40,
                 vertical: 10,
-                text: 'Avançado'),
+                text: 'Avançado',
+                action: () {
+                  Navigator.pushNamed(context, '/superior_ex');
+                }),
             SizedBox(
               height: 50,
             ),

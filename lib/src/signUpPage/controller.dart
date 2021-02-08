@@ -5,14 +5,19 @@ import 'package:plusfit/authentication.dart';
 
 
 class Controller extends ControllerMVC{
-  String message;
+  String message = 'Caso base';
 
   AuthenticationService _auth = AuthenticationService();
 
-  Future singIn(email, password) async {
-
-    message = _auth.singUp(email: email, password: password).toString();
-
+  Future singUp(email, password, check) async {
+    if (password == check) {
+      _auth.singUp(email: email, password: password).toString();
+      return message;
+    } else {
+      message = "Senhas não Coencidem";
+      return message;
+    }
+    
   }
 
    toggle(value) {

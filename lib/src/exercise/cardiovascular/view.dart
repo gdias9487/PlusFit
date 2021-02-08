@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:plusfit/src/exercise/superior/exerciseList/controller.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
+
 
 class CardiovascularPage extends StatefulWidget {
   CardiovascularPage({Key key, this.title}) : super(key: key);
@@ -14,6 +16,7 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
   @override
   Widget build(BuildContext context) {
     final ScrollController cont = ScrollController();
+    // Exercise exercicio = Exercise();
     void scroll() {
       cont.animateTo(0,
           duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
@@ -74,7 +77,8 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
               iconSize: 35,
               splashRadius: 20,
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, '/treino');
+                //exercicio.getAll();
               },
             ),
             TrainingContainer(
@@ -82,19 +86,32 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
                 height: 150,
                 horizontal: 40,
                 vertical: 10,
-                text: 'Básico'),
+                text: 'Básico',
+                action: (){
+                  Navigator.pushNamed(context, '/cardio_ex');
+                },
+                ),
+                
             TrainingContainer(
                 width: 1,
                 height: 150,
                 horizontal: 40,
                 vertical: 10,
-                text: 'Intermediário'),
+                text: 'Intermediário',
+                action: (){
+                  Navigator.pushNamed(context, '/cardio_ex');
+                },
+                ),
             TrainingContainer(
                 width: 1,
                 height: 150,
                 horizontal: 40,
                 vertical: 10,
-                text: 'Avançado'),
+                text: 'Avançado',
+                action: (){
+                  Navigator.pushNamed(context, '/cardio_ex');
+                },
+                ),
             SizedBox(
               height: 50,
             ),

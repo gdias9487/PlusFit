@@ -1,5 +1,8 @@
 import 'package:plusfit/authentication.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:plusfit/src/exercise/inferior/exerciseList/view.dart';
+import 'package:plusfit/src/exercise/superior/exerciseList/models.dart';
+import 'package:plusfit/src/exercise/superior/exerciseList/view.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
@@ -18,6 +21,8 @@ import 'package:plusfit/src/signUpPage/view.dart';
 import 'package:plusfit/src/signUpPage2/view.dart';
 import 'package:plusfit/src/exercise/superior/view.dart';
 import 'package:plusfit/src/editProfilePage/view.dart';
+
+import 'src/exercise/cardiovascular/exerciseList/view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +57,10 @@ class PFApp extends StatelessWidget {
             '/superior': (context) => SuperiorPage(),
             '/inferior': (context) => InferiorPage(),
             '/cardio': (context) => CardiovascularPage(),
+            '/cardio_ex': (context) => Cardio(),
+            '/inferior_ex': (context) => Inferior(),
+            '/superior_ex': (context) => Superior(),
+
           },
           title: 'PlusFit v1.0',
           theme: ThemeData(
