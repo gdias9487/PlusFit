@@ -4,10 +4,11 @@ import 'package:plusfit/widgets/Buttons.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:plusfit/src/editProfilePage/view.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import '../../components/constants.dart';
+import '../../components/constants.dart';
 import '../../components/constants.dart';
 import '../../components/constants.dart';
 
@@ -20,10 +21,12 @@ class PerfilPage extends StatefulWidget {
   @override
   _MyPerfilPageState createState() => _MyPerfilPageState();
 }
-
+ 
 
 class _MyPerfilPageState extends State<PerfilPage> {
   PickedFile _imagefile;
+  final TextEditingController nomeController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   void _showDialog() {
     showDialog(
@@ -44,6 +47,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
       }
     );
   }
+
   
   @override
   Widget build(BuildContext context) {
@@ -60,6 +64,18 @@ class _MyPerfilPageState extends State<PerfilPage> {
               Navigator.pop(context);
             },
           ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.create),
+              color: Colors.white,
+              onPressed: () {
+                 showModalBottomSheet(
+                  context: context,
+                  builder: ((builder) => _editar()),
+                );
+              },
+              ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -81,27 +97,19 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Carlos Dias Ernandes",
+                          "Carlos Dias",
                           style: TextStyle(fontSize: 20.0, color: Colors.white),
                         ),
                         SizedBox(
                           height: 10,
                         ),
+                        Text(
+                          "carlinhos@hotmail.com",
+                          style: TextStyle(fontSize: 12.0, color: Colors.white),
+                        ),
+                        
                         Row(
                           children: <Widget>[
-                            DefaultElevatedButton(
-                                color: porange,
-                                fontSize: 12,
-                                height: 60,
-                                radius: 25,
-                                width: 30,
-                                text: 'Editar',
-                                action: () {
-                                  Navigator.pushNamed(context, "/edit");
-                                }),
-                            SizedBox(
-                              width: 25,
-                            ),
                             DefaultElevatedButton(
                               color: porange,
                               fontSize: 12,
@@ -205,6 +213,51 @@ class _MyPerfilPageState extends State<PerfilPage> {
             ),
           ),
         ),
+      ),
+    );
+  }
+  Widget _editar(){
+    return Container(
+       height: 1200.0,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 40,
+        vertical: 25,
+      ),
+      child: Column(
+        children: <Widget>[
+          Text("Editar Conta",
+          style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold,color: porange),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: TextField( 
+              controller: nomeController,
+              decoration: InputDecoration(labelText: 'Novo Nome'),
+              keyboardType: TextInputType.text,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: TextField( 
+              controller: emailController,
+              decoration: InputDecoration(labelText: 'Novo Email'),
+              keyboardType: TextInputType.text,
+            ),
+          ),
+          SizedBox(
+            height: 25
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: RaisedButton(
+              child: Text("Alterar"),
+              color: porange,
+              textColor: Colors.white,
+              onPressed: () {},
+            ),
+          ),
+        ],
       ),
     );
   }

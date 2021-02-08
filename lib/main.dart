@@ -17,7 +17,7 @@ import 'package:plusfit/src/exercisePage/view.dart';
 import 'package:plusfit/src/signUpPage/view.dart';
 import 'package:plusfit/src/signUpPage2/view.dart';
 import 'package:plusfit/src/exercise/superior/view.dart';
-import 'package:plusfit/src/editProfilePage/view.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,7 +48,7 @@ class PFApp extends StatelessWidget {
             '/exercises': (context) => ExercisePage(),
             '/signup2': (context) => SignupprfPage(),
             '/perfil': (context) => PerfilPage(),
-            '/edit': (context) => EditPage(),
+            
             '/superior': (context) => SuperiorPage(),
             '/inferior': (context) => InferiorPage(),
             '/cardio': (context) => CardiovascularPage(),
