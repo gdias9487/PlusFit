@@ -1,88 +1,55 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:plusfit/src/exercise/superior/exerciseList/controller.dart';
+import 'package:plusfit/widgets/TrainingContainer.dart';
 
-class Superior extends StatefulWidget {
+class Exercises extends StatefulWidget {
+  Exercises({Key key, this.title}) : super(key: key);
+
   final String title;
-  final String nivel;
-
-  Superior({Key key, this.title, this.nivel}) : super(key: key);
 
   @override
-  _SuperiorPageState createState() => _SuperiorPageState(nivel);
+  _ExercisesState createState() => _ExercisesState();
 }
 
-class _SuperiorPageState extends State<Superior> {
-  final String nivel;
-
-  _SuperiorPageState(this.nivel);
-
+class _ExercisesState extends State<Exercises> {
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
-    return snapshot.data.docs.get("Nome").map<Widget>((document) {
-      return ListTile(
-        title: Text(document['Nome']),
-        subtitle: Text(document['Nivel']),
+    int x = 0;
+    return snapshot.data.docs.map<Widget>((document) {
+      x++;
+      return ExerciseContainer(
+        width: 1,
+        height: 100,
+        top: 20,
+        left: 20,
+        right: 20,
+        bottom: 0.0,
+        text: document['exercicios.exercicio$x' + '.nome'].toString(),
       );
     }).toList();
   }
 
-  @override
   Widget build(BuildContext context) {
-    final ScrollController cont = ScrollController();
-    void scroll() {
-      cont.animateTo(0,
-          duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
-    }
-
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Treinos',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.account_circle_sharp),
-            color: Colors.white,
-            splashRadius: 20,
-            iconSize: 35,
-            onPressed: () {
-              Navigator.pushNamed(context, '/perfil');
-            },
-          ),
-        ],
-        elevation: 0,
-        backgroundColor: Colors.black,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          splashRadius: 20,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: Container(
-        child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('exercicios')
-                .where('Nivel', isEqualTo: nivel)
-                .where('Tipo', isEqualTo: 'superior')
-                .snapshots(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                default:
-                  return ListView(children: makeListWidget(snapshot));
-              }
-            }),
-      ),
-    );
+        body: Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/sign_up_background.png"),
+              fit: BoxFit.cover)),
+      child: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('treinos')
+              // .doc('Biceps')
+              .snapshots(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              default:
+                return ListView(children: makeListWidget(snapshot));
+            }
+          }),
+    ));
   }
 }

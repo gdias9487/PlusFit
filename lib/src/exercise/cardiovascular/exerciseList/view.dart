@@ -33,7 +33,6 @@ class _CardioPageState extends State<Cardio> {
           duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
     }
 
-    print(nivel);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -68,7 +67,7 @@ class _CardioPageState extends State<Cardio> {
       body: Container(
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('exercicios')
+                .collection('Treinos')
                 .where('Nivel', isEqualTo: nivel)
                 .where('Tipo', isEqualTo: 'cardio')
                 .snapshots(),

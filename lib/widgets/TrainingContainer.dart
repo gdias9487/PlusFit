@@ -46,3 +46,55 @@ class TrainingContainer extends StatelessWidget {
     );
   }
 }
+
+class ExerciseContainer extends StatelessWidget {
+  final Key key;
+  final double width;
+  final double height;
+  final double right;
+  final double left;
+  final double top;
+  final double bottom;
+  final String text;
+  final action;
+
+  const ExerciseContainer(
+      {this.key,
+      this.action,
+      @required this.height,
+      @required this.right,
+      @required this.top,
+      @required this.text,
+      @required this.width,
+      this.left,
+      this.bottom});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: action,
+      child: Padding(
+        padding:
+            EdgeInsets.only(right: right, left: left, top: top, bottom: bottom),
+        child: Container(
+            width: width,
+            height: height,
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: Colors.blueGrey[50].withOpacity(0.2),
+                borderRadius: BorderRadius.circular(20),
+                ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(text,
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              ],
+            )),
+      ),
+    );
+  }
+}
