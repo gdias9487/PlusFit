@@ -19,8 +19,8 @@ class _CardioPageState extends State<Cardio> {
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
       return ListTile(
-        title: Text(document['nome']),
-        subtitle: Text(document['nivel']),
+        title: Text(document['Nome']),
+        subtitle: Text(document['Nivel']),
       );
     }).toList();
   }
@@ -33,7 +33,6 @@ class _CardioPageState extends State<Cardio> {
           duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
     }
 
-    print(nivel);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -68,9 +67,9 @@ class _CardioPageState extends State<Cardio> {
       body: Container(
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('treinos')
-                .where('nivel', isEqualTo: nivel)
-                .where('tipo', isEqualTo: 'cardio')
+                .collection('Treinos')
+                .where('Nivel', isEqualTo: nivel)
+                .where('Tipo', isEqualTo: 'cardio')
                 .snapshots(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {

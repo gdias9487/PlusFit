@@ -19,8 +19,8 @@ class _InferiorPageState extends State<Inferior> {
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
       return ListTile(
-        title: Text(document['nome']),
-        subtitle: Text(document['nivel']),
+        title: Text(document['Nome']),
+        subtitle: Text(document['Nivel']),
       );
     }).toList();
   }
@@ -67,9 +67,9 @@ class _InferiorPageState extends State<Inferior> {
       body: Container(
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('treinos')
-                .where('nivel', isEqualTo: nivel)
-                .where('tipo', isEqualTo: 'inferior')
+                .collection('exercicios')
+                .where('Nivel', isEqualTo: nivel)
+                .where('Tipo', isEqualTo: 'inferior')
                 .snapshots(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {

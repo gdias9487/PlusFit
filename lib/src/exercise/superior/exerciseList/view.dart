@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:plusfit/src/exercise/superior/exerciseList/controller.dart';
 
 class Superior extends StatefulWidget {
   final String title;
   final String nivel;
 
   Superior({Key key, this.title, this.nivel}) : super(key: key);
-  
 
   @override
   _SuperiorPageState createState() => _SuperiorPageState(nivel);
@@ -17,12 +15,12 @@ class _SuperiorPageState extends State<Superior> {
   final String nivel;
 
   _SuperiorPageState(this.nivel);
-  
+
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
       return ListTile(
-        title: Text(document['nome']),
-        subtitle: Text(document['nivel']),
+        title: Text(document['Nome']),
+        // subtitle: Text(document['Descricao']),
       );
     }).toList();
   }
@@ -70,8 +68,8 @@ class _SuperiorPageState extends State<Superior> {
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('treinos')
-                .where('nivel', isEqualTo: nivel)
-                .where('tipo', isEqualTo: 'superior')
+                .doc()
+                .collection('Exercicios')
                 .snapshots(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {

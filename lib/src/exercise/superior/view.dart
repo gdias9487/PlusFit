@@ -154,7 +154,7 @@ class _SuperiorPageState extends State<SuperiorPage> {
                 vertical: 10,
                 text: 'Avançado',
                 action: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Superior(nivel: "avanco")));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Superior(nivel: "avancado")));
                 }),
             SizedBox(
               height: 50,
