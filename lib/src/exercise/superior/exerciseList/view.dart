@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 
+var fodase = [];
+int x = 0;
+
 class Exercises extends StatefulWidget {
   Exercises({Key key, this.title}) : super(key: key);
 
@@ -12,20 +15,57 @@ class Exercises extends StatefulWidget {
 }
 
 class _ExercisesState extends State<Exercises> {
+  String teste;
+  var list = ["1", "2", "3"];
+  int x = 0;
+  _retornaNome(Map map) {
+    map.forEach((k, v) {
+      if (v.runtimeType.toString() ==
+          "_InternalLinkedHashMap<String, dynamic>") {
+        _retornaNome(v);
+      } else {
+        if (k == "nome" && v != null) {
+          x++;
+          teste += " " + v + ".";
+          return teste;
+        }
+        ;
+      }
+    });
+  }
+
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
-    int x = 0;
     return snapshot.data.docs.map<Widget>((document) {
-      x++;
+      teste = '';
+      x = 0;
+      _retornaNome(document['exercicios']);
+      fodase = teste.split('.');
       return ExerciseContainer(
+          width: 1,
+          height: 150,
+          top: 20,
+          left: 20,
+          right: 20,
+          bottom: 0.0,
+          text: teste);
+    }).toList();
+  }
+
+  batatafrita(fodase) {
+    for (var i = 0; i < fodase.length; i++) {
+      cebola(fodase[i]);
+    }
+  }
+
+  cebola(list) {
+    return ExerciseContainer(
         width: 1,
-        height: 100,
+        height: 150,
         top: 20,
         left: 20,
         right: 20,
         bottom: 0.0,
-        text: document['exercicios.exercicio$x' + '.nome'].toString(),
-      );
-    }).toList();
+        text: teste);
   }
 
   Widget build(BuildContext context) {
@@ -47,7 +87,8 @@ class _ExercisesState extends State<Exercises> {
                   child: CircularProgressIndicator(),
                 );
               default:
-                return ListView(children: makeListWidget(snapshot));
+                print(fodase[0]);
+                return ListView(children: <Widget>[batatafrita(fodase)]);
             }
           }),
     ));
