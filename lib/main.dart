@@ -54,9 +54,6 @@ class PFApp extends StatelessWidget {
             '/superior': (context) => SuperiorPage(),
             '/inferior': (context) => InferiorPage(),
             '/cardio': (context) => CardiovascularPage(),
-            '/cardio_ex': (context) => Cardio(),
-            '/inferior_ex': (context) => Inferior(),
-             '/exercise': (context) => Exercises(),
           },
           title: 'PlusFit v1.0',
           theme: ThemeData(

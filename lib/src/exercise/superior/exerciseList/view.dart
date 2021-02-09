@@ -2,44 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 
-var fodase = [];
-int x = 0;
-
-class Exercises extends StatefulWidget {
-  Exercises({Key key, this.title}) : super(key: key);
+class ExercisesSuperior extends StatefulWidget {
+  ExercisesSuperior({Key key, this.title, @required this.documentId}) : super(key: key);
 
   final String title;
+  final String documentId;
 
   @override
-  _ExercisesState createState() => _ExercisesState();
+  _ExercisesSuperiorState createState() => _ExercisesSuperiorState(documentId);
 }
 
-class _ExercisesState extends State<Exercises> {
-  String teste;
-  var list = ["1", "2", "3"];
-  int x = 0;
-  _retornaNome(Map map) {
-    map.forEach((k, v) {
-      if (v.runtimeType.toString() ==
-          "_InternalLinkedHashMap<String, dynamic>") {
-        _retornaNome(v);
-      } else {
-        if (k == "nome" && v != null) {
-          x++;
-          teste += " " + v + ".";
-          return teste;
-        }
-        ;
-      }
-    });
-  }
+class _ExercisesSuperiorState extends State<ExercisesSuperior> {
+  final String documentId;
+
+  _ExercisesSuperiorState(this.documentId);
 
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
-    return snapshot.data.docs.map<Widget>((document) {
-      teste = '';
-      x = 0;
-      _retornaNome(document['exercicios']);
-      fodase = teste.split('.');
+    return snapshot.data.docs.map<Widget>((document) { 
+      var nome = document['nome'];
       return ExerciseContainer(
           width: 1,
           height: 150,
@@ -62,14 +42,46 @@ class _ExercisesState extends State<Exercises> {
         width: 1,
         height: 150,
         top: 20,
-        left: 20,
-        right: 20,
+        left: 30,
+        right: 30,
         bottom: 0.0,
-        text: teste);
+        text: "$nome",
+      );
+    }).toList();
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'Exercicios',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.account_circle_sharp),
+            color: Colors.white,
+            splashRadius: 20,
+            iconSize: 35,
+            onPressed: () {
+              Navigator.pushNamed(context, '/perfil');
+            },
+          ),
+        ],
+        elevation: 0,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          splashRadius: 20,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
         body: Container(
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -77,8 +89,7 @@ class _ExercisesState extends State<Exercises> {
               fit: BoxFit.cover)),
       child: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('treinos')
-              // .doc('Biceps')
+              .collection('treinos/$documentId/exercicios')
               .snapshots(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
@@ -87,8 +98,7 @@ class _ExercisesState extends State<Exercises> {
                   child: CircularProgressIndicator(),
                 );
               default:
-                print(fodase[0]);
-                return ListView(children: <Widget>[batatafrita(fodase)]);
+                return ListView(children: makeListWidget(snapshot));
             }
           }),
     ));

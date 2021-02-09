@@ -1,14 +1,31 @@
-class Treino {
-  String nome, nivel, tipo;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
-  Treino({this.nome, this.nivel, this.tipo});
+class GetUserName extends StatelessWidget {
+  final String documentId;
 
-  factory Treino.fromJson(Map<String, dynamic> json) {
-    return Treino(
-      nome: json['nome'],
-      nivel: json['nivel'],
-      tipo: json['tipo'],
-      
+  GetUserName(this.documentId);
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(documentId).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+
+        if (snapshot.hasError) {
+          print("Something went wrong");
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data();
+          print("Full Name: ${data['full_name']} ${data['last_name']}");
+        }
+
+        print("loading");
+      },
     );
   }
 }
