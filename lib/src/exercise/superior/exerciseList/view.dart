@@ -1,61 +1,44 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:plusfit/widgets/TrainingContainer.dart';
+import 'package:plusfit/src/exercise/superior/exerciseList/controller.dart';
 
-class ExercisesSuperior extends StatefulWidget {
-  ExercisesSuperior({Key key, this.title, @required this.documentId}) : super(key: key);
-
+class Superior extends StatefulWidget {
   final String title;
-  final String documentId;
+  final String nivel;
+
+  Superior({Key key, this.title, this.nivel}) : super(key: key);
 
   @override
-  _ExercisesSuperiorState createState() => _ExercisesSuperiorState(documentId);
+  _SuperiorPageState createState() => _SuperiorPageState(nivel);
 }
 
-class _ExercisesSuperiorState extends State<ExercisesSuperior> {
-  final String documentId;
+class _SuperiorPageState extends State<Superior> {
+  final String nivel;
 
-  _ExercisesSuperiorState(this.documentId);
+  _SuperiorPageState(this.nivel);
 
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
-    return snapshot.data.docs.map<Widget>((document) { 
-      var nome = document['nome'];
-      return ExerciseContainer(
-          width: 1,
-          height: 150,
-          top: 20,
-          left: 20,
-          right: 20,
-          bottom: 0.0,
-          text: teste);
-    }).toList();
-  }
-
-  batatafrita(fodase) {
-    for (var i = 0; i < fodase.length; i++) {
-      cebola(fodase[i]);
-    }
-  }
-
-  cebola(list) {
-    return ExerciseContainer(
-        width: 1,
-        height: 150,
-        top: 20,
-        left: 30,
-        right: 30,
-        bottom: 0.0,
-        text: "$nome",
+    return snapshot.data.docs.map<Widget>((document) {
+      return ListTile(
+        title: Text(document['Nome']),
+        subtitle: Text(document['Nivel']),
       );
     }).toList();
   }
 
+  @override
   Widget build(BuildContext context) {
+    final ScrollController cont = ScrollController();
+    void scroll() {
+      cont.animateTo(0,
+          duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
+    }
+
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Exercicios',
+          'Treinos',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -82,25 +65,24 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
           },
         ),
       ),
-        body: Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/sign_up_background.png"),
-              fit: BoxFit.cover)),
-      child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection('treinos/$documentId/exercicios')
-              .snapshots(),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              default:
-                return ListView(children: makeListWidget(snapshot));
-            }
-          }),
-    ));
+      body: Container(
+        child: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('exercicios')
+                .where('Nivel', isEqualTo: nivel)
+                .where('Tipo', isEqualTo: 'superior')
+                .snapshots(),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                default:
+                  return ListView(children: makeListWidget(snapshot));
+              }
+            }),
+      ),
+    );
   }
 }
