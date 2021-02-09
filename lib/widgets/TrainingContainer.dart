@@ -56,6 +56,7 @@ class ExerciseContainer extends StatelessWidget {
   final double top;
   final double bottom;
   final String text;
+  final String subtext;
   final action;
 
   const ExerciseContainer(
@@ -67,7 +68,7 @@ class ExerciseContainer extends StatelessWidget {
       @required this.text,
       @required this.width,
       this.left,
-      this.bottom});
+      this.bottom, this.subtext = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +91,15 @@ class ExerciseContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(text,
+                  textAlign: TextAlign.center,
                     style:
+                    
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Text(subtext,
+                  textAlign: TextAlign.center,
+                    style:
+                    
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               ],
             )),
       ),

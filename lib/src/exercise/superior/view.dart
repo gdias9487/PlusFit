@@ -2,6 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/src/exercise/superior/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'controller.dart';
+import 'exerciseList/models.dart';
 
 class SuperiorPage extends StatefulWidget {
   SuperiorPage({Key key, this.title}) : super(key: key);
@@ -20,18 +24,24 @@ class _SuperiorPageState extends State<SuperiorPage> {
 
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
+      var nome = document['Nome'];
+      var nivel = document['Nivel'];
       return ExerciseContainer(
-        width: 1,
-        height: 100,
-        top: 20,
-        left: 20,
-        right: 20,
-        bottom: 0.0,
-        text: document['Nome'],
-        action: (){
-          Navigator.pushNamed(context, '/exercise');
-        },
-      );
+          width: 1,
+          height: 100,
+          top: 20,
+          left: 20,
+          right: 20,
+          bottom: 0.0,
+          text: "$nome",
+          subtext: "$nivel",
+          action: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ExercisesSuperior(documentId: (document['Nome'].toString()))));
+          });
     }).toList();
   }
 
