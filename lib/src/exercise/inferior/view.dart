@@ -34,8 +34,8 @@ class _InferiorPageState extends State<InferiorPage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        ExercisesInferior(documentId: (document['Nome'].toString()))));
+                    builder: (context) => ExercisesInferior(
+                        documentId: (document['Nome'].toString()))));
           });
     }).toList();
   }
@@ -84,22 +84,29 @@ class _InferiorPageState extends State<InferiorPage> {
             image: DecorationImage(
                 image: AssetImage("assets/sign_up_background.png"),
                 fit: BoxFit.cover)),
-        child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('treinos')
-                // .where('Nivel', isEqualTo: nivel)
-                .where('Tipo', isEqualTo: 'inferior')
-                .snapshots(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                default:
-                  return ListView(children: makeListWidget(snapshot));
-              }
-            }),
+        child: Column(children: [
+          SizedBox(
+            height: 50,
+          ),
+          Flexible(
+            child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('treinos')
+                    // .where('Nivel', isEqualTo: nivel)
+                    .where('Tipo', isEqualTo: 'inferior')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    default:
+                      return ListView(children: makeListWidget(snapshot));
+                  }
+                }),
+          ),
+        ]),
       ),
     );
   }

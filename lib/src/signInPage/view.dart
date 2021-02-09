@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
             .singIn(
                 email: emailController.text.trim(),
                 password: passwordController.text.trim())
-            .then((value) => Navigator.pushNamed(context, '/exercises'))
+            .then((value) => Navigator.popAndPushNamed(context, '/exercises'))
             .catchError((e) => _showDialog(error));
 
         return null;
