@@ -86,7 +86,8 @@ class _InferiorPageState extends State<InferiorPage> {
                 fit: BoxFit.cover)),
         child: Column(children: [
           SizedBox(
-            height: 50,
+            height: 100,
+            child: Image.asset('assets/Inferiores_2.png'),
           ),
           Flexible(
             child: StreamBuilder(
