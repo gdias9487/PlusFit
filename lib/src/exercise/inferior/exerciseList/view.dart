@@ -19,7 +19,7 @@ class _ExercisesInferiorPageState extends State<ExercisesInferior> {
   _ExercisesInferiorPageState(this.documentId);
 
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
-    return snapshot.data.docs.map<Widget>((document) {
+    return snapshot.data.docs.map<Widget>((document) { 
       var nome = document['nome'];
       return ExerciseContainer(
         width: 1,
@@ -35,55 +35,55 @@ class _ExercisesInferiorPageState extends State<ExercisesInferior> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            'Exercicios',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.account_circle_sharp),
-              color: Colors.white,
-              splashRadius: 20,
-              iconSize: 35,
-              onPressed: () {
-                Navigator.pushNamed(context, '/perfil');
-              },
-            ),
-          ],
-          elevation: 0,
-          backgroundColor: Colors.black,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            splashRadius: 20,
-            onPressed: () {
-              Navigator.pop(context);
-            },
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'Exercicios',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.account_circle_sharp),
+            color: Colors.white,
+            splashRadius: 20,
+            iconSize: 35,
+            onPressed: () {
+              Navigator.pushNamed(context, '/perfil');
+            },
+          ),
+        ],
+        elevation: 0,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          splashRadius: 20,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
         body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/sign_up_background.png"),
-                  fit: BoxFit.cover)),
-          child: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('treinos/$documentId/exercicios')
-                  .snapshots(),
-              builder: (context, snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.waiting:
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  default:
-                    return ListView(children: makeListWidget(snapshot));
-                }
-              }),
-        ));
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/sign_up_background.png"),
+              fit: BoxFit.cover)),
+      child: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('treinos/$documentId/exercicios')
+              .snapshots(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              default:
+                return ListView(children: makeListWidget(snapshot));
+            }
+          }),
+    ));
   }
 }

@@ -82,9 +82,9 @@ class ExerciseContainer extends StatelessWidget {
             height: height,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.blueGrey[50].withOpacity(0.2),
-              borderRadius: BorderRadius.circular(20),
-            ),
+                color: Colors.blueGrey[50].withOpacity(0.2),
+                borderRadius: BorderRadius.circular(20),
+                ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
