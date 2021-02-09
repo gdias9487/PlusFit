@@ -34,8 +34,8 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        ExercisesCardio(documentId: (document['Nome'].toString()))));
+                    builder: (context) => ExercisesCardio(
+                        documentId: (document['Nome'].toString()))));
           });
     }).toList();
   }
@@ -84,22 +84,31 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
             image: DecorationImage(
                 image: AssetImage("assets/sign_up_background.png"),
                 fit: BoxFit.cover)),
-        child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('treinos')
-                // .where('Nivel', isEqualTo: nivel)
-                .where('Tipo', isEqualTo: 'cardio')
-                .snapshots(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                default:
-                  return ListView(children: makeListWidget(snapshot));
-              }
-            }),
+        child: Column(children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width - 40,
+            height: 100,
+            child: Image.asset('assets/Cardio_2.png'),
+          ),
+          Flexible(
+            child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('treinos')
+                    // .where('Nivel', isEqualTo: nivel)
+                    .where('Tipo', isEqualTo: 'cardio')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    default:
+                      return ListView(children: makeListWidget(snapshot));
+                  }
+                }),
+          ),
+        ]),
       ),
     );
   }

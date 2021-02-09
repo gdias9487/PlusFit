@@ -57,5 +57,10 @@ flutter:
     - assets/icon.png
     - assets/mandar.png
     - assets/superiores.png
+<<<<<<< HEAD
     - assets/test.jpg
     
+=======
+    - assets/Inferiores_2.png
+    - assets/Cardio_2.png
+>>>>>>> a76e8c5a60f1abc7b6e95bceed63d9e84ff72fa4
