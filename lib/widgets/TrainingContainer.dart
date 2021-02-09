@@ -30,7 +30,7 @@ class TrainingContainer extends StatelessWidget {
             height: height,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: Colors.blueGrey[50].withOpacity(0.2),
+                color: Colors.white.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(20)),
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -68,7 +68,8 @@ class ExerciseContainer extends StatelessWidget {
       @required this.text,
       @required this.width,
       this.left,
-      this.bottom, this.subtext = ''});
+      this.bottom,
+      this.subtext = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -82,23 +83,21 @@ class ExerciseContainer extends StatelessWidget {
             height: height,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: Colors.blueGrey[50].withOpacity(0.2),
-                borderRadius: BorderRadius.circular(20),
-                ),
+              color: Colors.white.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(text,
-                  textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
                     style:
-                    
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 Text(subtext,
-                  textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
                     style:
-                    
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               ],
             )),
