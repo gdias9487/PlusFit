@@ -11,6 +11,7 @@ import '../../components/constants.dart';
 import '../../components/constants.dart';
 import '../../components/constants.dart';
 import '../../components/constants.dart';
+import '../signUpPage/controller.dart';
 
 
 class PerfilPage extends StatefulWidget {
@@ -25,8 +26,12 @@ class PerfilPage extends StatefulWidget {
 
 class _MyPerfilPageState extends State<PerfilPage> {
   PickedFile _imagefile;
-  final TextEditingController nomeController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
+  final nomeController = TextEditingController();
+  final emailController = TextEditingController();
+  final condicion = false;
+  
+  
+
   final ImagePicker _picker = ImagePicker();
   void _showDialog() {
     showDialog(
@@ -97,14 +102,14 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Carlos Dias",
+                          nomeController.text,
                           style: TextStyle(fontSize: 20.0, color: Colors.white),
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         Text(
-                          "carlinhos@hotmail.com",
+                          emailController.text,
                           style: TextStyle(fontSize: 12.0, color: Colors.white),
                         ),
                         
@@ -254,7 +259,10 @@ class _MyPerfilPageState extends State<PerfilPage> {
               child: Text("Alterar"),
               color: porange,
               textColor: Colors.white,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+                condicion == true;
+              },
             ),
           ),
         ],
