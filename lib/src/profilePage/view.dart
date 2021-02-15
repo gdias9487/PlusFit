@@ -23,6 +23,28 @@ class _MyPerfilPageState extends State<PerfilPage> {
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
+<<<<<<< HEAD
+=======
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context){
+        return AlertDialog(
+          title: new Text("Desconectar"),
+          content: new Text("Você Deseja Realmente Sair ?"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Sim"),
+              onPressed: () {
+                Navigator.popAndPushNamed(context, '/home'); 
+              },
+            ),
+          ],
+        );
+      }
+    );
+  }
+>>>>>>> dbd7c73a500360168ca54aa7f31d1403ff37e2e8
 
   @override
   Widget build(BuildContext context) {
