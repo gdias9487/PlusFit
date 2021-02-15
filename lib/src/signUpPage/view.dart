@@ -57,7 +57,7 @@ class _SignupPageState extends State<SignupPage> {
             .signUp(
                 email: emailController.text.trim(),
                 password: passwordController.text.trim())
-            .then((value) => Navigator.pushNamed(context, '/exercises'))
+            .then((value) => Navigator.pop(context))
             .catchError((e) => _showDialog(error));
 
         return null;
@@ -215,8 +215,8 @@ class _SignupPageState extends State<SignupPage> {
                                 height: padbutton,
                               ),
                               Align(
-                                  alignment: Alignment.bottomCenter,
-                                    child: ElevatedButton(
+                                alignment: Alignment.bottomCenter,
+                                child: ElevatedButton(
                                     child: Text("Cadastrar"),
                                     style: ElevatedButton.styleFrom(
                                       primary: porange,

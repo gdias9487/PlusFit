@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
               child: Container(
-                  height: 400,
+                  height: 330,
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -211,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
                   )),
             ),
             SizedBox(
-              height: 100,
+              height: 40,
             ),
             Container(
               height: 32,

@@ -10,19 +10,20 @@ class Alert_Box extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: new Text(
-        "⚠️ Ocorreu um erro ",
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
-      content: new Text(text),
-      actions: <Widget>[
-        FlatButton(
-          child: Text("Voltar"),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        title: new Text(
+          " Ocorreu um erro ",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-      ],
-    );
+        content: new Text(text),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Voltar"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0))));
   }
 }

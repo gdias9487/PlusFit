@@ -23,11 +23,11 @@ class AuthenticationService {
         case "account-exists-with-different-credential":
         case "email-already-in-use":
           error =
-              "Este e-mail já está sendo utilizado. Vá para a página de login.";
+              "Este e-mail já cadastrado.";
           break;
         case "ERROR_WRONG_PASSWORD":
         case "wrong-password":
-          error = "Combinação de e-mail/senha incorretos.";
+          error = "Combinação de e-mail/senha incorreta.";
 
           break;
         case "ERROR_USER_NOT_FOUND":
@@ -80,11 +80,11 @@ class AuthenticationService {
         case "account-exists-with-different-credential":
         case "email-already-in-use":
           error =
-              "Este e-mail já está sendo utilizado. Vá para a página de login.";
+              "Este e-mail já cadastrado.";
           break;
         case "ERROR_WRONG_PASSWORD":
         case "wrong-password":
-          error = "Combinação de e-mail/senha incorretos.";
+          error = "Combinação de e-mail/senha incorreta.";
           break;
         case "ERROR_USER_NOT_FOUND":
         case "user-not-found":

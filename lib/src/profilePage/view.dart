@@ -37,9 +37,9 @@ class _MyPerfilPageState extends State<PerfilPage> {
           content: new Text("Você Deseja Realmente Sair ?"),
           actions: <Widget>[
             FlatButton(
-              child: Text("Sim, Sair"),
+              child: Text("Sim"),
               onPressed: () {
-                Navigator.pushNamed(context, '/home'); 
+                Navigator.popAndPushNamed(context, '/home'); 
               },
             ),
           ],
@@ -104,7 +104,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           height: 10,
                         ),
                         Text(
-                          "carlinhos@hotmail.com",
+                          "aluno@gmail.com",
                           style: TextStyle(fontSize: 12.0, color: Colors.white),
                         ),
                         

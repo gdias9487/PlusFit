@@ -60,10 +60,7 @@ class _AboutPageState extends State<AboutPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(''),
+                      
                     ],
                   )),
             ),
