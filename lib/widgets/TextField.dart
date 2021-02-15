@@ -28,14 +28,14 @@ class DefaultTextField extends StatelessWidget {
       child: TextFormField(
         controller: controler,
         obscureText: obscureText,
-        style: new TextStyle(color: Colors.black, fontSize: 16),
+        style: defaultFont(16, FontWeight.normal, Colors.black),
         decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
             fillColor: Colors.blue,
             prefixIcon: Icon(prefixicon),
             suffixIcon: Icon(suffixicon),
             labelText: text,
-            labelStyle: TextStyle(color: pgreytextfield)),
+            labelStyle: defaultFont(18, FontWeight.normal, pgreytextfield)),
       ),
     );
   }

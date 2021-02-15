@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:plusfit/src/homePage/view.dart';
 import 'package:plusfit/widgets/AlertDialog.dart';
+import 'package:plusfit/widgets/animations.dart';
 import 'package:provider/provider.dart';
 import 'package:plusfit/authentication.dart';
 
@@ -90,7 +92,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User>();
     return Scaffold(
       body: Container(
           decoration: BoxDecoration(
@@ -118,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
               child: Container(
-                  height: 400,
+                  height: 329,
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -138,14 +139,15 @@ class _LoginPageState extends State<LoginPage> {
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           obscureText: false,
-                          style:
-                              new TextStyle(color: Colors.black, fontSize: 18),
+                          style: defaultFont(
+                              15, FontWeight.normal, pgreytextfield),
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30)),
                               prefixIcon: Icon(Icons.account_circle_sharp),
                               labelText: 'Email',
-                              labelStyle: TextStyle(color: pgreytextfield)),
+                              labelStyle: defaultFont(
+                                  15, FontWeight.normal, pgreytextfield)),
                         ),
                         SizedBox(
                           height: 20,
@@ -155,8 +157,8 @@ class _LoginPageState extends State<LoginPage> {
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: _obscureText,
-                          style:
-                              new TextStyle(color: Colors.black, fontSize: 18),
+                          style: defaultFont(
+                              15, FontWeight.normal, pgreytextfield),
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30)),
@@ -166,7 +168,8 @@ class _LoginPageState extends State<LoginPage> {
                                 icon: Icon(_viewpass),
                               ),
                               labelText: 'Senha',
-                              labelStyle: TextStyle(color: pgreytextfield)),
+                              labelStyle: defaultFont(
+                                  15, FontWeight.normal, pgreytextfield)),
                         ),
                         SizedBox(
                           height: padbutton,
@@ -183,6 +186,9 @@ class _LoginPageState extends State<LoginPage> {
                             validateAndSubmit();
                           },
                           child: Text("Entrar"),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         Container(
                           alignment: Alignment.topRight,

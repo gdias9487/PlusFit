@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/src/exercise/superior/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,7 +27,9 @@ class _SuperiorPageState extends State<SuperiorPage> {
     return snapshot.data.docs.map<Widget>((document) {
       var nome = document['Nome'];
       var nivel = document['Nivel'];
+
       return ExerciseContainer(
+          color: dificult(nivel),
           width: 1,
           height: 100,
           top: 20,
@@ -58,10 +61,7 @@ class _SuperiorPageState extends State<SuperiorPage> {
         centerTitle: true,
         title: Text(
           'Treinos Superiores',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: defaultFont(18, FontWeight.bold, Colors.white),
         ),
         actions: [
           IconButton(
@@ -87,7 +87,7 @@ class _SuperiorPageState extends State<SuperiorPage> {
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/sign_up_background.png"),
+                image: AssetImage("assets/back_treinos.png"),
                 fit: BoxFit.cover)),
         child: Column(
           children: [

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plusfit/components/constants.dart';
 
 class DefaultElevatedButton extends StatelessWidget {
   final Key key;
@@ -28,7 +29,7 @@ class DefaultElevatedButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           primary: color,
-          textStyle: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
+          textStyle: defaultFont(fontSize, FontWeight.bold, Colors.black),
           minimumSize: Size(height, width),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius))),
@@ -64,8 +65,7 @@ class DefaultOutlinedButton extends StatelessWidget {
         style: OutlinedButton.styleFrom(
             primary: color,
             side: BorderSide(color: color),
-            textStyle:
-                TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
+            textStyle: defaultFont(fontSize, FontWeight.bold, Colors.black),
             minimumSize: Size(height, width),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(radius))),
@@ -76,14 +76,13 @@ class DefaultOutlinedButton extends StatelessWidget {
   }
 }
 
-
 class Bordaedit extends StatefulWidget {
   @override
   _BordaeditState createState() => _BordaeditState();
 }
 
 class _BordaeditState extends State<Bordaedit> {
-    PickedFile _imagefile;
+  PickedFile _imagefile;
   final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
@@ -96,11 +95,11 @@ class _BordaeditState extends State<Bordaedit> {
       ),
       child: Column(
         children: <Widget>[
-          Text("Escolha uma opção",style: TextStyle(
-            fontSize: 20.0
+          Text(
+            "Escolha uma opção",
+            style: TextStyle(fontSize: 20.0),
           ),
-          ),
-          SizedBox(height:20),
+          SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -122,16 +121,18 @@ class _BordaeditState extends State<Bordaedit> {
           ),
         ],
       ),
-    );  
-    
+    );
   }
+
   Widget imagemPerfil() {
     return Center(
       child: Stack(
         children: <Widget>[
           CircleAvatar(
             radius: 80.0,
-            backgroundImage: _imagefile ==null? AssetImage("assets/homem.png") : FileImage(File(_imagefile.path)),
+            backgroundImage: _imagefile == null
+                ? AssetImage("assets/homem.png")
+                : FileImage(File(_imagefile.path)),
           ),
           Positioned(
             bottom: 20.0,
@@ -143,20 +144,24 @@ class _BordaeditState extends State<Bordaedit> {
                   builder: ((builder) => Bordaedit()),
                 );
               },
-              child: Icon(Icons.edit, color: Colors.teal, size: 28.0,),
+              child: Icon(
+                Icons.edit,
+                color: Colors.teal,
+                size: 28.0,
+              ),
             ),
           ),
         ],
       ),
     );
   }
-  void takedPhoto (ImageSource source) async {
+
+  void takedPhoto(ImageSource source) async {
     final pickedFile = await _picker.getImage(
       source: source,
     );
-      setState(() {
-        _imagefile = pickedFile;
-      });
-    }
+    setState(() {
+      _imagefile = pickedFile;
+    });
+  }
 }
-

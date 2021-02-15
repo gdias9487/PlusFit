@@ -8,10 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import '../../components/constants.dart';
-import '../../components/constants.dart';
-import '../../components/constants.dart';
-import '../../components/constants.dart';
-
 
 class PerfilPage extends StatefulWidget {
   PerfilPage({Key key, this.title}) : super(key: key);
@@ -21,41 +17,46 @@ class PerfilPage extends StatefulWidget {
   @override
   _MyPerfilPageState createState() => _MyPerfilPageState();
 }
- 
 
 class _MyPerfilPageState extends State<PerfilPage> {
   PickedFile _imagefile;
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
-  void _showDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context){
-        return AlertDialog(
-          title: new Text("Desconectar"),
-          content: new Text("Você Deseja Realmente Sair ?"),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Sim, Sair"),
-              onPressed: () {
-                Navigator.pushNamed(context, '/home'); 
-              },
-            ),
-          ],
-        );
-      }
-    );
-  }
 
-  
   @override
   Widget build(BuildContext context) {
+    logoff(firebaseUser) {
+      context.read<AuthenticationService>().signOut();
+      if (firebaseUser == null) {
+        Navigator.pushNamed(context, '/home');
+      }
+    }
+
     final firebaseUser = context.watch<User>();
+    void _showDialog() {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Desconectar"),
+              content: Text("Você Deseja Realmente Sair ?"),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Sim"),
+                  onPressed: () {
+                    logoff(firebaseUser);
+                  },
+                ),
+              ],
+            );
+          });
+    }
+
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Profile"),
+          title: Text("Perfil"),
           elevation: 0,
           backgroundColor: Colors.black,
           leading: IconButton(
@@ -69,12 +70,12 @@ class _MyPerfilPageState extends State<PerfilPage> {
               icon: Icon(Icons.create),
               color: Colors.white,
               onPressed: () {
-                 showModalBottomSheet(
+                showModalBottomSheet(
                   context: context,
                   builder: ((builder) => _editar()),
                 );
               },
-              ),
+            ),
           ],
         ),
         body: SingleChildScrollView(
@@ -98,16 +99,15 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       children: <Widget>[
                         Text(
                           "Carlos Dias",
-                          style: TextStyle(fontSize: 20.0, color: Colors.white),
+                          style: defaultFont(18, FontWeight.bold, Colors.white),
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         Text(
                           "carlinhos@hotmail.com",
-                          style: TextStyle(fontSize: 12.0, color: Colors.white),
+                          style: defaultFont(12, FontWeight.bold, Colors.white),
                         ),
-                        
                         Row(
                           children: <Widget>[
                             DefaultElevatedButton(
@@ -129,8 +129,8 @@ class _MyPerfilPageState extends State<PerfilPage> {
                 ),
                 SizedBox(height: 20.0),
                 Text(
-                  "Account",
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.white),
+                  "Conta",
+                  style: defaultFont(20, FontWeight.bold, Colors.white),
                 ),
                 SizedBox(height: 10.0),
                 Card(
@@ -139,40 +139,58 @@ class _MyPerfilPageState extends State<PerfilPage> {
                     child: Column(
                       children: <Widget>[
                         ListTile(
-                          leading: Icon(
-                            Icons.assignment_turned_in_sharp,
+                          trailing: Icon(
+                            Icons.arrow_forward_ios,
                             color: Colors.black,
+                            size: 16,
                           ),
+                          leading: Icon(Icons.person, color: Colors.black),
                           title: Text(
-                            "Training",
-                            style: TextStyle(fontSize: 19.0),
+                            "Informações pessoais",
+                            style: defaultFont(
+                                16, FontWeight.normal, Colors.black),
                           ),
                           onTap: () {},
                         ),
                         Divider(height: 10.0, color: Colors.grey),
                         ListTile(
+                          trailing: Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.black,
+                            size: 16,
+                          ),
                           leading: Icon(Icons.vpn_key, color: Colors.black),
                           title: Text(
-                            "Change Password",
-                            style: TextStyle(fontSize: 19.0),
+                            "Alterar senha",
+                            style: defaultFont(
+                                16, FontWeight.normal, Colors.black),
                           ),
                           onTap: () {},
                         ),
                         Divider(height: 10.0, color: Colors.grey),
                         ListTile(
-                          leading: Icon(Icons.headset_mic, color: Colors.black),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.black,
+                            size: 16,
+                          ),
+                          leading: Icon(Icons.assignment_turned_in_sharp,
+                              color: Colors.black),
                           title: Text(
-                            "Support",
-                            style: TextStyle(fontSize: 19.0),
+                            "Treinos",
+                            style: defaultFont(
+                                16, FontWeight.normal, Colors.black),
                           ),
                           onTap: () {},
                         ),
                         Divider(height: 10.0, color: Colors.grey),
                         ListTile(
-                          leading: Icon(Icons.block_outlined, color: Colors.red),
+                          leading:
+                              Icon(Icons.block_outlined, color: Colors.red),
                           title: Text(
-                            "Deletar Conta",
-                            style: TextStyle(fontSize: 19.0,color: Colors.red),
+                            "Desativar conta",
+                            style:
+                                defaultFont(16, FontWeight.normal, Colors.red),
                           ),
                           onTap: () {},
                         ),
@@ -180,10 +198,13 @@ class _MyPerfilPageState extends State<PerfilPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 10.0),
                 Text(
-                  "Notification",
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
+                  "Configurações",
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 SizedBox(height: 10.0),
                 Card(
@@ -192,18 +213,29 @@ class _MyPerfilPageState extends State<PerfilPage> {
                     padding: EdgeInsets.all(14.0),
                     child: Column(
                       children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "App Notification",
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                            Switch(
-                              value: true,
-                              onChanged: (bool value) {},
-                            ),
-                          ],
+                        ListTile(
+                            onTap: () {
+                              Switch(
+                                value: true,
+                                onChanged: (bool value) {},
+                              );
+                            },
+                            leading:
+                                Icon(Icons.notifications, color: Colors.black),
+                            title: Text(
+                              "Notificações",
+                              style: defaultFont(
+                                  16, FontWeight.normal, Colors.black),
+                            )),
+                        Divider(height: 10.0, color: Colors.grey),
+                        ListTile(
+                          leading: Icon(Icons.headset_mic, color: Colors.black),
+                          title: Text(
+                            "Suporte",
+                            style: defaultFont(
+                                16, FontWeight.normal, Colors.black),
+                          ),
+                          onTap: () {},
                         ),
                       ],
                     ),
@@ -216,9 +248,10 @@ class _MyPerfilPageState extends State<PerfilPage> {
       ),
     );
   }
-  Widget _editar(){
+
+  Widget _editar() {
     return Container(
-       height: 1200.0,
+      height: 1200.0,
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.symmetric(
         horizontal: 40,
@@ -226,12 +259,14 @@ class _MyPerfilPageState extends State<PerfilPage> {
       ),
       child: Column(
         children: <Widget>[
-          Text("Editar Conta",
-          style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold,color: porange),
+          Text(
+            "Editar Conta",
+            style: TextStyle(
+                fontSize: 25.0, fontWeight: FontWeight.bold, color: porange),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
-            child: TextField( 
+            child: TextField(
               controller: nomeController,
               decoration: InputDecoration(labelText: 'Novo Nome'),
               keyboardType: TextInputType.text,
@@ -239,15 +274,13 @@ class _MyPerfilPageState extends State<PerfilPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
-            child: TextField( 
+            child: TextField(
               controller: emailController,
               decoration: InputDecoration(labelText: 'Novo Email'),
               keyboardType: TextInputType.text,
             ),
           ),
-          SizedBox(
-            height: 25
-          ),
+          SizedBox(height: 25),
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
             child: RaisedButton(
@@ -261,29 +294,45 @@ class _MyPerfilPageState extends State<PerfilPage> {
       ),
     );
   }
-   Widget perfilImagem() {
-    return Stack(
-      children: <Widget>[
-          CircleAvatar(
-            radius: 80.0,
-            backgroundImage: _imagefile == null ? AssetImage("assets/homem.png") : FileImage(File(_imagefile.path)),
-          ),
-          Positioned(
-            bottom: 20.0,
-            right: 20.0,
-            child: InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: ((builder) => bordaEdit()),
-                );
-              },
-              child: Icon(Icons.edit, color: Colors.teal, size: 28.0,),
-            ),
-          ),
-        ],
-    );
+
+  imageChecker() {
+    if (_imagefile == null) {
+      return AssetImage("assets/homem.png");
+    } else {
+      return FileImage(File(_imagefile.path));
+    }
   }
+
+  Widget perfilImagem() {
+    return Hero(
+        tag: 'profile',
+        child: Stack(
+          children: <Widget>[
+            CircleAvatar(
+              radius: 80.0,
+              backgroundImage: imageChecker(),
+            ),
+            Positioned(
+              bottom: 20.0,
+              right: 20.0,
+              child: InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: ((builder) => bordaEdit()),
+                  );
+                },
+                child: Icon(
+                  Icons.edit,
+                  color: Colors.teal,
+                  size: 28.0,
+                ),
+              ),
+            ),
+          ],
+        ));
+  }
+
   Widget bordaEdit() {
     return Container(
       height: 100.0,
@@ -294,11 +343,11 @@ class _MyPerfilPageState extends State<PerfilPage> {
       ),
       child: Column(
         children: <Widget>[
-          Text("Escolha uma opção",style: TextStyle(
-            fontSize: 20.0
+          Text(
+            "Escolha uma opção",
+            style: TextStyle(fontSize: 20.0),
           ),
-          ),
-          SizedBox(height:20),
+          SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -322,12 +371,13 @@ class _MyPerfilPageState extends State<PerfilPage> {
       ),
     );
   }
-  void takedPhoto (ImageSource source) async {
-      final pickedFile = await _picker.getImage(
-        source: source,
-      );
-      setState(() {
-        _imagefile = pickedFile;
-      });
-    }
+
+  void takedPhoto(ImageSource source) async {
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
+    setState(() {
+      _imagefile = pickedFile;
+    });
+  }
 }

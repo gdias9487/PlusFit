@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 //Paleta de cores PlusFit
 const pdarkred = Color(0xFF26020F);
@@ -17,3 +18,8 @@ const double padroof = 30;
 //Fontes
 
 //const defaultfont = roboto
+
+defaultFont(double size, weight, color) {
+  return GoogleFonts.lato(
+      textStyle: (TextStyle(fontSize: size, fontWeight: weight, color: color)));
+}

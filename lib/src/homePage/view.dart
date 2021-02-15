@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:plusfit/src/signInPage/view.dart';
 import 'package:plusfit/widgets/Buttons.dart';
+import 'package:plusfit/widgets/animations.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -19,58 +21,64 @@ class _HomePageState extends State<HomePage> {
             child: ListView(
               children: <Widget>[
                 SizedBox(
-                  height: 420,
+                  height: 20,
+                ),
+                FadeAnimation(
+                  2,
+                  Container(
+                    height: 200,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      image: AssetImage("assets/Plusfit_logo.png"),
+                    )),
+                  ),
+                ),
+                SizedBox(
+                  height: 200,
                 ),
                 Container(
                   child: Column(
                     children: <Widget>[
-                      DefaultOutlinedButton(
-                          color: Colors.white,
-                          fontSize: 20,
-                          height: 320,
-                          radius: 25,
-                          width: 50,
-                          route: '/signup',
-                          text: 'Cadastrar'),
+                      FadeAnimation(
+                          2,
+                          DefaultOutlinedButton(
+                              color: Colors.white,
+                              fontSize: 20,
+                              height: 320,
+                              radius: 25,
+                              width: 50,
+                              route: '/signup',
+                              text: ('Cadastrar'))),
                       SizedBox(
                         height: 20,
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: porange,
-                            textStyle: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                            minimumSize: Size(320, 50),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25))),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/login');
-                        },
-                        child: Text("Entrar"),
-                      ),
+                      FadeAnimation(
+                          2,
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: porange,
+                                textStyle: defaultFont(
+                                    20, FontWeight.bold, Colors.white),
+                                minimumSize: Size(320, 50),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25))),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  transitionAnimation(
+                                      LoginPage(), Alignment.center));
+                            },
+                            child: Text("Entrar"),
+                          )),
                     ],
                   ),
                 ),
                 SizedBox(height: 65),
-                Container(
-                  alignment: Alignment.center,
-                  width: 80,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/about');
-                    },
-                    child: Text(
-                      "Sobre o Aplicativo",
-                      style: TextStyle(
-                          color: pyellow, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
               ],
             ),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/main_menu_background.png"),
+                    image: (AssetImage("assets/back_treinos.png")),
                     fit: BoxFit.cover))));
   }
 }

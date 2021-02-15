@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/src/exercise/inferior/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 
@@ -22,6 +23,7 @@ class _InferiorPageState extends State<InferiorPage> {
       var nome = document['Nome'];
       var nivel = document['Nivel'];
       return ExerciseContainer(
+          color: dificult(nivel),
           width: 1,
           height: 100,
           top: 20,
@@ -53,10 +55,7 @@ class _InferiorPageState extends State<InferiorPage> {
         centerTitle: true,
         title: Text(
           'Treinos Inferiores',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: defaultFont(18, FontWeight.bold, Colors.white),
         ),
         actions: [
           IconButton(
@@ -82,7 +81,7 @@ class _InferiorPageState extends State<InferiorPage> {
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/sign_up_background.png"),
+                image: AssetImage("assets/back_treinos.png"),
                 fit: BoxFit.cover)),
         child: Column(children: [
           SizedBox(

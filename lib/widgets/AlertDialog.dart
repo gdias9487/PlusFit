@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plusfit/components/constants.dart';
 
 class Alert_Box extends StatelessWidget {
   final Key key;
@@ -12,12 +13,15 @@ class Alert_Box extends StatelessWidget {
     return AlertDialog(
       title: new Text(
         "⚠️ Ocorreu um erro ",
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        style: defaultFont(18, FontWeight.normal, Colors.black),
       ),
       content: new Text(text),
       actions: <Widget>[
         FlatButton(
-          child: Text("Voltar"),
+          child: Text(
+            "Voltar",
+            style: defaultFont(18, FontWeight.normal, Colors.black),
+          ),
           onPressed: () {
             Navigator.pop(context);
           },

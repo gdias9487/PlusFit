@@ -134,7 +134,8 @@ class _SignupPageState extends State<SignupPage> {
                       child: Image.asset("assets/Plusfit_logo.png")),
                   Padding(
                     padding: EdgeInsets.only(left: 35, right: 35, top: 10),
-                    child: Container(
+                    child: AnimatedContainer(
+                        duration: Duration(milliseconds: 500),
                         height: 370,
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
@@ -153,8 +154,8 @@ class _SignupPageState extends State<SignupPage> {
                                 controller: emailController,
                                 keyboardType: TextInputType.emailAddress,
                                 obscureText: false,
-                                style: new TextStyle(
-                                    color: Colors.black, fontSize: 18),
+                                style: defaultFont(
+                                    15, FontWeight.normal, Colors.black),
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius:
@@ -162,8 +163,8 @@ class _SignupPageState extends State<SignupPage> {
                                     prefixIcon:
                                         Icon(Icons.account_circle_sharp),
                                     labelText: 'Email',
-                                    labelStyle:
-                                        TextStyle(color: pgreytextfield)),
+                                    labelStyle: defaultFont(
+                                        15, FontWeight.normal, pgreytextfield)),
                               ),
                               SizedBox(
                                 height: paddefault,
@@ -173,8 +174,8 @@ class _SignupPageState extends State<SignupPage> {
                                 controller: passwordController,
                                 keyboardType: TextInputType.visiblePassword,
                                 obscureText: _obscureText,
-                                style: new TextStyle(
-                                    color: Colors.black, fontSize: 18),
+                                style: defaultFont(
+                                    15, FontWeight.normal, pgreytextfield),
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius:
@@ -185,8 +186,8 @@ class _SignupPageState extends State<SignupPage> {
                                       icon: Icon(_viewpass),
                                     ),
                                     labelText: 'Senha',
-                                    labelStyle:
-                                        TextStyle(color: pgreytextfield)),
+                                    labelStyle: defaultFont(
+                                        15, FontWeight.normal, pgreytextfield)),
                               ),
                               SizedBox(
                                 height: paddefault,
@@ -196,8 +197,8 @@ class _SignupPageState extends State<SignupPage> {
                                 controller: passwordController1,
                                 keyboardType: TextInputType.visiblePassword,
                                 obscureText: _obscureText1,
-                                style: new TextStyle(
-                                    color: Colors.black, fontSize: 18),
+                                style: defaultFont(
+                                    15, FontWeight.normal, pgreytextfield),
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius:
@@ -208,21 +209,22 @@ class _SignupPageState extends State<SignupPage> {
                                       icon: Icon(_viewpass1),
                                     ),
                                     labelText: 'Confirmar Senha',
-                                    labelStyle:
-                                        TextStyle(color: pgreytextfield)),
+                                    labelStyle: defaultFont(
+                                        15, FontWeight.normal, pgreytextfield)),
                               ),
                               SizedBox(
                                 height: padbutton,
                               ),
                               Align(
-                                  alignment: Alignment.bottomCenter,
-                                    child: ElevatedButton(
-                                    child: Text("Cadastrar"),
+                                alignment: Alignment.bottomCenter,
+                                child: ElevatedButton(
+                                    child: Text(
+                                      "Cadastrar",
+                                    ),
                                     style: ElevatedButton.styleFrom(
                                       primary: porange,
-                                      textStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                      textStyle: defaultFont(
+                                          20, FontWeight.bold, Colors.black),
                                       minimumSize: Size(320, 50),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -244,7 +246,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                           Text(
                             "Possui uma Conta?",
-                            style: TextStyle(color: pyellow),
+                            style: defaultFont(14, FontWeight.normal, pyellow),
                           ),
                           TextButton(
                             onPressed: () {
@@ -252,8 +254,7 @@ class _SignupPageState extends State<SignupPage> {
                             },
                             child: Text(
                               "Entrar",
-                              style: TextStyle(
-                                  color: pyellow, fontWeight: FontWeight.bold),
+                              style: defaultFont(14, FontWeight.bold, pyellow),
                             ),
                           ),
                         ],

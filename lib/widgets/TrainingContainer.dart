@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:plusfit/components/constants.dart';
 
 class TrainingContainer extends StatelessWidget {
   final Key key;
@@ -30,16 +32,18 @@ class TrainingContainer extends StatelessWidget {
             height: height,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.5),
+                border: Border.all(color: Colors.white.withOpacity(0.5)),
+                color: Colors.white.withOpacity(0.4),
                 borderRadius: BorderRadius.circular(20)),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(text,
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Text(
+                  text,
+                  style: defaultFont(20, FontWeight.bold, Colors.white),
+                )
               ],
             )),
       ),
@@ -57,10 +61,12 @@ class ExerciseContainer extends StatelessWidget {
   final double bottom;
   final String text;
   final String subtext;
+  final color;
   final action;
 
   const ExerciseContainer(
       {this.key,
+      this.color = Colors.white70,
       this.action,
       @required this.height,
       @required this.right,
@@ -83,7 +89,8 @@ class ExerciseContainer extends StatelessWidget {
             height: height,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.5),
+              border: Border.all(color: Colors.white.withOpacity(0.5)),
+              color: color.withOpacity(0.3),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
@@ -93,15 +100,23 @@ class ExerciseContainer extends StatelessWidget {
               children: <Widget>[
                 Text(text,
                     textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    style: defaultFont(18, FontWeight.bold, Colors.amber)),
                 Text(subtext,
                     textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    style: defaultFont(16, FontWeight.normal, Colors.amber)),
               ],
             )),
       ),
     );
+  }
+}
+
+dificult(nivel) {
+  if (nivel == "básico") {
+    return Colors.yellow[400];
+  } else if (nivel == "intermediário") {
+    return Colors.orange[500];
+  } else {
+    return Colors.red[500];
   }
 }
