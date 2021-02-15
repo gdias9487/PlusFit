@@ -71,6 +71,22 @@ class _ExercisesInferiorPageState extends State<ExercisesInferior> {
                   image: AssetImage("assets/sign_up_background.png"),
                   fit: BoxFit.cover)),
           child: Column(children: [
+            Container(
+              height: 50,
+              width: 150,
+              decoration: BoxDecoration(
+                  color: Colors.orange[700],
+                  borderRadius: BorderRadius.circular(20)),
+              child: FlatButton(
+                child: Text(
+                  'Iniciar Treino',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
             Flexible(
               child: StreamBuilder(
                   stream: FirebaseFirestore.instance
