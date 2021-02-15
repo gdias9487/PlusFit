@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 FadeAnimation(
                   2,
+                  30.0,
+                  0.0,
                   Container(
                     height: 200,
                     decoration: BoxDecoration(
@@ -41,6 +43,8 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       FadeAnimation(
                           2,
+                          30.0,
+                          0.0,
                           DefaultOutlinedButton(
                               color: Colors.white,
                               fontSize: 20,
@@ -54,6 +58,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                       FadeAnimation(
                           2,
+                          30.0,
+                          0.0,
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 primary: porange,
@@ -63,10 +69,7 @@ class _HomePageState extends State<HomePage> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(25))),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  transitionAnimation(
-                                      LoginPage(), Alignment.center));
+                              Navigator.pushNamed(context, '/login');
                             },
                             child: Text("Entrar"),
                           )),

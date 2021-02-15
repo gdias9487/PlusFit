@@ -9,11 +9,13 @@ class TrainingContainer extends StatelessWidget {
   final double horizontal;
   final double vertical;
   final String text;
+  final String image;
   final action;
 
   const TrainingContainer(
       {this.key,
       this.action,
+      this.image,
       @required this.height,
       @required this.horizontal,
       @required this.vertical,
@@ -32,17 +34,37 @@ class TrainingContainer extends StatelessWidget {
             height: height,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.white.withOpacity(0.5)),
-                color: Colors.white.withOpacity(0.4),
+                gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment(0, -0.5),
+                    colors: [Colors.red[300].withOpacity(0.4), Colors.black]),
+                image: DecorationImage(
+                    image: AssetImage(image),
+                    fit: BoxFit.cover,
+                    alignment: Alignment.topRight,
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.6), BlendMode.dstATop)),
+                border:
+                    Border.all(width: 3, color: Colors.white.withOpacity(0.5)),
                 borderRadius: BorderRadius.circular(20)),
-            child: Column(
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Spacer(),
+                SizedBox(
+                  width: 25,
+                ),
                 Text(
                   text,
-                  style: defaultFont(20, FontWeight.bold, Colors.white),
+                  style: defaultFont(23, FontWeight.bold, Colors.white),
+                ),
+                Spacer(),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.white,
+                  size: 25,
                 )
               ],
             )),

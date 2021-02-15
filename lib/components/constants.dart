@@ -11,8 +11,8 @@ const pgreytextfield = Colors.black54;
 
 //Padding padrão entre campos
 
-const double paddefault = 8;
-const double padbutton = 13;
+const double paddefault = 15;
+const double padbutton = 20;
 const double padroof = 30;
 
 //Fontes

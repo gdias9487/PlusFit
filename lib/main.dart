@@ -60,7 +60,9 @@ class PFApp extends StatelessWidget {
             primaryColor: porange,
             primarySwatch: Colors.deepOrange,
           ),
-          home: HomePage(title: 'PlusFit'),
+          home: LoginPage(
+            title: 'PlusFit',
+          ),
           debugShowCheckedModeBanner: false,
         ));
   }

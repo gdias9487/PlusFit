@@ -62,4 +62,7 @@ flutter:
     - assets/Inferiores_2.png
     - assets/Cardio_2.png
     - assets/back_treinos.png
-
+    - assets/superiores.jpeg
+    - assets/inferior.jpg
+    - assets/cardio.jpg
+    - assets/cardio.png
