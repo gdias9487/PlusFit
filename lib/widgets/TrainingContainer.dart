@@ -83,6 +83,7 @@ class ExerciseContainer extends StatelessWidget {
   final double bottom;
   final String text;
   final String subtext;
+  final String image;
   final color;
   final action;
 
@@ -97,7 +98,7 @@ class ExerciseContainer extends StatelessWidget {
       @required this.width,
       this.left,
       this.bottom,
-      this.subtext = ''});
+      this.subtext = '', this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -114,17 +115,27 @@ class ExerciseContainer extends StatelessWidget {
               border: Border.all(color: Colors.white.withOpacity(0.5)),
               color: color.withOpacity(0.3),
               borderRadius: BorderRadius.circular(20),
+              gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment(0, -0.5),
+                    colors: [Colors.red[300].withOpacity(0.4), Colors.black]),
+                image: DecorationImage(
+                    image: AssetImage(image),
+                    fit: BoxFit.cover,
+                    alignment: Alignment.topCenter,
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.6), BlendMode.dstATop)),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Text(text,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.start,
                     style: defaultFont(18, FontWeight.bold, Colors.amber)),
                 Text(subtext,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                     style: defaultFont(16, FontWeight.normal, Colors.amber)),
               ],
             )),

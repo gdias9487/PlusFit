@@ -87,7 +87,7 @@ class _ExercisePageState extends State<ExercisePage> {
               30.0,
               0.0,
               TrainingContainer(
-                image: "assets/superiores.jpeg",
+                image: "assets/superior/superiores.jpeg",
                 width: 1,
                 height: 150,
                 horizontal: 15,
@@ -103,7 +103,7 @@ class _ExercisePageState extends State<ExercisePage> {
               30.0,
               0.0,
               TrainingContainer(
-                image: "assets/inferior.jpg",
+                image: "assets/inferior/inferior.jpg",
                 width: 1,
                 height: 150,
                 horizontal: 15,

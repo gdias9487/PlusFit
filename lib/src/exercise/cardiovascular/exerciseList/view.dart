@@ -30,6 +30,7 @@ class _ExercisesCardioPageState extends State<ExercisesCardio> {
         right: 30,
         bottom: 0.0,
         text: "$nome",
+        image: "assets/signup.jpg",
       );
     }).toList();
   }

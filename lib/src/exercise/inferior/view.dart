@@ -22,6 +22,8 @@ class _InferiorPageState extends State<InferiorPage> {
     return snapshot.data.docs.map<Widget>((document) {
       var nome = document['Nome'];
       var nivel = document['Nivel'];
+      var image = document['image'];
+
       return ExerciseContainer(
           color: dificult(nivel),
           width: 1,
@@ -31,7 +33,8 @@ class _InferiorPageState extends State<InferiorPage> {
           right: 20,
           bottom: 0.0,
           text: "$nome",
-          subtext: "$nivel",
+          subtext: "Nivel: $nivel",
+          image: 'assets/inferior/$image',
           action: () {
             Navigator.push(
                 context,

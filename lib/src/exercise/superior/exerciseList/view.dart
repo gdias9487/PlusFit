@@ -28,6 +28,7 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
         left: 30,
         right: 30,
         bottom: 0.0,
+        image: "assets/signup.jpg",
         text: "$nome",
       );
     }).toList();
