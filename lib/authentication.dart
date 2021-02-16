@@ -121,4 +121,8 @@ class AuthenticationService {
       return null;
     }
   }
+
+  resetPassword(String email) async {
+    _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
 }

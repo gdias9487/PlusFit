@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
 
+import 'controller.dart';
+
 class ResetPassword extends StatefulWidget {
   ResetPassword({Key key, this.title}) : super(key: key);
 
@@ -12,6 +14,9 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  Controller _controller = Controller();
+  final TextEditingController _emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,10 +85,18 @@ class _ResetPasswordState extends State<ResetPassword> {
                     SizedBox(
                       height: 20,
                     ),
-                    DefaultTextField(
+                    TextFormField(
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
                       obscureText: false,
-                      text: "Email",
-                      prefixicon: Icons.account_circle_sharp,
+                      style: defaultFont(16, FontWeight.normal, Colors.black),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          prefixIcon: Icon(Icons.account_circle_sharp),
+                          labelText: 'Email',
+                          labelStyle: defaultFont(
+                              16, FontWeight.normal, pgreytextfield)),
                     ),
                     SizedBox(
                       height: paddefault,
@@ -100,8 +113,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25))),
                           onPressed: () {
-                            Navigator.pop(context);
-                            Navigator.pop(context);
+                            _controller
+                                .resetPassword(_emailController.text.trim());
                           },
                           child: Text("Redefinir Senha"),
                         ),
