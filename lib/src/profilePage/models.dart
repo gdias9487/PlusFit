@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:plusfit/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:plusfit/widgets/animations.dart';
 
 var _firestore = FirebaseFirestore.instance;
 final FirebaseAuth _firebase = FirebaseAuth.instance;

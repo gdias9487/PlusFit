@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/authentication.dart';
 import 'package:plusfit/src/signUpPage/models.dart';
 import 'package:plusfit/widgets/AlertDialog.dart';
-import 'package:plusfit/widgets/TextFormFieldContainer.dart';
-import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/src/signUpPage/controller.dart';
 import 'package:plusfit/widgets/animations.dart';

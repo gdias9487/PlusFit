@@ -4,7 +4,6 @@ import 'package:plusfit/src/exercise/cardiovascular/view.dart';
 import 'package:plusfit/src/exercise/inferior/view.dart';
 import 'package:plusfit/src/exercise/superior/view.dart';
 import 'package:plusfit/src/profilePage/view.dart';
-
 import 'package:plusfit/widgets/TrainingContainer.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/widgets/animations.dart';

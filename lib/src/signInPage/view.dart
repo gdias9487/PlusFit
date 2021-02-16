@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:plusfit/src/homePage/view.dart';
 import 'package:plusfit/widgets/AlertDialog.dart';
 import 'package:plusfit/widgets/animations.dart';
 import 'package:provider/provider.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:plusfit/widgets/AlertDialog.dart';
-import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/widgets/animations.dart';
 import 'package:provider/provider.dart';
