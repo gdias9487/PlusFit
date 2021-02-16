@@ -64,69 +64,38 @@ class _MyPerfilPageState extends State<PerfilPage> {
           });
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text("Perfil")),
-        elevation: 0,
-        backgroundColor: Colors.black,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [],
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/backperfil.png"), fit: BoxFit.cover),
-        ),
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
-        child: SingleChildScrollView(
-          child: Column(
+    return Drawer(
+        child: Container(
+      color: Colors.black,
+      child: ListView(
+        children: <Widget>[
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               FadeAnimation(
-                  1,
+                  0,
                   500,
                   -40.0,
                   0.0,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      perfilImagem(),
-                      SizedBox(width: 20.0),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          GetUserName(getEmail(_firebaseAuth.currentUser)),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          GetUserEmail(getEmail(_firebaseAuth.currentUser)),
-                          Row(
-                            children: <Widget>[
-                              DefaultElevatedButton(
-                                color: porange,
-                                fontSize: 12,
-                                height: 60,
-                                radius: 25,
-                                width: 30,
-                                text: 'Desconectar',
-                                action: () {
-                                  _showDialog();
-                                },
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
+                  Center(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: perfilImagem(),
+                    ),
                   )),
+              SizedBox(height: 10),
+              Center(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                    GetUserName(getEmail(_firebaseAuth.currentUser)),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ])),
               SizedBox(height: 20.0),
               FadeAnimation(
-                  1,
+                  0,
                   500,
                   30.0,
                   0.0,
@@ -136,7 +105,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                   )),
               SizedBox(height: 10.0),
               FadeAnimation(
-                  1,
+                  0,
                   500,
                   30.0,
                   0.0,
@@ -195,8 +164,19 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           ),
                           Divider(height: 10.0, color: Colors.grey),
                           ListTile(
-                            leading:
-                                Icon(Icons.block_outlined, color: Colors.red),
+                            leading: Icon(Icons.close, color: Colors.black),
+                            title: Text(
+                              "Desconectar",
+                              style: defaultFont(
+                                  16, FontWeight.normal, Colors.black),
+                            ),
+                            onTap: () {
+                              _showDialog();
+                            },
+                          ),
+                          Divider(height: 10.0, color: Colors.grey),
+                          ListTile(
+                            leading: Icon(Icons.block_outlined, color: porange),
                             title: Text(
                               "Desativar conta",
                               style: defaultFont(
@@ -210,7 +190,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                   )),
               SizedBox(height: 10.0),
               FadeAnimation(
-                  1,
+                  0,
                   500,
                   30.0,
                   0.0,
@@ -223,7 +203,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                   )),
               SizedBox(height: 10.0),
               FadeAnimation(
-                  1,
+                  0,
                   500,
                   30.0,
                   0.0,
@@ -263,10 +243,10 @@ class _MyPerfilPageState extends State<PerfilPage> {
                     ),
                   )),
             ],
-          ),
-        ),
+          )
+        ],
       ),
-    );
+    ));
   }
 
   imageChecker() {
@@ -278,33 +258,31 @@ class _MyPerfilPageState extends State<PerfilPage> {
   }
 
   Widget perfilImagem() {
-    return Hero(
-        tag: 'profile',
-        child: Stack(
-          children: <Widget>[
-            CircleAvatar(
-              radius: 80.0,
-              backgroundImage: imageChecker(),
+    return Stack(
+      children: <Widget>[
+        CircleAvatar(
+          radius: 90,
+          backgroundImage: imageChecker(),
+        ),
+        Positioned(
+          bottom: 20.0,
+          right: 20.0,
+          child: InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: ((builder) => bordaEdit()),
+              );
+            },
+            child: Icon(
+              Icons.edit,
+              color: Colors.teal,
+              size: 28.0,
             ),
-            Positioned(
-              bottom: 20.0,
-              right: 20.0,
-              child: InkWell(
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: ((builder) => bordaEdit()),
-                  );
-                },
-                child: Icon(
-                  Icons.edit,
-                  color: Colors.teal,
-                  size: 28.0,
-                ),
-              ),
-            ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    );
   }
 
   Widget bordaEdit() {

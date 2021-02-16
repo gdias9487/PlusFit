@@ -37,39 +37,28 @@ class _ExercisePageState extends State<ExercisePage> {
             500,
             -40.0,
             0.0,
-            Center(
-                child: Text(
+            Text(
               "Categorias",
               style: defaultFont(23, FontWeight.bold, Colors.white),
-            ))),
-        actions: [
-          FadeAnimation(
-              2,
-              500,
-              -40.0,
-              0.0,
-              IconButton(
-                icon: Icon(Icons.account_circle_sharp),
-                color: Colors.white,
-                splashRadius: 20,
-                iconSize: 35,
-                onPressed: () {
-                  Navigator.push(
-                      context, transitionAnimation(PerfilPage(), 1.0, 0.0));
-                },
-              )),
-        ],
+            )),
+        actions: [],
         elevation: 0,
         backgroundColor: Colors.black,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          iconSize: 0,
-          splashRadius: 20,
-          color: Colors.black,
-          highlightColor: Colors.black,
-          splashColor: Colors.black,
-          onPressed: () {},
-        ),
+        leading: FadeAnimation(
+            2,
+            500,
+            -40.0,
+            0.0,
+            IconButton(
+              icon: Icon(Icons.list),
+              color: Colors.white,
+              splashRadius: 20,
+              iconSize: 35,
+              onPressed: () {
+                Navigator.push(
+                    context, transitionAnimation(PerfilPage(), -1.0, 0.0));
+              },
+            )),
       ),
       body: Container(
         decoration: BoxDecoration(
