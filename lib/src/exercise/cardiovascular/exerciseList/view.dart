@@ -1,23 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 
 class ExercisesCardio extends StatefulWidget {
   final String title;
+  final String image;
   final String documentId;
 
-  const ExercisesCardio({Key key, this.title, this.documentId})
+  const ExercisesCardio({Key key, this.title, this.documentId, this.image})
       : super(key: key);
 
   @override
   _ExercisesCardioPageState createState() =>
-      _ExercisesCardioPageState(documentId);
+      _ExercisesCardioPageState(documentId, image);
 }
 
 class _ExercisesCardioPageState extends State<ExercisesCardio> {
   final String documentId;
+  final String image;
 
-  _ExercisesCardioPageState(this.documentId);
+  _ExercisesCardioPageState(this.documentId, this.image);
 
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
@@ -37,58 +40,51 @@ class _ExercisesCardioPageState extends State<ExercisesCardio> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            'Exercicios',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.account_circle_sharp),
-              color: Colors.white,
-              splashRadius: 20,
-              iconSize: 35,
-              onPressed: () {
-                Navigator.pushNamed(context, '/perfil');
-              },
-            ),
-          ],
-          elevation: 0,
-          backgroundColor: Colors.black,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            splashRadius: 20,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
+
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/sign_up_background.png"),
                   fit: BoxFit.cover)),
           child: Column(children: [
-            Container(
-              height: 50,
-              width: 150,
-              decoration: BoxDecoration(
-                  color: Colors.orange[700],
-                  borderRadius: BorderRadius.circular(20)),
-              child: FlatButton(
-                child: Text(
-                  'Iniciar Treino',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            Padding(
+          padding: const EdgeInsets.only(top: 60),
+          child: Container(
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/cardio/$image"),
+                    fit: BoxFit.cover)),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    color: Colors.white,
+                    splashRadius: 20,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+                Spacer(),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20, bottom: 10),
+                    child: Text(
+                      '$documentId',
+                      style: defaultFont(30, FontWeight.bold, Colors.white),
+                    ),
+                  ),
+                ),
+              ],
             ),
+          ),
+        ),
+
             Flexible(
               child: StreamBuilder(
                   stream: FirebaseFirestore.instance
