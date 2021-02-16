@@ -40,7 +40,7 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ExercisesCardio(
-                        documentId: (document['Nome'].toString()))));
+                        documentId: (document['Nome'].toString()), image: (document['image'].toString()))));
           });
     }).toList();
   }

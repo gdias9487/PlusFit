@@ -40,7 +40,7 @@ class _InferiorPageState extends State<InferiorPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ExercisesInferior(
-                        documentId: (document['Nome'].toString()))));
+                        documentId: (document['Nome'].toString()), image: (document['image'].toString()))));
           });
     }).toList();
   }
