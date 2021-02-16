@@ -64,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                 email: emailController.text.trim(),
                 password: passwordController.text.trim())
             .then((value) => Navigator.popAndPushNamed(context, '/exercises'))
+            // ignore: return_of_invalid_type_from_catch_error
             .catchError((e) => _showDialog(error));
 
         return null;
@@ -155,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                                 keyboardType: TextInputType.emailAddress,
                                 obscureText: false,
                                 style: defaultFont(
-                                    15, FontWeight.normal, pgreytextfield),
+                                    16, FontWeight.normal, pgreytextfield),
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius:
@@ -164,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                                         Icon(Icons.account_circle_sharp),
                                     labelText: 'Email',
                                     labelStyle: defaultFont(
-                                        15, FontWeight.normal, pgreytextfield)),
+                                        16, FontWeight.normal, pgreytextfield)),
                               ),
                             ),
                             SizedBox(
@@ -180,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                                 keyboardType: TextInputType.visiblePassword,
                                 obscureText: _obscureText,
                                 style: defaultFont(
-                                    15, FontWeight.normal, pgreytextfield),
+                                    16, FontWeight.normal, pgreytextfield),
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius:
@@ -192,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     labelText: 'Senha',
                                     labelStyle: defaultFont(
-                                        15, FontWeight.normal, pgreytextfield)),
+                                        16, FontWeight.normal, pgreytextfield)),
                               ),
                             ),
                             SizedBox(

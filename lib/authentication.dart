@@ -2,19 +2,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
 String error;
+getEmail(user) {
+  try {
+    return user.email;
+  } catch (e) {
+    return '';
+  }
+}
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-  }
-
   Future<String> singIn({String email, String password}) async {
     try {
-      final cebola = await _firebaseAuth.signInWithEmailAndPassword(
+      // ignore: unused_local_variable
+      final user = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       return "Logged in";
     } on FirebaseAuthException catch (e) {
@@ -22,8 +26,7 @@ class AuthenticationService {
         case "ERROR_EMAIL_ALREADY_IN_USE":
         case "account-exists-with-different-credential":
         case "email-already-in-use":
-          error =
-              "Este e-mail já cadastrado.";
+          error = "Este e-mail já cadastrado.";
           break;
         case "ERROR_WRONG_PASSWORD":
         case "wrong-password":
@@ -71,7 +74,8 @@ class AuthenticationService {
 
   Future<String> signUp({String email, String password}) async {
     try {
-      final cebola = await _firebaseAuth.createUserWithEmailAndPassword(
+      // ignore: unused_local_variable
+      final user = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       return "Cadastrado";
     } on FirebaseAuthException catch (e) {
@@ -79,8 +83,7 @@ class AuthenticationService {
         case "ERROR_EMAIL_ALREADY_IN_USE":
         case "account-exists-with-different-credential":
         case "email-already-in-use":
-          error =
-              "Este e-mail já cadastrado.";
+          error = "Este e-mail já cadastrado.";
           break;
         case "ERROR_WRONG_PASSWORD":
         case "wrong-password":

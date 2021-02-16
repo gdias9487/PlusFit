@@ -12,9 +12,12 @@ class FadeAnimation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     final tween = MultiTrackTween([
+      // ignore: deprecated_member_use
       Track("opacity")
           .add(Duration(milliseconds: 500), Tween(begin: 0.0, end: 1.0)),
+      // ignore: deprecated_member_use
       Track("translateY").add(
           Duration(milliseconds: 500), Tween(begin: begin, end: end),
           curve: Curves.decelerate),

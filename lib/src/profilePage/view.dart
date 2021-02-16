@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plusfit/authentication.dart';
+import 'package:plusfit/src/profilePage/models.dart';
 import 'package:plusfit/widgets/AlertDialog.dart';
 import 'package:plusfit/widgets/Buttons.dart';
 import 'package:plusfit/widgets/animations.dart';
@@ -21,6 +22,8 @@ class PerfilPage extends StatefulWidget {
 }
 
 class _MyPerfilPageState extends State<PerfilPage> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   PickedFile _imagefile;
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -29,10 +32,10 @@ class _MyPerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
     logoff(firebaseUser) {
-      context.read<AuthenticationService>().signOut();
-      if (firebaseUser == null) {
-        Navigator.pushNamed(context, '/login');
-      }
+      _firebaseAuth.signOut();
+      print(_firebaseAuth.currentUser);
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/login', (Route<dynamic> route) => false);
     }
 
     final firebaseUser = context.watch<User>();
@@ -108,7 +111,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "Carlos Dias",
+                            "Jefinho",
                             style:
                                 defaultFont(18, FontWeight.bold, Colors.white),
                           ),
@@ -116,7 +119,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                             height: 10,
                           ),
                           Text(
-                            "carlinhos@hotmail.com",
+                            getEmail(_firebaseAuth.currentUser),
                             style:
                                 defaultFont(12, FontWeight.bold, Colors.white),
                           ),
@@ -158,7 +161,11 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       padding: EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         children: <Widget>[
-                          ListTile(
+                          ExpansionTile(
+                            onExpansionChanged: (value) {
+                              Icon(Icons.arrow_drop_down);
+                            },
+                            children: showInfo(),
                             trailing: Icon(
                               Icons.arrow_forward_ios,
                               color: Colors.black,
@@ -170,7 +177,6 @@ class _MyPerfilPageState extends State<PerfilPage> {
                               style: defaultFont(
                                   16, FontWeight.normal, Colors.black),
                             ),
-                            onTap: () {},
                           ),
                           Divider(height: 10.0, color: Colors.grey),
                           ListTile(

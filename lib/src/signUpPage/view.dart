@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/authentication.dart';
+import 'package:plusfit/src/signUpPage/models.dart';
 import 'package:plusfit/widgets/AlertDialog.dart';
 import 'package:plusfit/widgets/TextFormFieldContainer.dart';
 import 'package:plusfit/widgets/TextField.dart';
@@ -19,13 +22,16 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final _firebase = FirebaseAuth.instance;
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController passwordController1 = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   Controller _controller = Controller();
 
+  var confirmp;
   var _viewpass = Icons.visibility_off;
   var _viewpass1 = Icons.visibility_off;
   bool _obscureText = true;
@@ -56,32 +62,18 @@ class _SignupPageState extends State<SignupPage> {
         context
             .read<AuthenticationService>()
             .signUp(
-                email: emailController.text.trim(),
-                password: passwordController.text.trim())
-            .then((value) => Navigator.pop(context))
+                email: _emailController.text.trim(),
+                password: _passwordController.text.trim())
+            .then((value) {
+          addInfo(_firebase.currentUser.email);
+          Navigator.popAndPushNamed(context, '/login');
+        })
+            // ignore: return_of_invalid_type_from_catch_error
             .catchError((e) => _showDialog(error));
 
         return null;
       } catch (e) {}
     }
-  }
-
-  // ignore: missing_return
-  String validateemail(value) {
-    if (value.isEmpty) {
-      return "Campo obrigatório *";
-    } else if (!(value.contains('@') && value.contains('.com'))) {
-      return "Digite um email válido *";
-    } else {
-      return null;
-    }
-  }
-
-  String validatepass(value) {
-    if (value.isEmpty) {
-      return "Este campo não pode estar vazio *";
-    } else
-      return null;
   }
 
   void _toggle() {
@@ -159,12 +151,12 @@ class _SignupPageState extends State<SignupPage> {
                                           0.0,
                                           TextFormField(
                                             validator: validateemail,
-                                            controller: emailController,
+                                            controller: _emailController,
                                             keyboardType:
                                                 TextInputType.emailAddress,
                                             obscureText: false,
                                             style: defaultFont(
-                                                15,
+                                                16,
                                                 FontWeight.normal,
                                                 Colors.black),
                                             decoration: InputDecoration(
@@ -176,7 +168,7 @@ class _SignupPageState extends State<SignupPage> {
                                                     Icons.account_circle_sharp),
                                                 labelText: 'Email',
                                                 labelStyle: defaultFont(
-                                                    15,
+                                                    16,
                                                     FontWeight.normal,
                                                     pgreytextfield)),
                                           )),
@@ -188,13 +180,13 @@ class _SignupPageState extends State<SignupPage> {
                                           30.0,
                                           0.0,
                                           TextFormField(
-                                            validator: validatepass,
-                                            controller: passwordController,
+                                            validator: pass,
+                                            controller: _passwordController,
                                             keyboardType:
                                                 TextInputType.visiblePassword,
                                             obscureText: _obscureText,
                                             style: defaultFont(
-                                                15,
+                                                16,
                                                 FontWeight.normal,
                                                 pgreytextfield),
                                             decoration: InputDecoration(
@@ -210,7 +202,7 @@ class _SignupPageState extends State<SignupPage> {
                                                 ),
                                                 labelText: 'Senha',
                                                 labelStyle: defaultFont(
-                                                    15,
+                                                    16,
                                                     FontWeight.normal,
                                                     pgreytextfield)),
                                           )),
@@ -222,13 +214,14 @@ class _SignupPageState extends State<SignupPage> {
                                           30.0,
                                           0.0,
                                           TextFormField(
-                                            validator: validatepass,
-                                            controller: passwordController1,
+                                            validator: confirmpass,
+                                            controller:
+                                                _confirmPasswordController,
                                             keyboardType:
                                                 TextInputType.visiblePassword,
                                             obscureText: _obscureText1,
                                             style: defaultFont(
-                                                15,
+                                                16,
                                                 FontWeight.normal,
                                                 pgreytextfield),
                                             decoration: InputDecoration(
@@ -244,7 +237,7 @@ class _SignupPageState extends State<SignupPage> {
                                                 ),
                                                 labelText: 'Confirmar Senha',
                                                 labelStyle: defaultFont(
-                                                    15,
+                                                    16,
                                                     FontWeight.normal,
                                                     pgreytextfield)),
                                           )),

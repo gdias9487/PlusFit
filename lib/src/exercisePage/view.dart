@@ -64,6 +64,8 @@ class _ExercisePageState extends State<ExercisePage> {
           icon: Icon(Icons.arrow_back_ios),
           iconSize: 0,
           splashRadius: 20,
+          color: Colors.black,
+          highlightColor: Colors.black,
           splashColor: Colors.black,
           onPressed: () {},
         ),
