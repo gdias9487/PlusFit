@@ -22,15 +22,14 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
     return snapshot.data.docs.map<Widget>((document) {
       var nome = document['nome'];
       return ExerciseContainer(
-        width: 1,
-        height: 100,
-        top: 20,
-        left: 30,
-        right: 30,
-        bottom: 0.0,
-        image: "assets/signup.jpg",
-        text: "$nome",
-      );
+          width: 1,
+          height: 100,
+          top: 20,
+          left: 30,
+          right: 30,
+          bottom: 0.0,
+          text: "$nome",
+          image: "assets/signup.jpg");
     }).toList();
   }
 

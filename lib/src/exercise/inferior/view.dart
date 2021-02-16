@@ -60,17 +60,7 @@ class _InferiorPageState extends State<InferiorPage> {
           'Treinos Inferiores',
           style: defaultFont(18, FontWeight.bold, Colors.white),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.account_circle_sharp),
-            color: Colors.white,
-            splashRadius: 20,
-            iconSize: 35,
-            onPressed: () {
-              Navigator.pushNamed(context, '/perfil');
-            },
-          ),
-        ],
+        actions: [],
         elevation: 0,
         backgroundColor: Colors.black,
         leading: IconButton(

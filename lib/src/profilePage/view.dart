@@ -69,181 +69,206 @@ class _MyPerfilPageState extends State<PerfilPage> {
       color: Colors.black,
       child: ListView(
         children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              FadeAnimation(
-                  0,
-                  500,
-                  -40.0,
-                  0.0,
-                  Center(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: perfilImagem(),
-                    ),
-                  )),
-              SizedBox(height: 10),
-              Center(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                    GetUserName(getEmail(_firebaseAuth.currentUser)),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ])),
-              SizedBox(height: 20.0),
-              FadeAnimation(
-                  0,
-                  500,
-                  30.0,
-                  0.0,
-                  Text(
-                    "Conta",
-                    style: defaultFont(20, FontWeight.bold, Colors.white),
-                  )),
-              SizedBox(height: 10.0),
-              FadeAnimation(
-                  0,
-                  500,
-                  30.0,
-                  0.0,
-                  Card(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: <Widget>[
-                          ExpansionTile(
-                            onExpansionChanged: (value) {
-                              Icon(Icons.arrow_drop_down);
-                            },
-                            children: showInfo(),
-                            trailing: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.black,
-                              size: 16,
+          Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  })),
+          Padding(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  FadeAnimation(
+                      0.5,
+                      600,
+                      -100.0,
+                      0.0,
+                      Center(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: perfilImagem(),
+                        ),
+                      )),
+                  SizedBox(height: 10),
+                  FadeAnimation(
+                      0.5,
+                      400,
+                      -100.0,
+                      0.0,
+                      Center(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                            GetUserName(getEmail(_firebaseAuth.currentUser)),
+                            SizedBox(
+                              height: 10,
                             ),
-                            leading: Icon(Icons.person, color: Colors.black),
-                            title: Text(
-                              "Informações pessoais",
-                              style: defaultFont(
-                                  16, FontWeight.normal, Colors.black),
-                            ),
+                          ]))),
+                  SizedBox(height: 20.0),
+                  FadeAnimation(
+                      0.5,
+                      500,
+                      100.0,
+                      0.0,
+                      Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            "Conta",
+                            style:
+                                defaultFont(20, FontWeight.bold, Colors.white),
+                          ))),
+                  SizedBox(height: 10.0),
+                  FadeAnimation(
+                      0.5,
+                      500,
+                      100.0,
+                      0.0,
+                      Card(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Column(
+                            children: <Widget>[
+                              ExpansionTile(
+                                onExpansionChanged: (value) {
+                                  Icon(Icons.arrow_drop_down);
+                                },
+                                children: showInfo(),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.black,
+                                  size: 16,
+                                ),
+                                leading:
+                                    Icon(Icons.person, color: Colors.black),
+                                title: Text(
+                                  "Informações pessoais",
+                                  style: defaultFont(
+                                      16, FontWeight.normal, Colors.black),
+                                ),
+                              ),
+                              Divider(height: 10.0, color: Colors.grey),
+                              ExpansionTile(
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.black,
+                                  size: 16,
+                                ),
+                                leading:
+                                    Icon(Icons.vpn_key, color: Colors.black),
+                                title: Text(
+                                  "Alterar senha",
+                                  style: defaultFont(
+                                      16, FontWeight.normal, Colors.black),
+                                ),
+                                children: editPass,
+                              ),
+                              Divider(height: 10.0, color: Colors.grey),
+                              ListTile(
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.black,
+                                  size: 16,
+                                ),
+                                leading: Icon(Icons.assignment_turned_in_sharp,
+                                    color: Colors.black),
+                                title: Text(
+                                  "Treinos",
+                                  style: defaultFont(
+                                      16, FontWeight.normal, Colors.black),
+                                ),
+                                onTap: () {},
+                              ),
+                              Divider(height: 10.0, color: Colors.grey),
+                              ListTile(
+                                leading: Icon(Icons.close, color: Colors.black),
+                                title: Text(
+                                  "Desconectar",
+                                  style: defaultFont(
+                                      16, FontWeight.normal, Colors.black),
+                                ),
+                                onTap: () {
+                                  _showDialog();
+                                },
+                              ),
+                              Divider(height: 10.0, color: Colors.grey),
+                              ListTile(
+                                leading:
+                                    Icon(Icons.block_outlined, color: porange),
+                                title: Text(
+                                  "Desativar conta",
+                                  style: defaultFont(
+                                      16, FontWeight.normal, Colors.red),
+                                ),
+                                onTap: () {},
+                              ),
+                            ],
                           ),
-                          Divider(height: 10.0, color: Colors.grey),
-                          ExpansionTile(
-                            trailing: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.black,
-                              size: 16,
-                            ),
-                            leading: Icon(Icons.vpn_key, color: Colors.black),
-                            title: Text(
-                              "Alterar senha",
-                              style: defaultFont(
-                                  16, FontWeight.normal, Colors.black),
-                            ),
-                            children: editPass,
+                        ),
+                      )),
+                  SizedBox(height: 10.0),
+                  FadeAnimation(
+                      0.5,
+                      500,
+                      100.0,
+                      0.0,
+                      Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            "Configurações",
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ))),
+                  SizedBox(height: 10.0),
+                  FadeAnimation(
+                      0.5,
+                      500,
+                      100.0,
+                      0.0,
+                      Card(
+                        elevation: 3.0,
+                        child: Padding(
+                          padding: EdgeInsets.all(14.0),
+                          child: Column(
+                            children: <Widget>[
+                              ListTile(
+                                  onTap: () {
+                                    Switch(
+                                      value: true,
+                                      onChanged: (bool value) {},
+                                    );
+                                  },
+                                  leading: Icon(Icons.notifications,
+                                      color: Colors.black),
+                                  title: Text(
+                                    "Notificações",
+                                    style: defaultFont(
+                                        16, FontWeight.normal, Colors.black),
+                                  )),
+                              Divider(height: 10.0, color: Colors.grey),
+                              ListTile(
+                                leading: Icon(Icons.headset_mic,
+                                    color: Colors.black),
+                                title: Text(
+                                  "Suporte",
+                                  style: defaultFont(
+                                      16, FontWeight.normal, Colors.black),
+                                ),
+                                onTap: () {},
+                              ),
+                            ],
                           ),
-                          Divider(height: 10.0, color: Colors.grey),
-                          ListTile(
-                            trailing: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.black,
-                              size: 16,
-                            ),
-                            leading: Icon(Icons.assignment_turned_in_sharp,
-                                color: Colors.black),
-                            title: Text(
-                              "Treinos",
-                              style: defaultFont(
-                                  16, FontWeight.normal, Colors.black),
-                            ),
-                            onTap: () {},
-                          ),
-                          Divider(height: 10.0, color: Colors.grey),
-                          ListTile(
-                            leading: Icon(Icons.close, color: Colors.black),
-                            title: Text(
-                              "Desconectar",
-                              style: defaultFont(
-                                  16, FontWeight.normal, Colors.black),
-                            ),
-                            onTap: () {
-                              _showDialog();
-                            },
-                          ),
-                          Divider(height: 10.0, color: Colors.grey),
-                          ListTile(
-                            leading: Icon(Icons.block_outlined, color: porange),
-                            title: Text(
-                              "Desativar conta",
-                              style: defaultFont(
-                                  16, FontWeight.normal, Colors.red),
-                            ),
-                            onTap: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  )),
-              SizedBox(height: 10.0),
-              FadeAnimation(
-                  0,
-                  500,
-                  30.0,
-                  0.0,
-                  Text(
-                    "Configurações",
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  )),
-              SizedBox(height: 10.0),
-              FadeAnimation(
-                  0,
-                  500,
-                  30.0,
-                  0.0,
-                  Card(
-                    elevation: 3.0,
-                    child: Padding(
-                      padding: EdgeInsets.all(14.0),
-                      child: Column(
-                        children: <Widget>[
-                          ListTile(
-                              onTap: () {
-                                Switch(
-                                  value: true,
-                                  onChanged: (bool value) {},
-                                );
-                              },
-                              leading: Icon(Icons.notifications,
-                                  color: Colors.black),
-                              title: Text(
-                                "Notificações",
-                                style: defaultFont(
-                                    16, FontWeight.normal, Colors.black),
-                              )),
-                          Divider(height: 10.0, color: Colors.grey),
-                          ListTile(
-                            leading:
-                                Icon(Icons.headset_mic, color: Colors.black),
-                            title: Text(
-                              "Suporte",
-                              style: defaultFont(
-                                  16, FontWeight.normal, Colors.black),
-                            ),
-                            onTap: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  )),
-            ],
-          )
+                        ),
+                      )),
+                ],
+              ))
         ],
       ),
     ));

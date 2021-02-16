@@ -21,9 +21,10 @@ class FadeAnimation extends StatelessWidget {
       // ignore: deprecated_member_use
       Track("translateY").add(
           Duration(milliseconds: durationY), Tween(begin: begin, end: end),
-          curve: Curves.easeInToLinear),
+          curve: Curves.fastLinearToSlowEaseIn),
     ]);
 
+    // ignore: deprecated_member_use
     return ControlledAnimation(
       delay: Duration(milliseconds: (500 * delay).round()),
       duration: tween.duration,
