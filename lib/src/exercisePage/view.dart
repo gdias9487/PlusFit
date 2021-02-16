@@ -33,7 +33,7 @@ class _ExercisePageState extends State<ExercisePage> {
     return Scaffold(
       appBar: AppBar(
         title: FadeAnimation(
-            2,
+            1,
             500,
             -40.0,
             0.0,
@@ -45,7 +45,7 @@ class _ExercisePageState extends State<ExercisePage> {
         elevation: 0,
         backgroundColor: Colors.black,
         leading: FadeAnimation(
-            2,
+            1,
             500,
             -40.0,
             0.0,
@@ -73,7 +73,7 @@ class _ExercisePageState extends State<ExercisePage> {
             height: 15,
           ),
           FadeAnimation(
-              2,
+              1,
               500,
               30.0,
               0.0,
@@ -90,7 +90,7 @@ class _ExercisePageState extends State<ExercisePage> {
                 },
               )),
           FadeAnimation(
-              2,
+              1,
               500,
               30.0,
               0.0,
@@ -107,7 +107,7 @@ class _ExercisePageState extends State<ExercisePage> {
                 },
               )),
           FadeAnimation(
-              2,
+              1,
               500,
               30.0,
               0.0,

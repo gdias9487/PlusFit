@@ -41,7 +41,8 @@ class _SuperiorPageState extends State<SuperiorPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ExercisesSuperior(
-                        documentId: (document['Nome'].toString()), image: (document['image'].toString()))));
+                        documentId: (document['Nome'].toString()),
+                        image: (document['image'].toString()))));
           });
     }).toList();
   }
