@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:plusfit/widgets/TextField.dart';
+import 'package:plusfit/widgets/AlertDialog.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/widgets/animations.dart';
+import 'package:provider/provider.dart';
 
+import '../../authentication.dart';
 import 'controller.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -15,21 +17,78 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   Controller _controller = Controller();
   final TextEditingController _emailController = TextEditingController();
+  void _showDialog(text) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return FadeAnimation(
+              1,
+              500,
+              0.0,
+              0.0,
+              Alert_Box(
+                title: "Sucesso",
+                buttons: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Voltar",
+                        style: defaultFont(14, FontWeight.bold, porange),
+                      ))
+                ],
+                text: text,
+              ));
+        });
+  }
+
+  bool validateAndSave() {
+    if (_formkey.currentState.validate()) {
+      _formkey.currentState.save();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void validateAndSubmit() async {
+    if (validateAndSave()) {
+      try {
+        context
+            .read<AuthenticationService>()
+            .resetPassword(_emailController.text.trim())
+            .then((value) {
+          _showDialog("Foi enviado uma mensagem para seu endereço de e-mail.");
+        }).catchError((e) => {_showDialog(error)});
+
+        return null;
+      } catch (e) {}
+    }
+  }
+
+  String validateemail(value) {
+    if (value.isEmpty) {
+      return "Campo obrigatório *";
+    } else if (!(value.contains('@') && value.contains('.com'))) {
+      return "Digite um email válido *";
+    } else {
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/login_background.png"),
-                  fit: BoxFit.cover)),
-          child: ListView(physics: NeverScrollableScrollPhysics(), children: <
-              Widget>[
+          color: Colors.black,
+          child: ListView(children: <Widget>[
             FadeAnimation(
-                1.5,
+                0,
+                1000,
                 30.0,
                 0.0,
                 IconButton(
@@ -46,20 +105,22 @@ class _ResetPasswordState extends State<ResetPassword> {
               height: 20,
             ),
             FadeAnimation(
-                1,
+                0,
+                800,
                 30.0,
                 0.0,
                 SizedBox(
                     height: 200,
                     child: Image.asset("assets/Plusfit_logo.png"))),
             FadeAnimation(
-                2,
-                30.0,
+                0,
+                900,
+                800.0,
                 0.0,
                 Padding(
                   padding: EdgeInsets.only(top: 50),
                   child: Container(
-                    height: MediaQuery.of(context).size.height / 1.5,
+                    height: (MediaQuery.of(context).size.height / 2) + 20,
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -74,56 +135,44 @@ class _ResetPasswordState extends State<ResetPassword> {
                         SizedBox(
                           height: 10,
                         ),
-                        FadeAnimation(
-                          2,
-                          30.0,
-                          0.0,
-                          Text(
-                            'Redefinir Senha',
-                            textAlign: TextAlign.center,
-                            style:
-                                defaultFont(20, FontWeight.bold, Colors.black),
-                          ),
+                        Text(
+                          'Redefinir Senha',
+                          textAlign: TextAlign.center,
+                          style: defaultFont(20, FontWeight.bold, Colors.black),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        FadeAnimation(
-                          2,
-                          30.0,
-                          0.0,
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 5),
-                            child: Text(
-                              'Insira seu endereço de email para redefinir a senha',
-                              textAlign: TextAlign.center,
-                              style: defaultFont(
-                                  20, FontWeight.normal, Colors.black54),
-                            ),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                          child: Text(
+                            'Insira seu endereço de email para redefinir a senha',
+                            textAlign: TextAlign.center,
+                            style: defaultFont(
+                                20, FontWeight.normal, Colors.black54),
                           ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        FadeAnimation(
-                          2,
-                          30.0,
-                          0.0,
-                          TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            obscureText: false,
-                            style: defaultFont(
-                                16, FontWeight.normal, pgreytextfield),
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                prefixIcon: Icon(Icons.account_circle_sharp),
-                                labelText: 'Email',
-                                labelStyle: defaultFont(
-                                    16, FontWeight.normal, pgreytextfield)),
-                          ),
-                        ),
+                        Form(
+                            key: _formkey,
+                            child: TextFormField(
+                              controller: _emailController,
+                              validator: validateemail,
+                              keyboardType: TextInputType.emailAddress,
+                              obscureText: false,
+                              style: defaultFont(
+                                  16, FontWeight.normal, pgreytextfield),
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30)),
+                                  prefixIcon: Icon(Icons.account_circle_sharp),
+                                  labelText: 'Email',
+                                  labelStyle: defaultFont(
+                                      16, FontWeight.normal, pgreytextfield)),
+                            )),
                         SizedBox(
                           height: paddefault + 10,
                         ),
@@ -138,7 +187,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(25))),
                             onPressed: () {
-                              Navigator.popAndPushNamed(context, '/login');
+                              validateAndSubmit();
                             },
                             child: Text("Redefinir Senha"),
                           ),

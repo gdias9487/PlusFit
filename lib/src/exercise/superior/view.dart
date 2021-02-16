@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/src/exercise/superior/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'controller.dart';
-import 'exerciseList/models.dart';
 
 class SuperiorPage extends StatefulWidget {
   SuperiorPage({Key key, this.title}) : super(key: key);

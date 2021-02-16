@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plusfit/components/constants.dart';
 
 class Alert_Box extends StatelessWidget {
   final Key key;

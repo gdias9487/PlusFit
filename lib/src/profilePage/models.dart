@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:plusfit/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:plusfit/widgets/animations.dart';
 
 var _firestore = FirebaseFirestore.instance;
 final FirebaseAuth _firebase = FirebaseAuth.instance;
@@ -146,7 +144,7 @@ class GetUserName extends StatelessWidget {
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text("",
-              style: defaultFont(20, FontWeight.bold, Colors.white));
+              style: defaultFont(25, FontWeight.bold, Colors.white));
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
@@ -154,11 +152,11 @@ class GetUserName extends StatelessWidget {
 
           return Text(
             data["nome"].toString(),
-            style: defaultFont(20, FontWeight.bold, Colors.white),
+            style: defaultFont(25, FontWeight.bold, Colors.white),
           );
         }
 
-        return Text("", style: defaultFont(20, FontWeight.bold, Colors.white));
+        return Text("", style: defaultFont(25, FontWeight.bold, Colors.white));
       },
     );
   }
@@ -180,7 +178,7 @@ class GetUserEmail extends StatelessWidget {
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text("",
-              style: defaultFont(12, FontWeight.bold, Colors.white));
+              style: defaultFont(16, FontWeight.bold, Colors.white));
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
@@ -188,11 +186,11 @@ class GetUserEmail extends StatelessWidget {
 
           return Text(
             data["email"].toString(),
-            style: defaultFont(12, FontWeight.bold, Colors.white),
+            style: defaultFont(16, FontWeight.bold, Colors.white),
           );
         }
 
-        return Text("", style: defaultFont(12, FontWeight.bold, Colors.white));
+        return Text("", style: defaultFont(16, FontWeight.bold, Colors.white));
       },
     );
   }

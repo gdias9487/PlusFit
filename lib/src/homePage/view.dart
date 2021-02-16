@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:plusfit/src/signInPage/view.dart';
 import 'package:plusfit/widgets/Buttons.dart';
 import 'package:plusfit/widgets/animations.dart';
 
@@ -25,6 +24,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 FadeAnimation(
                   2,
+                  500,
                   30.0,
                   0.0,
                   Container(
@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       FadeAnimation(
                           2,
+                          500,
                           30.0,
                           0.0,
                           DefaultOutlinedButton(
@@ -58,6 +59,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       FadeAnimation(
                           2,
+                          500,
                           30.0,
                           0.0,
                           ElevatedButton(
