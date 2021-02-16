@@ -3,6 +3,8 @@ import 'package:plusfit/widgets/TextField.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/widgets/animations.dart';
 
+import 'controller.dart';
+
 class ResetPassword extends StatefulWidget {
   ResetPassword({Key key, this.title}) : super(key: key);
 
@@ -13,6 +15,9 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  Controller _controller = Controller();
+  final TextEditingController _emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
