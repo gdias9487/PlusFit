@@ -35,6 +35,7 @@ class _ExercisePageState extends State<ExercisePage> {
       appBar: AppBar(
         title: FadeAnimation(
             2,
+            500,
             -40.0,
             0.0,
             Center(
@@ -45,6 +46,7 @@ class _ExercisePageState extends State<ExercisePage> {
         actions: [
           FadeAnimation(
               2,
+              500,
               -40.0,
               0.0,
               IconButton(
@@ -84,6 +86,7 @@ class _ExercisePageState extends State<ExercisePage> {
           ),
           FadeAnimation(
               2,
+              500,
               30.0,
               0.0,
               TrainingContainer(
@@ -100,6 +103,7 @@ class _ExercisePageState extends State<ExercisePage> {
               )),
           FadeAnimation(
               2,
+              500,
               30.0,
               0.0,
               TrainingContainer(
@@ -116,6 +120,7 @@ class _ExercisePageState extends State<ExercisePage> {
               )),
           FadeAnimation(
               2,
+              500,
               30.0,
               0.0,
               TrainingContainer(

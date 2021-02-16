@@ -89,6 +89,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
             children: <Widget>[
               FadeAnimation(
                   1,
+                  500,
                   -40.0,
                   0.0,
                   Row(
@@ -126,6 +127,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
               SizedBox(height: 20.0),
               FadeAnimation(
                   1,
+                  500,
                   30.0,
                   0.0,
                   Text(
@@ -135,6 +137,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
               SizedBox(height: 10.0),
               FadeAnimation(
                   1,
+                  500,
                   30.0,
                   0.0,
                   Card(
@@ -208,6 +211,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
               SizedBox(height: 10.0),
               FadeAnimation(
                   1,
+                  500,
                   30.0,
                   0.0,
                   Text(
@@ -220,6 +224,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
               SizedBox(height: 10.0),
               FadeAnimation(
                   1,
+                  500,
                   30.0,
                   0.0,
                   Card(

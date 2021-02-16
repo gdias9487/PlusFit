@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 FadeAnimation(
                   2,
+                  500,
                   30.0,
                   0.0,
                   Container(
@@ -43,6 +44,7 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       FadeAnimation(
                           2,
+                          500,
                           30.0,
                           0.0,
                           DefaultOutlinedButton(
@@ -58,6 +60,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       FadeAnimation(
                           2,
+                          500,
                           30.0,
                           0.0,
                           ElevatedButton(

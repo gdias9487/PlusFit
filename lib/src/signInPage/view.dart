@@ -110,27 +110,25 @@ class _LoginPageState extends State<LoginPage> {
         actions: [],
       ),
       body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/login_background.png"),
-                  fit: BoxFit.cover)),
-          child: ListView(physics: NeverScrollableScrollPhysics(), children: <
-              Widget>[
+          color: Colors.black,
+          child: ListView(children: <Widget>[
             FadeAnimation(
-                1,
+                0,
+                1000,
                 30.0,
                 0.0,
                 SizedBox(
                     height: 200,
                     child: Image.asset("assets/Plusfit_logo.png"))),
             FadeAnimation(
-                2,
-                30.0,
+                0,
+                1000,
+                800.0,
                 0.0,
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 50),
+                  padding: EdgeInsets.only(top: 50),
                   child: Container(
-                      height: MediaQuery.of(context).size.height / 1.5,
+                      height: (MediaQuery.of(context).size.height / 2) + 25,
                       padding: EdgeInsets.only(top: 20, right: 10, left: 10),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -147,118 +145,90 @@ class _LoginPageState extends State<LoginPage> {
                             SizedBox(
                               height: 10,
                             ),
-                            FadeAnimation(
-                              2,
-                              30.0,
-                              0.0,
-                              TextFormField(
-                                validator: validateemail,
-                                controller: emailController,
-                                keyboardType: TextInputType.emailAddress,
-                                obscureText: false,
-                                style: defaultFont(
-                                    16, FontWeight.normal, pgreytextfield),
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    prefixIcon:
-                                        Icon(Icons.account_circle_sharp),
-                                    labelText: 'Email',
-                                    labelStyle: defaultFont(
-                                        16, FontWeight.normal, pgreytextfield)),
-                              ),
+                            TextFormField(
+                              validator: validateemail,
+                              controller: emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              obscureText: false,
+                              style: defaultFont(
+                                  16, FontWeight.normal, pgreytextfield),
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30)),
+                                  prefixIcon: Icon(Icons.account_circle_sharp),
+                                  labelText: 'Email',
+                                  labelStyle: defaultFont(
+                                      16, FontWeight.normal, pgreytextfield)),
                             ),
                             SizedBox(
                               height: 20,
                             ),
-                            FadeAnimation(
-                              2,
-                              30.0,
-                              0.0,
-                              TextFormField(
-                                validator: validatepass,
-                                controller: passwordController,
-                                keyboardType: TextInputType.visiblePassword,
-                                obscureText: _obscureText,
-                                style: defaultFont(
-                                    16, FontWeight.normal, pgreytextfield),
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    prefixIcon: Icon(Icons.lock_outline),
-                                    suffixIcon: IconButton(
-                                      onPressed: _toggle,
-                                      icon: Icon(_viewpass),
-                                    ),
-                                    labelText: 'Senha',
-                                    labelStyle: defaultFont(
-                                        16, FontWeight.normal, pgreytextfield)),
-                              ),
+                            TextFormField(
+                              validator: validatepass,
+                              controller: passwordController,
+                              keyboardType: TextInputType.visiblePassword,
+                              obscureText: _obscureText,
+                              style: defaultFont(
+                                  16, FontWeight.normal, pgreytextfield),
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30)),
+                                  prefixIcon: Icon(Icons.lock_outline),
+                                  suffixIcon: IconButton(
+                                    onPressed: _toggle,
+                                    icon: Icon(_viewpass),
+                                  ),
+                                  labelText: 'Senha',
+                                  labelStyle: defaultFont(
+                                      16, FontWeight.normal, pgreytextfield)),
                             ),
                             SizedBox(
                               height: padbutton,
                             ),
-                            FadeAnimation(
-                              2,
-                              30.0,
-                              0.0,
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: porange,
-                                    textStyle: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                    minimumSize: Size(320, 50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(25))),
-                                onPressed: () {
-                                  validateAndSubmit();
-                                },
-                                child: Text("Entrar"),
-                              ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: porange,
+                                  textStyle: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                  minimumSize: Size(320, 50),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25))),
+                              onPressed: () {
+                                validateAndSubmit();
+                              },
+                              child: Text("Entrar"),
                             ),
                             Column(
                               children: <Widget>[
-                                FadeAnimation(
-                                  2,
-                                  30.0,
-                                  0.0,
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                        primary: Colors.white),
-                                    onPressed: () {
-                                      Navigator.popAndPushNamed(
-                                          context, '/signup');
-                                    },
-                                    child: Text(
-                                      'Cadastrar',
-                                      style: defaultFont(
-                                          14, FontWeight.bold, porange),
-                                    ),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                      primary: Colors.white),
+                                  onPressed: () {
+                                    Navigator.popAndPushNamed(
+                                        context, '/signup');
+                                  },
+                                  child: Text(
+                                    'Cadastrar',
+                                    style: defaultFont(
+                                        14, FontWeight.bold, porange),
                                   ),
                                 ),
-                                FadeAnimation(
-                                    2,
-                                    30.0,
-                                    0.0,
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                          primary: Colors.white,
-                                          minimumSize: Size(30, 0)),
-                                      onPressed: () {
-                                        Navigator.popAndPushNamed(
-                                            context, '/reset');
-                                      },
-                                      child: Text(
-                                        "Esqueceu a Senha?",
-                                        textAlign: TextAlign.center,
-                                        style: defaultFont(14, FontWeight.bold,
-                                            pgreytextfield),
-                                      ),
-                                    ))
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                      primary: Colors.white,
+                                      minimumSize: Size(30, 0)),
+                                  onPressed: () {
+                                    Navigator.popAndPushNamed(
+                                        context, '/reset');
+                                  },
+                                  child: Text(
+                                    "Esqueceu a Senha?",
+                                    textAlign: TextAlign.center,
+                                    style: defaultFont(
+                                        14, FontWeight.bold, pgreytextfield),
+                                  ),
+                                )
                               ],
                             )
                           ],

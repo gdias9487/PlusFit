@@ -6,9 +6,10 @@ class FadeAnimation extends StatelessWidget {
   final Widget child;
   final double begin;
   final double end;
+  final durationY;
 
-  FadeAnimation(
-      this.delay, @required this.begin, @required this.end, this.child);
+  FadeAnimation(this.delay, @required this.durationY, @required this.begin,
+      @required this.end, this.child);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,8 @@ class FadeAnimation extends StatelessWidget {
           .add(Duration(milliseconds: 500), Tween(begin: 0.0, end: 1.0)),
       // ignore: deprecated_member_use
       Track("translateY").add(
-          Duration(milliseconds: 500), Tween(begin: begin, end: end),
-          curve: Curves.decelerate),
+          Duration(milliseconds: durationY), Tween(begin: begin, end: end),
+          curve: Curves.easeInToLinear),
     ]);
 
     return ControlledAnimation(
