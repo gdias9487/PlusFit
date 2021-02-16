@@ -6,7 +6,7 @@ getEmail(user) {
   try {
     return user.email;
   } catch (e) {
-    return '';
+    return ' ';
   }
 }
 

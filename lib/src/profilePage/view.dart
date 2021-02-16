@@ -110,11 +110,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            "Jefinho",
-                            style:
-                                defaultFont(18, FontWeight.bold, Colors.white),
-                          ),
+                          GetUserName(getEmail(_firebaseAuth.currentUser)),
                           SizedBox(
                             height: 10,
                           ),

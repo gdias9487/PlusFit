@@ -91,3 +91,37 @@ setInfo(email, nome, peso, altura) {
   nome.clear();
   altura.clear();
 }
+
+class GetUserName extends StatelessWidget {
+  final String documentId;
+
+  GetUserName(this.documentId);
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference users =
+        FirebaseFirestore.instance.collection('usuarios');
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(documentId).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("",
+              style: defaultFont(20, FontWeight.bold, Colors.white));
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data();
+
+          return Text(
+            data["nome"].toString(),
+            style: defaultFont(20, FontWeight.bold, Colors.white),
+          );
+        }
+
+        return Text("", style: defaultFont(20, FontWeight.bold, Colors.white));
+      },
+    );
+  }
+}
