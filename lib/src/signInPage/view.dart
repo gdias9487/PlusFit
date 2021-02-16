@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _obscureText = true;
 
   @override
+  // ignore: override_on_non_overriding_member
   void _showDialog(text) {
     showDialog(
         context: context,
@@ -248,7 +249,8 @@ class _LoginPageState extends State<LoginPage> {
                                           primary: Colors.white,
                                           minimumSize: Size(30, 0)),
                                       onPressed: () {
-                                        Navigator.pushNamed(context, '/reset');
+                                        Navigator.popAndPushNamed(
+                                            context, '/reset');
                                       },
                                       child: Text(
                                         "Esqueceu a Senha?",

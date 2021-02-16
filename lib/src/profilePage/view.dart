@@ -75,26 +75,15 @@ class _MyPerfilPageState extends State<PerfilPage> {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.create),
-            color: Colors.white,
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: ((builder) => _editar()),
-              );
-            },
-          ),
-        ],
+        actions: [],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/backperfil.png"), fit: BoxFit.cover),
-          ),
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/backperfil.png"), fit: BoxFit.cover),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -114,11 +103,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            getEmail(_firebaseAuth.currentUser),
-                            style:
-                                defaultFont(12, FontWeight.bold, Colors.white),
-                          ),
+                          GetUserEmail(getEmail(_firebaseAuth.currentUser)),
                           Row(
                             children: <Widget>[
                               DefaultElevatedButton(
@@ -175,7 +160,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                             ),
                           ),
                           Divider(height: 10.0, color: Colors.grey),
-                          ListTile(
+                          ExpansionTile(
                             trailing: Icon(
                               Icons.arrow_forward_ios,
                               color: Colors.black,
@@ -187,7 +172,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                               style: defaultFont(
                                   16, FontWeight.normal, Colors.black),
                             ),
-                            onTap: () {},
+                            children: editPass,
                           ),
                           Divider(height: 10.0, color: Colors.grey),
                           ListTile(
@@ -275,52 +260,6 @@ class _MyPerfilPageState extends State<PerfilPage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _editar() {
-    return Container(
-      height: 1200.0,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(
-        horizontal: 40,
-        vertical: 25,
-      ),
-      child: Column(
-        children: <Widget>[
-          Text(
-            "Editar Conta",
-            style: TextStyle(
-                fontSize: 25.0, fontWeight: FontWeight.bold, color: porange),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: TextField(
-              controller: nomeController,
-              decoration: InputDecoration(labelText: 'Novo Nome'),
-              keyboardType: TextInputType.text,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Novo Email'),
-              keyboardType: TextInputType.text,
-            ),
-          ),
-          SizedBox(height: 25),
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: RaisedButton(
-              child: Text("Alterar"),
-              color: porange,
-              textColor: Colors.white,
-              onPressed: () {},
-            ),
-          ),
-        ],
       ),
     );
   }

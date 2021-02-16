@@ -3,9 +3,11 @@ import 'package:plusfit/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:plusfit/widgets/animations.dart';
 
 var _firestore = FirebaseFirestore.instance;
 final FirebaseAuth _firebase = FirebaseAuth.instance;
+final TextEditingController changepass = TextEditingController();
 final TextEditingController nome = TextEditingController();
 final TextEditingController peso = TextEditingController();
 final TextEditingController altura = TextEditingController();
@@ -15,61 +17,97 @@ showInfo() {
 }
 
 List editInfo = <Widget>[
-  TextFormField(
-    controller: nome,
-    keyboardType: TextInputType.name,
-    obscureText: false,
-    style: defaultFont(14, FontWeight.normal, pgreytextfield),
-    decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-        prefixIcon: Icon(Icons.account_circle_sharp),
-        labelText: 'Nome',
-        labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
-  ),
-  SizedBox(
-    height: 10,
-  ),
-  TextFormField(
-    controller: peso,
-    keyboardType: TextInputType.number,
-    obscureText: false,
-    style: defaultFont(14, FontWeight.normal, pgreytextfield),
-    decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-        prefixIcon: Icon(Icons.account_circle_sharp),
-        labelText: 'Peso',
-        labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
-  ),
-  SizedBox(
-    height: 10,
-  ),
-  TextFormField(
-    controller: altura,
-    keyboardType: TextInputType.number,
-    obscureText: false,
-    style: defaultFont(14, FontWeight.normal, pgreytextfield),
-    decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-        prefixIcon: Icon(Icons.account_circle_sharp),
-        labelText: 'Altura',
-        labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
-  ),
-  SizedBox(
-    height: 10,
-  ),
-  TextButton(
-      style: TextButton.styleFrom(
-          minimumSize: Size(100, 35),
-          backgroundColor: porange,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(35))),
-      onPressed: () {
-        setInfo(_firebase.currentUser.email, nome, peso, altura);
-      },
-      child: Text(
-        "Salvar",
-        style: defaultFont(14, FontWeight.bold, Colors.white),
+  Container(
+      child: Column(children: <Widget>[
+    TextFormField(
+      controller: nome,
+      keyboardType: TextInputType.name,
+      obscureText: false,
+      style: defaultFont(14, FontWeight.normal, pgreytextfield),
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+          prefixIcon: Icon(Icons.account_circle_sharp),
+          labelText: 'Nome',
+          labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
+    ),
+    SizedBox(
+      height: 10,
+    ),
+    Row(children: <Widget>[
+      Flexible(
+          child: TextFormField(
+        controller: peso,
+        keyboardType: TextInputType.number,
+        obscureText: false,
+        style: defaultFont(14, FontWeight.normal, pgreytextfield),
+        decoration: InputDecoration(
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+            prefixIcon: Icon(Icons.account_circle_sharp),
+            labelText: 'Peso',
+            labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
       )),
+      SizedBox(
+        width: 5,
+      ),
+      Flexible(
+          child: TextFormField(
+        controller: altura,
+        keyboardType: TextInputType.number,
+        obscureText: false,
+        style: defaultFont(14, FontWeight.normal, pgreytextfield),
+        decoration: InputDecoration(
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+            prefixIcon: Icon(Icons.account_circle_sharp),
+            labelText: 'Altura',
+            labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
+      ))
+    ]),
+    SizedBox(
+      height: 10,
+    ),
+    TextButton(
+        style: TextButton.styleFrom(
+            minimumSize: Size(100, 35),
+            backgroundColor: porange,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35))),
+        onPressed: () {
+          setInfo(_firebase.currentUser.email, nome, peso, altura);
+        },
+        child: Text(
+          "Salvar",
+          style: defaultFont(14, FontWeight.bold, Colors.white),
+        ))
+  ])),
+];
+List editPass = <Widget>[
+  Container(
+      child: Column(children: <Widget>[
+    TextFormField(
+      controller: changepass,
+      keyboardType: TextInputType.name,
+      obscureText: false,
+      style: defaultFont(14, FontWeight.normal, pgreytextfield),
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+          prefixIcon: Icon(Icons.account_circle_sharp),
+          labelText: 'Email',
+          labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
+    ),
+    TextButton(
+        style: TextButton.styleFrom(
+            minimumSize: Size(100, 35),
+            backgroundColor: porange,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35))),
+        onPressed: () {
+          setInfo(_firebase.currentUser.email, nome, peso, altura);
+        },
+        child: Text(
+          "Alterar",
+          style: defaultFont(14, FontWeight.bold, Colors.white),
+        ))
+  ]))
 ];
 
 class PFUser {
@@ -121,6 +159,40 @@ class GetUserName extends StatelessWidget {
         }
 
         return Text("", style: defaultFont(20, FontWeight.bold, Colors.white));
+      },
+    );
+  }
+}
+
+class GetUserEmail extends StatelessWidget {
+  final String documentId;
+
+  GetUserEmail(this.documentId);
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference users =
+        FirebaseFirestore.instance.collection('usuarios');
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(documentId).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("",
+              style: defaultFont(12, FontWeight.bold, Colors.white));
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data();
+
+          return Text(
+            data["email"].toString(),
+            style: defaultFont(12, FontWeight.bold, Colors.white),
+          );
+        }
+
+        return Text("", style: defaultFont(12, FontWeight.bold, Colors.white));
       },
     );
   }
