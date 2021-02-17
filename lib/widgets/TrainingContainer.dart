@@ -134,6 +134,9 @@ class ExerciseContainer extends StatelessWidget {
                 Text(text,
                     textAlign: TextAlign.start,
                     style: defaultFont(18, FontWeight.bold, Colors.amber)),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(subtext,
                     textAlign: TextAlign.left,
                     style: defaultFont(16, FontWeight.normal, Colors.amber)),

@@ -48,55 +48,44 @@ class _ExercisesInferiorPageState extends State<ExercisesInferior> {
               image: AssetImage("assets/sign_up_background.png"),
               fit: BoxFit.cover)),
       child: Column(children: [
-        Stack(children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(top: 60),
             child: Container(
-              child: FutureBuilder(
-                future: FireStorageService.getImage(
-                    context, "images/inferior/$image"),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done)
-                    return Container(
-                      color: Colors.transparent,
-                      height: 200,
-                      width: MediaQuery.of(context).size.width / 1,
-                      child: snapshot.data,
-                    );
-                  if (snapshot.connectionState == ConnectionState.waiting)
-                    return Container(
-                        height: MediaQuery.of(context).size.height / 1.25,
-                        width: MediaQuery.of(context).size.width / 1.25,
-                        child: CircularProgressIndicator());
-
-                  return Container();
-                },
+              height: 200,
+              decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/inferior/$image"),
+              fit: BoxFit.cover)),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios),
+                      color: Colors.white,
+                      splashRadius: 20,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+        Spacer(),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 20, bottom: 10),
+                      child: Text(
+                        '$documentId',
+                        style: defaultFont(30, FontWeight.bold, Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
               ),
+        
             ),
           ),
-          Positioned(
-            top: 65,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              color: Colors.white,
-              splashRadius: 20,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          Positioned(
-            left: 0,
-            top: 200,
-            child: Padding(
-              padding: EdgeInsets.only(left: 20, bottom: 10),
-              child: Text(
-                '$documentId',
-                style: defaultFont(30, FontWeight.bold, Colors.white),
-              ),
-            ),
-          ),
-        ]),
+        
         Flexible(
           child: StreamBuilder(
               stream: FirebaseFirestore.instance

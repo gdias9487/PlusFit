@@ -49,71 +49,44 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
               image: AssetImage("assets/sign_up_background.png"),
               fit: BoxFit.cover)),
       child: Column(children: [
-        Stack(children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(top: 60),
             child: Container(
-              child: FutureBuilder(
-                future: FireStorageService.getImage(
-                    context, "images/superior/$image"),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done)
-                    return Container(
-                      color: Colors.transparent,
-                      height: 200,
-                      width: MediaQuery.of(context).size.width / 1,
-                      child: snapshot.data,
-                    );
-                  if (snapshot.connectionState == ConnectionState.waiting)
-                    return Container(
-                      height: 200,
-                      width: MediaQuery.of(context).size.width / 1,
-                    );
-
-                  return Container();
-                },
+              height: 200,
+              decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/superior/$image"),
+              fit: BoxFit.cover)),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios),
+                      color: Colors.white,
+                      splashRadius: 20,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+        Spacer(),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 20, bottom: 10),
+                      child: Text(
+                        '$documentId',
+                        style: defaultFont(30, FontWeight.bold, Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
               ),
+        
             ),
           ),
-          Positioned(
-            top: 65,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              color: Colors.white,
-              splashRadius: 20,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          Positioned(
-            left: 0,
-            top: 200,
-            child: Padding(
-              padding: EdgeInsets.only(left: 20, bottom: 10),
-              child: Text(
-                '$documentId',
-                style: defaultFont(30, FontWeight.bold, Colors.white),
-              ),
-            ),
-          ),
-        ]),
-        // Container(
-        //   height: 50,
-        //   width: 150,
-        //   decoration: BoxDecoration(
-        //       color: Colors.orange[700],
-        //       borderRadius: BorderRadius.circular(20)),
-        //   child: FlatButton(
-        //     child: Text(
-        //       'Iniciar Treino',
-        //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-        //     ),
-        //     onPressed: () {
-        //       Navigator.pop(context);
-        //     },
-        //   ),
-        // ),
+        
         Flexible(
           child: StreamBuilder(
               stream: FirebaseFirestore.instance

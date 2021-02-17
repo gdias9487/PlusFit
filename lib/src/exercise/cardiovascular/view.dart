@@ -34,7 +34,7 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
           right: 20,
           bottom: 0.0,
           text: "$nome",
-          subtext: "$nivel",
+          subtext: "Nivel: $nivel",
           image: 'assets/cardio/$image',
           action: () {
             Navigator.push(
