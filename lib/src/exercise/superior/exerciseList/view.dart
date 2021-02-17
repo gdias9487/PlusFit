@@ -66,9 +66,9 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
                     );
                   if (snapshot.connectionState == ConnectionState.waiting)
                     return Container(
-                        height: MediaQuery.of(context).size.height / 1.25,
-                        width: MediaQuery.of(context).size.width / 1.25,
-                        child: CircularProgressIndicator());
+                      height: 200,
+                      width: MediaQuery.of(context).size.width / 1,
+                    );
 
                   return Container();
                 },

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/src/profilePage/models.dart';
@@ -365,6 +366,10 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           borderRadius: BorderRadius.circular(35))),
                   onPressed: () {
                     uploadImageToFirebase(context);
+                    FirebaseFirestore.instance
+                        .collection("usuarios")
+                        .doc(_firebaseAuth.currentUser.email)
+                        .update({"image": _firebaseAuth.currentUser.email});
                   },
                   child: Text(
                     "Salvar",
