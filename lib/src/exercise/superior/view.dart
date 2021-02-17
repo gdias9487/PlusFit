@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/src/exercise/superior/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
+import 'package:plusfit/widgets/animations.dart';
 
 class SuperiorPage extends StatefulWidget {
   SuperiorPage({Key key, this.title}) : super(key: key);
@@ -39,10 +40,12 @@ class _SuperiorPageState extends State<SuperiorPage> {
           action: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => ExercisesSuperior(
+                transitionAnimation(
+                    ExercisesSuperior(
                         documentId: (document['Nome'].toString()),
-                        image: (document['image'].toString()))));
+                        image: (document['image'].toString())),
+                    1.0,
+                    0.0));
           });
     }).toList();
   }

@@ -9,14 +9,21 @@ class PFUser {
   String name;
   String weight;
   String height;
-  PFUser(this.email, this.name, this.weight, this.height);
+  String image;
+  PFUser(this.email, this.name, this.weight, this.height, this.image);
 
   Map<String, dynamic> toMap() {
-    return {"email": email, "nome": name, "peso": weight, "altura": height};
+    return {
+      "email": email,
+      "nome": name,
+      "peso": weight,
+      "altura": height,
+      "image": image
+    };
   }
 }
 
 addInfo(email) {
-  var user = PFUser(email, "", "", "");
+  var user = PFUser(email, "", "", "", "");
   _firestore.collection("usuarios").doc(email).set(user.toMap());
 }

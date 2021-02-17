@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import '../../components/constants.dart';
+import '../../storage.dart';
 
 class PerfilPage extends StatefulWidget {
   PerfilPage({Key key, this.title}) : super(key: key);
@@ -39,28 +40,11 @@ class _MyPerfilPageState extends State<PerfilPage> {
     }
 
     final firebaseUser = context.watch<User>();
-    void _showDialog() {
+    void _showDialog(widget) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return Alert_Box(
-              buttons: <Widget>[
-                TextButton(
-                    onPressed: () {
-                      logoff(firebaseUser);
-                    },
-                    child: Text("Sim",
-                        style: defaultFont(14, FontWeight.bold, porange))),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("Não",
-                        style: defaultFont(14, FontWeight.bold, porange))),
-              ],
-              title: "Desconectar",
-              text: "Você deseja sair da sua conta?",
-            );
+            return widget;
           });
     }
 
@@ -85,16 +69,63 @@ class _MyPerfilPageState extends State<PerfilPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   FadeAnimation(
-                      0.5,
-                      600,
-                      -100.0,
-                      0.0,
-                      Center(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: perfilImagem(),
+                    0.5,
+                    600,
+                    -100.0,
+                    0.0,
+                    Center(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: FutureBuilder(
+                          future: FireStorageService.getImage(
+                              context, "profilephotos/defaultprofilephoto.jpg"),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done)
+                              return CircleAvatar(
+                                  radius: 82,
+                                  backgroundColor: Colors.white,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      _showDialog(Alert_Box(
+                                        buttons: <Widget>[
+                                          TextButton(
+                                              onPressed: () {},
+                                              child: Text("Sim",
+                                                  style: defaultFont(
+                                                      14,
+                                                      FontWeight.bold,
+                                                      porange)))
+                                        ],
+                                        title: "    Editar imagem de perfil",
+                                        text: "",
+                                      ));
+                                    },
+                                    child: FadeAnimation(
+                                        0.8,
+                                        1,
+                                        30,
+                                        0.0,
+                                        CircleAvatar(
+                                          radius: 80,
+                                          backgroundImage: snapshot.data.image,
+                                        )),
+                                  ));
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting)
+                              return CircleAvatar(
+                                  backgroundColor: Colors.grey,
+                                  radius: 80,
+                                  child: CircularProgressIndicator(
+                                    backgroundColor: Colors.white,
+                                  ));
+
+                            return CircleAvatar();
+                          },
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                   SizedBox(height: 10),
                   FadeAnimation(
                       0.5,
@@ -135,9 +166,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           child: Column(
                             children: <Widget>[
                               ExpansionTile(
-                                onExpansionChanged: (value) {
-                                  Icon(Icons.arrow_drop_down);
-                                },
+                                onExpansionChanged: (value) {},
                                 children: showInfo(),
                                 trailing: Icon(
                                   Icons.arrow_forward_ios,
@@ -193,7 +222,26 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                       16, FontWeight.normal, Colors.black),
                                 ),
                                 onTap: () {
-                                  _showDialog();
+                                  _showDialog(Alert_Box(
+                                    buttons: <Widget>[
+                                      TextButton(
+                                          onPressed: () {
+                                            logoff(firebaseUser);
+                                          },
+                                          child: Text("Sim",
+                                              style: defaultFont(14,
+                                                  FontWeight.bold, porange))),
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Não",
+                                              style: defaultFont(14,
+                                                  FontWeight.bold, porange))),
+                                    ],
+                                    title: "Desconectar",
+                                    text: "Você deseja sair da sua conta?",
+                                  ));
                                 },
                               ),
                               Divider(height: 10.0, color: Colors.grey),
