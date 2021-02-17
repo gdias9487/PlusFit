@@ -71,7 +71,7 @@ Widget exerciseInfo(context, nome, series, repeticoes) {
                       fit: BoxFit.fitWidth)),
             )),
             Text(
-              repeticoes,
+              repeticoes.toString(),
               style: defaultFont(20, FontWeight.normal, Colors.black),
             ),
             Spacer(),
