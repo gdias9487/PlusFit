@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:plusfit/src/profilePage/view.dart';
 import 'package:plusfit/widgets/animations.dart';
 
 import '../../storage.dart';

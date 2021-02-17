@@ -1,7 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:plusfit/authentication.dart';
-import 'package:plusfit/src/profilePage/controller.dart';
 import 'package:plusfit/src/profilePage/models.dart';
 import 'package:plusfit/widgets/AlertDialog.dart';
 import 'package:plusfit/widgets/animations.dart';
@@ -11,6 +9,9 @@ import 'package:plusfit/components/constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../../components/constants.dart';
+
+var profilephoto = GetUserImage(FirebaseAuth.instance.currentUser.email);
+var profilename = GetUserName(FirebaseAuth.instance.currentUser.email);
 
 class PerfilPage extends StatefulWidget {
   PerfilPage({Key key, this.title}) : super(key: key);
@@ -31,10 +32,11 @@ class _MyPerfilPageState extends State<PerfilPage> {
 
   ///NOTE: Only supported on Android & iOS
   ///Needs image_picker plugin {https://pub.dev/packages/image_picker}
+
   final picker = ImagePicker();
 
-  Future pickImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+  Future pickImage(ImageSource source) async {
+    final pickedFile = await picker.getImage(source: source);
 
     setState(() {
       _imageFile = File(pickedFile.path);
@@ -47,9 +49,9 @@ class _MyPerfilPageState extends State<PerfilPage> {
         FirebaseStorage.instance.ref().child('profilephotos/$fileName');
     UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
-    taskSnapshot.ref.getDownloadURL().then(
-          (value) => print("Done: $value"),
-        );
+    taskSnapshot.ref.getDownloadURL().then((value) => setState(() {
+          profilephoto = GetUserImage(_firebaseAuth.currentUser.email);
+        }));
   }
 
   @override
@@ -68,6 +70,16 @@ class _MyPerfilPageState extends State<PerfilPage> {
           builder: (BuildContext context) {
             return FadeAnimation(0, 1000, 1000.0, 0.0, widget);
           });
+    }
+
+    _fetchData() {
+      profilephoto = GetUserImage(_firebaseAuth.currentUser.email);
+      profilename = GetUserName(_firebaseAuth.currentUser.email);
+    }
+
+    initState() {
+      super.initState();
+      _fetchData();
     }
 
     return Drawer(
@@ -90,22 +102,15 @@ class _MyPerfilPageState extends State<PerfilPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  FadeAnimation(
-                    0.5,
-                    600,
-                    -100.0,
-                    0.0,
-                    Center(
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            child:
-                                GetUserImage(_firebaseAuth.currentUser.email),
-                            onTap: () {
-                              _showDialog(bordaEdit());
-                            },
-                          )),
-                    ),
+                  Center(
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: GestureDetector(
+                          child: profilephoto,
+                          onTap: () {
+                            _showDialog(bordaEdit());
+                          },
+                        )),
                   ),
                   SizedBox(height: 10),
                   FadeAnimation(
@@ -117,7 +122,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                            GetUserName(getEmail(_firebaseAuth.currentUser)),
+                            profilename,
                             SizedBox(
                               height: 10,
                             ),
@@ -331,7 +336,9 @@ class _MyPerfilPageState extends State<PerfilPage> {
                   // ignore: deprecated_member_use
                   FlatButton.icon(
                     icon: Icon(Icons.camera),
-                    onPressed: () {},
+                    onPressed: () {
+                      pickImage(ImageSource.camera);
+                    },
                     label: Text("Camera"),
                   ),
                   SizedBox(
@@ -341,7 +348,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                   FlatButton.icon(
                     icon: Icon(Icons.image),
                     onPressed: () {
-                      pickImage();
+                      pickImage(ImageSource.gallery);
                     },
                     label: Text("Galeria"),
                   ),
