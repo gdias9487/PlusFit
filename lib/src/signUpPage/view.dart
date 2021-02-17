@@ -108,9 +108,9 @@ class _SignupPageState extends State<SignupPage> {
                       30.0,
                       0.0,
                       Padding(
-                          padding: EdgeInsets.only(top: 50),
+                          padding: EdgeInsets.only(top: 0),
                           child: SizedBox(
-                              height: 200,
+                              height: 250,
                               child: Image.asset("assets/Plusfit_logo.png")))),
                   FadeAnimation(
                       0,
@@ -118,7 +118,7 @@ class _SignupPageState extends State<SignupPage> {
                       800.0,
                       0.0,
                       Padding(
-                        padding: EdgeInsets.only(top: 50),
+                        padding: EdgeInsets.only(top: 30),
                         child: Container(
                             height:
                                 (MediaQuery.of(context).size.height / 2) + 25,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/src/exercise/superior/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
+import 'package:plusfit/widgets/animations.dart';
 
 class SuperiorPage extends StatefulWidget {
   SuperiorPage({Key key, this.title}) : super(key: key);
@@ -14,17 +15,12 @@ class SuperiorPage extends StatefulWidget {
 }
 
 class _SuperiorPageState extends State<SuperiorPage> {
-  double _slideValue = 0;
-  double _slideValue1 = 0;
-
-  String _cursor = "minutos";
-
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
       var nome = document['Nome'];
       var nivel = document['Nivel'];
       var image = document['image'];
-      print("assets/$image");
+
       return ExerciseContainer(
           color: dificult(nivel),
           width: 1,
@@ -39,22 +35,18 @@ class _SuperiorPageState extends State<SuperiorPage> {
           action: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => ExercisesSuperior(
+                transitionAnimation(
+                    ExercisesSuperior(
                         documentId: (document['Nome'].toString()),
-                        image: (document['image'].toString()))));
+                        image: (document['image'].toString())),
+                    1.0,
+                    0.0));
           });
     }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController cont = ScrollController();
-    void scroll() {
-      cont.animateTo(0,
-          duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
-    }
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

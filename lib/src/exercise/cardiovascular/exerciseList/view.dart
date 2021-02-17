@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 
+import '../../../../storage.dart';
+
 class ExercisesCardio extends StatefulWidget {
   final String title;
   final String image;
@@ -40,68 +42,78 @@ class _ExercisesCardioPageState extends State<ExercisesCardio> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-
         body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/sign_up_background.png"),
-                  fit: BoxFit.cover)),
-          child: Column(children: [
-            Padding(
-          padding: const EdgeInsets.only(top: 60),
-          child: Container(
-            height: 200,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/cardio/$image"),
-                    fit: BoxFit.cover)),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    color: Colors.white,
-                    splashRadius: 20,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                Spacer(),
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20, bottom: 10),
-                    child: Text(
-                      '$documentId',
-                      style: defaultFont(30, FontWeight.bold, Colors.white),
-                    ),
-                  ),
-                ),
-              ],
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/sign_up_background.png"),
+              fit: BoxFit.cover)),
+      child: Column(children: [
+        Stack(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 60),
+            child: Container(
+              child: FutureBuilder(
+                future: FireStorageService.getImage(
+                    context, "images/cardio/$image"),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done)
+                    return Container(
+                      color: Colors.transparent,
+                      height: 200,
+                      width: MediaQuery.of(context).size.width / 1,
+                      child: snapshot.data,
+                    );
+                  if (snapshot.connectionState == ConnectionState.waiting)
+                    return Container(
+                        height: MediaQuery.of(context).size.height / 1.25,
+                        width: MediaQuery.of(context).size.width / 1.25,
+                        child: CircularProgressIndicator());
+
+                  return Container();
+                },
+              ),
             ),
           ),
-        ),
-
-            Flexible(
-              child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection('treinos/$documentId/exercicios')
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      default:
-                        return ListView(children: makeListWidget(snapshot));
-                    }
-                  }),
+          Positioned(
+            top: 65,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              color: Colors.white,
+              splashRadius: 20,
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-          ]),
-        ));
+          ),
+          Positioned(
+            left: 0,
+            top: 200,
+            child: Padding(
+              padding: EdgeInsets.only(left: 20, bottom: 10),
+              child: Text(
+                '$documentId',
+                style: defaultFont(30, FontWeight.bold, Colors.white),
+              ),
+            ),
+          ),
+        ]),
+        Flexible(
+          child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('treinos/$documentId/exercicios')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  default:
+                    return ListView(children: makeListWidget(snapshot));
+                }
+              }),
+        ),
+      ]),
+    ));
   }
 }

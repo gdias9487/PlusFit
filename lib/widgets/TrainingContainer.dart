@@ -97,7 +97,8 @@ class ExerciseContainer extends StatelessWidget {
       @required this.width,
       this.left,
       this.bottom,
-      this.subtext = '', this.image});
+      this.subtext = '',
+      this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -115,15 +116,15 @@ class ExerciseContainer extends StatelessWidget {
               color: color.withOpacity(0.3),
               borderRadius: BorderRadius.circular(20),
               gradient: LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment(0, -0.5),
-                    colors: [Colors.red[300].withOpacity(0.4), Colors.black]),
-                image: DecorationImage(
-                    image: AssetImage(image),
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
-                    colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.6), BlendMode.dstATop)),
+                  begin: Alignment.centerLeft,
+                  end: Alignment(0, -0.5),
+                  colors: [Colors.red[300].withOpacity(0.4), Colors.black]),
+              image: DecorationImage(
+                  image: (AssetImage(image)),
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.6), BlendMode.dstATop)),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.max,

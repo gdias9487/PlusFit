@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/src/exercise/cardiovascular/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
+import 'package:plusfit/widgets/animations.dart';
 
 class CardiovascularPage extends StatefulWidget {
   CardiovascularPage({Key key, this.title}) : super(key: key);
@@ -38,9 +39,12 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
           action: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => ExercisesCardio(
-                        documentId: (document['Nome'].toString()), image: (document['image'].toString()))));
+                transitionAnimation(
+                    ExercisesCardio(
+                        documentId: (document['Nome'].toString()),
+                        image: (document['image'].toString())),
+                    1.0,
+                    0.0));
           });
     }).toList();
   }

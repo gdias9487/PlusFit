@@ -103,10 +103,6 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        actions: [],
-      ),
       body: Container(
           color: Colors.black,
           child: ListView(children: <Widget>[
@@ -116,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                 30.0,
                 0.0,
                 SizedBox(
-                    height: 200,
+                    height: 250,
                     child: Image.asset("assets/Plusfit_logo.png"))),
             FadeAnimation(
                 0,
@@ -124,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                 800.0,
                 0.0,
                 Padding(
-                  padding: EdgeInsets.only(top: 50),
+                  padding: EdgeInsets.only(top: 30),
                   child: Container(
                       height: (MediaQuery.of(context).size.height / 2) + 25,
                       padding: EdgeInsets.only(top: 20, right: 10, left: 10),

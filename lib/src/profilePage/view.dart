@@ -1,16 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:plusfit/authentication.dart';
 import 'package:plusfit/src/profilePage/models.dart';
 import 'package:plusfit/widgets/AlertDialog.dart';
-import 'package:plusfit/widgets/Buttons.dart';
 import 'package:plusfit/widgets/animations.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
 import '../../components/constants.dart';
+
+var profilephoto = GetUserImage(FirebaseAuth.instance.currentUser.email);
+var profilename = GetUserName(FirebaseAuth.instance.currentUser.email);
 
 class PerfilPage extends StatefulWidget {
   PerfilPage({Key key, this.title}) : super(key: key);
@@ -23,11 +25,35 @@ class PerfilPage extends StatefulWidget {
 
 class _MyPerfilPageState extends State<PerfilPage> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
-  PickedFile _imagefile;
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  // ignore: unused_field
   final ImagePicker _picker = ImagePicker();
+  File _imageFile;
+
+  ///NOTE: Only supported on Android & iOS
+  ///Needs image_picker plugin {https://pub.dev/packages/image_picker}
+
+  final picker = ImagePicker();
+
+  Future pickImage(ImageSource source) async {
+    final pickedFile = await picker.getImage(source: source);
+
+    setState(() {
+      _imageFile = File(pickedFile.path);
+    });
+  }
+
+  Future uploadImageToFirebase(BuildContext context) async {
+    String fileName = _firebaseAuth.currentUser.email;
+    Reference firebaseStorageRef =
+        FirebaseStorage.instance.ref().child('profilephotos/$fileName');
+    UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
+    TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+    taskSnapshot.ref.getDownloadURL().then((value) => setState(() {
+          profilephoto = GetUserImage(_firebaseAuth.currentUser.email);
+        }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,29 +65,22 @@ class _MyPerfilPageState extends State<PerfilPage> {
     }
 
     final firebaseUser = context.watch<User>();
-    void _showDialog() {
+    void _showDialog(widget) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return Alert_Box(
-              buttons: <Widget>[
-                TextButton(
-                    onPressed: () {
-                      logoff(firebaseUser);
-                    },
-                    child: Text("Sim",
-                        style: defaultFont(14, FontWeight.bold, porange))),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("Não",
-                        style: defaultFont(14, FontWeight.bold, porange))),
-              ],
-              title: "Desconectar",
-              text: "Você deseja sair da sua conta?",
-            );
+            return FadeAnimation(0, 1000, 1000.0, 0.0, widget);
           });
+    }
+
+    _fetchData() {
+      profilephoto = GetUserImage(_firebaseAuth.currentUser.email);
+      profilename = GetUserName(_firebaseAuth.currentUser.email);
+    }
+
+    initState() {
+      super.initState();
+      _fetchData();
     }
 
     return Drawer(
@@ -84,17 +103,16 @@ class _MyPerfilPageState extends State<PerfilPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  FadeAnimation(
-                      0.5,
-                      600,
-                      -100.0,
-                      0.0,
-                      Center(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: perfilImagem(),
-                        ),
-                      )),
+                  Center(
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: GestureDetector(
+                          child: profilephoto,
+                          onTap: () {
+                            _showDialog(bordaEdit());
+                          },
+                        )),
+                  ),
                   SizedBox(height: 10),
                   FadeAnimation(
                       0.5,
@@ -105,7 +123,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                            GetUserName(getEmail(_firebaseAuth.currentUser)),
+                            profilename,
                             SizedBox(
                               height: 10,
                             ),
@@ -135,9 +153,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           child: Column(
                             children: <Widget>[
                               ExpansionTile(
-                                onExpansionChanged: (value) {
-                                  Icon(Icons.arrow_drop_down);
-                                },
+                                onExpansionChanged: (value) {},
                                 children: showInfo(),
                                 trailing: Icon(
                                   Icons.arrow_forward_ios,
@@ -193,7 +209,26 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                       16, FontWeight.normal, Colors.black),
                                 ),
                                 onTap: () {
-                                  _showDialog();
+                                  _showDialog(Alert_Box(
+                                    buttons: <Widget>[
+                                      TextButton(
+                                          onPressed: () {
+                                            logoff(firebaseUser);
+                                          },
+                                          child: Text("Sim",
+                                              style: defaultFont(14,
+                                                  FontWeight.bold, porange))),
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Não",
+                                              style: defaultFont(14,
+                                                  FontWeight.bold, porange))),
+                                    ],
+                                    title: "Desconectar",
+                                    text: "Você deseja sair da sua conta?",
+                                  ));
                                 },
                               ),
                               Divider(height: 10.0, color: Colors.grey),
@@ -274,87 +309,74 @@ class _MyPerfilPageState extends State<PerfilPage> {
     ));
   }
 
-  imageChecker() {
-    if (_imagefile == null) {
-      return AssetImage("assets/homem.png");
-    } else {
-      return FileImage(File(_imagefile.path));
-    }
-  }
-
-  Widget perfilImagem() {
-    return Stack(
-      children: <Widget>[
-        CircleAvatar(
-          radius: 90,
-          backgroundImage: imageChecker(),
-        ),
-        Positioned(
-          bottom: 20.0,
-          right: 20.0,
-          child: InkWell(
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                builder: ((builder) => bordaEdit()),
-              );
-            },
-            child: Icon(
-              Icons.edit,
-              color: Colors.teal,
-              size: 28.0,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget bordaEdit() {
-    return Container(
-      height: 100.0,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
-      ),
-      child: Column(
-        children: <Widget>[
-          Text(
-            "Escolha uma opção",
-            style: TextStyle(fontSize: 20.0),
+    return Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(35), topRight: Radius.circular(35))),
+          height: 220,
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 0,
           ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
             children: <Widget>[
-              FlatButton.icon(
-                icon: Icon(Icons.camera),
-                onPressed: () {
-                  takedPhoto(ImageSource.camera);
-                },
-                label: Text("Camera"),
+              SizedBox(
+                height: 30,
               ),
-              FlatButton.icon(
-                icon: Icon(Icons.image),
-                onPressed: () {
-                  takedPhoto(ImageSource.gallery);
-                },
-                label: Text("Galeria"),
+              Text("Escolha uma opção:",
+                  style: defaultFont(20, FontWeight.bold, Colors.black)),
+              SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // ignore: deprecated_member_use
+                  FlatButton.icon(
+                    icon: Icon(Icons.camera),
+                    onPressed: () {
+                      pickImage(ImageSource.camera);
+                    },
+                    label: Text("Camera"),
+                  ),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  // ignore: deprecated_member_use
+                  FlatButton.icon(
+                    icon: Icon(Icons.image),
+                    onPressed: () {
+                      pickImage(ImageSource.gallery);
+                    },
+                    label: Text("Galeria"),
+                  ),
+                ],
               ),
+              SizedBox(
+                height: 20,
+              ),
+              TextButton(
+                  style: TextButton.styleFrom(
+                      minimumSize: Size(100, 35),
+                      backgroundColor: porange,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(35))),
+                  onPressed: () {
+                    uploadImageToFirebase(context);
+                    FirebaseFirestore.instance
+                        .collection("usuarios")
+                        .doc(_firebaseAuth.currentUser.email)
+                        .update({"image": _firebaseAuth.currentUser.email});
+                  },
+                  child: Text(
+                    "Salvar",
+                    style: defaultFont(14, FontWeight.bold, Colors.white),
+                  ))
             ],
           ),
-        ],
-      ),
-    );
-  }
-
-  void takedPhoto(ImageSource source) async {
-    final pickedFile = await _picker.getImage(
-      source: source,
-    );
-    setState(() {
-      _imagefile = pickedFile;
-    });
+        ));
   }
 }

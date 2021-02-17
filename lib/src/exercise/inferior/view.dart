@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/src/exercise/inferior/exerciseList/view.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
+import 'package:plusfit/widgets/animations.dart';
 
 class InferiorPage extends StatefulWidget {
   InferiorPage({Key key, this.title}) : super(key: key);
@@ -38,9 +39,12 @@ class _InferiorPageState extends State<InferiorPage> {
           action: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => ExercisesInferior(
-                        documentId: (document['Nome'].toString()), image: (document['image'].toString()))));
+                transitionAnimation(
+                    ExercisesInferior(
+                        documentId: (document['Nome'].toString()),
+                        image: (document['image'].toString())),
+                    1.0,
+                    0.0));
           });
     }).toList();
   }

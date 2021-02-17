@@ -8,9 +8,11 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
+
+  firebase_storage: ^7.0.0
   firebase_core: ^0.7.0
   simple_animations: ^2.5.0
   google_fonts: ^1.1.2
@@ -28,10 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.1
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  integration_test:
-    sdk: flutter
+  
 
 
 flutter_icons:
@@ -53,9 +52,7 @@ flutter:
     - assets/home_background.png
     - assets/back1.png
     - assets/backperfil.png
-    - assets/homem.png
     - assets/backedit.png
-    - assets/correndo.jpg
     - assets/signup.jpg
     - assets/icon.png
     - assets/mandar.png
@@ -67,6 +64,7 @@ flutter:
     - assets/inferior/inferior.jpg
     - assets/cardio.jpg
     - assets/cardio.png
+    - assets/superior/flexao.gif
     - assets/superior/costa_biceps.png
     - assets/superior/peitoral_triceps.png
     - assets/superior/peitoral_triceps_abdomen.png

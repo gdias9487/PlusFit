@@ -21,5 +21,9 @@ const double padroof = 30;
 
 defaultFont(double size, weight, color) {
   return GoogleFonts.lato(
-      textStyle: (TextStyle(fontSize: size, fontWeight: weight, color: color)));
+      textStyle: (TextStyle(
+          fontSize: size,
+          fontWeight: weight,
+          color: color,
+          decoration: TextDecoration.none)));
 }
