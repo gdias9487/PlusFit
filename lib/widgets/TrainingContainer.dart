@@ -118,7 +118,11 @@ class ExerciseContainer extends StatelessWidget {
               gradient: LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment(0, -0.5),
-                  colors: [Colors.red[300].withOpacity(0.4), Colors.black]),
+                  colors: [
+                    Colors.yellow,
+                    Colors.red[300].withOpacity(0.4),
+                    Colors.black
+                  ]),
               image: DecorationImage(
                   image: (AssetImage(image)),
                   fit: BoxFit.cover,
