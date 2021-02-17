@@ -52,9 +52,7 @@ flutter:
     - assets/home_background.png
     - assets/back1.png
     - assets/backperfil.png
-    - assets/homem.png
     - assets/backedit.png
-    - assets/correndo.jpg
     - assets/signup.jpg
     - assets/icon.png
     - assets/mandar.png
@@ -66,6 +64,7 @@ flutter:
     - assets/inferior/inferior.jpg
     - assets/cardio.jpg
     - assets/cardio.png
+    - assets/superior/flexao.gif
     - assets/superior/costa_biceps.png
     - assets/superior/peitoral_triceps.png
     - assets/superior/peitoral_triceps_abdomen.png

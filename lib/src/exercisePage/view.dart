@@ -18,17 +18,9 @@ class ExercisePage extends StatefulWidget {
 }
 
 class _ExercisePageState extends State<ExercisePage> {
-  AnimationController _controler;
-
-  bool _profileContainerOpenned = false;
-
   @override
   Widget build(BuildContext context) {
     final ScrollController cont = ScrollController();
-    void scroll() {
-      cont.animateTo(0,
-          duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
-    }
 
     return Scaffold(
       appBar: AppBar(

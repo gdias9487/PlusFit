@@ -25,6 +25,7 @@ class FireStorageService extends ChangeNotifier {
         fit: BoxFit.cover,
       );
     });
+
     return m;
   }
 }

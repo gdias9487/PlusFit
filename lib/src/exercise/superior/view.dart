@@ -15,17 +15,12 @@ class SuperiorPage extends StatefulWidget {
 }
 
 class _SuperiorPageState extends State<SuperiorPage> {
-  double _slideValue = 0;
-  double _slideValue1 = 0;
-
-  String _cursor = "minutos";
-
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
       var nome = document['Nome'];
       var nivel = document['Nivel'];
       var image = document['image'];
-      print("assets/$image");
+
       return ExerciseContainer(
           color: dificult(nivel),
           width: 1,
@@ -52,12 +47,6 @@ class _SuperiorPageState extends State<SuperiorPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController cont = ScrollController();
-    void scroll() {
-      cont.animateTo(0,
-          duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
-    }
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

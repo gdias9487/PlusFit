@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
+import 'package:plusfit/widgets/animations.dart';
+
+import '../../storage.dart';
 
 var _firestore = FirebaseFirestore.instance;
 final FirebaseAuth _firebase = FirebaseAuth.instance;
@@ -138,6 +141,8 @@ class GetUserName extends StatelessWidget {
     CollectionReference users =
         FirebaseFirestore.instance.collection('usuarios');
 
+    // ignore: await_only_futures
+
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(documentId).get(),
       builder:
@@ -187,6 +192,65 @@ class GetUserEmail extends StatelessWidget {
           return Text(
             data["email"].toString(),
             style: defaultFont(16, FontWeight.bold, Colors.white),
+          );
+        }
+
+        return Text("", style: defaultFont(16, FontWeight.bold, Colors.white));
+      },
+    );
+  }
+}
+
+class GetUserImage extends StatelessWidget {
+  final String documentId;
+
+  GetUserImage(this.documentId);
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference users =
+        FirebaseFirestore.instance.collection('usuarios');
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(documentId).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("",
+              style: defaultFont(16, FontWeight.bold, Colors.white));
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data();
+          var image = data["image"].toString();
+          return FutureBuilder(
+            future:
+                FireStorageService.getImage(context, "profilephotos/$image"),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done)
+                return CircleAvatar(
+                  radius: 82,
+                  backgroundColor: Colors.white,
+                  child: FadeAnimation(
+                      0.8,
+                      1,
+                      30,
+                      0.0,
+                      CircleAvatar(
+                        radius: 80,
+                        backgroundImage: snapshot.data.image,
+                      )),
+                );
+              if (snapshot.connectionState == ConnectionState.waiting)
+                return CircleAvatar(
+                    backgroundColor: Colors.grey,
+                    radius: 80,
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                    ));
+
+              return CircleAvatar();
+            },
           );
         }
 

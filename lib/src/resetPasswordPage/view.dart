@@ -92,7 +92,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 30.0,
                 0.0,
                 IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: EdgeInsets.only(left: 20, top: 10),
                   alignment: Alignment.topLeft,
                   color: Colors.white,
                   icon: Icon(Icons.arrow_back_ios),
@@ -101,16 +101,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                     Navigator.popAndPushNamed(context, '/login');
                   },
                 )),
-            SizedBox(
-              height: 20,
-            ),
             FadeAnimation(
                 0,
                 800,
                 30.0,
                 0.0,
                 SizedBox(
-                    height: 200,
+                    height: 250,
                     child: Image.asset("assets/Plusfit_logo.png"))),
             FadeAnimation(
                 0,
@@ -118,7 +115,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 800.0,
                 0.0,
                 Padding(
-                  padding: EdgeInsets.only(top: 50),
+                  padding: EdgeInsets.only(top: 30),
                   child: Container(
                     height: (MediaQuery.of(context).size.height / 2) + 20,
                     padding: EdgeInsets.all(10),
