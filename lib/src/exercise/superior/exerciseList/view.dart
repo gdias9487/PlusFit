@@ -49,6 +49,7 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
       var nome = document['nome'];
       var series = document['series'];
       var repeticoes = document['repeticoes'];
+
       return WorkoutContainer(
           action: () {
             //_showDialog(context, exerciseInfo(context, nome, series, repeticoes));

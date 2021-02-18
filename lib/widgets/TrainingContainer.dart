@@ -163,6 +163,7 @@ class WorkoutContainer extends StatelessWidget {
   final String text;
   final String subtext;
   final String image;
+  final String gif;
   final color;
   final action;
 
@@ -176,6 +177,7 @@ class WorkoutContainer extends StatelessWidget {
       @required this.text,
       @required this.width,
       this.left,
+      this.gif,
       this.bottom,
       this.subtext = '',
       this.image});
@@ -237,8 +239,8 @@ class WorkoutContainer extends StatelessWidget {
                         ),
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image:
-                                AssetImage("assets/superior/gifs/flexao.gif")),
+                            image: AssetImage(
+                                "assets/superior/gifs/flexao_diamante_com_joelho_no_chao.gif")),
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
                       ),

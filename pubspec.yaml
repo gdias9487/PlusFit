@@ -45,32 +45,10 @@ flutter:
 
 
   assets:
-    - assets/Plusfit_logo.png
-    - assets/main_menu_background.png
-    - assets/sign_up_background.png
-    - assets/login_background.png
-    - assets/home_background.png
-    - assets/back1.png
-    - assets/backperfil.png
-    - assets/backedit.png
-    - assets/signup.jpg
-    - assets/icon.png
-    - assets/mandar.png
-    - assets/superiores.png
-    - assets/Inferiores_2.png
-    - assets/Cardio_2.png
-    - assets/back_treinos.png
-    - assets/superior/superiores.jpeg
-    - assets/inferior/inferior.jpg
-    - assets/cardio.jpg
-    - assets/cardio.png
-    - assets/superior/gifs/flexao.gif
-    - assets/superior/costa_biceps.png
-    - assets/superior/peitoral_triceps.png
-    - assets/superior/peitoral_triceps_abdomen.png
-    - assets/inferior/posterior_panturrilha_avancado.jpg
-    - assets/inferior/posterior_panturrilha_basico.jpg
-    - assets/inferior/posterior_panturrilha_intermediario.jpg
-    - assets/cardio/cardio_basico.jpg
-    - assets/cardio/cardio_intermediario.jpg
-    - assets/cardio/cardio_avancado.jpg
+    - assets/
+    - assets/superior/
+    - assets/superior/gifs/
+    - assets/inferior/
+    - assets/inferior/gifs/
+    - assets/cardio/  
+    - assets/cardio/gifs/

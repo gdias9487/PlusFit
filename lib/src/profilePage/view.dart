@@ -10,8 +10,6 @@ import 'package:plusfit/components/constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../../components/constants.dart';
-import '../../components/constants.dart';
-import '../../components/constants.dart';
 
 var profilephoto = GetUserImage(FirebaseAuth.instance.currentUser.email);
 var profilename = GetUserName(FirebaseAuth.instance.currentUser.email);
@@ -32,9 +30,6 @@ class _MyPerfilPageState extends State<PerfilPage> {
   // ignore: unused_field
   final ImagePicker _picker = ImagePicker();
   File _imageFile;
-
-  ///NOTE: Only supported on Android & iOS
-  ///Needs image_picker plugin {https://pub.dev/packages/image_picker}
 
   final picker = ImagePicker();
 

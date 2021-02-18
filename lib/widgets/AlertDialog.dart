@@ -96,7 +96,7 @@ class ExerciseInfo extends StatelessWidget {
                       begin: Alignment(-1.0, -2.0),
                       end: Alignment(1.0, 2.0),
                     ),
-                    border: Border.all(width: 2, color: Colors.white),
+                    border: Border.all(width: 2, color: Colors.yellow),
                     color: Colors.grey[600],
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(35),
@@ -122,7 +122,7 @@ class ExerciseInfo extends StatelessWidget {
               child: FlatButton(
                   minWidth: 10,
                   splashColor: Colors.grey[600],
-                  textColor: Colors.white,
+                  textColor: Colors.yellow,
                   onPressed: () {
                     Navigator.pop(context);
                   },
