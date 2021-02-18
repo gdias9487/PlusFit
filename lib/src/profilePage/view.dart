@@ -202,22 +202,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                 ),
                                 onTap: () {},
                               ),
-                              Divider(height: 10.0, color: Colors.grey),
-                              ListTile(
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.black,
-                                  size: 16,
-                                ),
-                                leading: Icon(Icons.headset_mic_sharp,
-                                    color: Colors.black),
-                                title: Text(
-                                  "Suporte",
-                                  style: defaultFont(
-                                      16, FontWeight.normal, Colors.black),
-                                ),
-                                onTap: () {_suporte(context);},
-                              ),
+    
                               Divider(height: 10.0, color: Colors.grey),
                               ListTile(
                                 leading: Icon(Icons.close, color: Colors.black),
@@ -314,7 +299,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                   style: defaultFont(
                                       16, FontWeight.normal, Colors.black),
                                 ),
-                                onTap: () {},
+                                onTap: () {_suporte(context);},
                               ),
                             ],
                           ),
