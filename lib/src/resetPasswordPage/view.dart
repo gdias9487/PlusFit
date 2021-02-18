@@ -115,7 +115,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 800.0,
                 0.0,
                 Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: 40),
                   child: Container(
                     height: (MediaQuery.of(context).size.height / 2) + 20,
                     padding: EdgeInsets.all(10),

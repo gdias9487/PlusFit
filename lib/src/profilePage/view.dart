@@ -151,7 +151,8 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       0.0,
                       Card(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 14.0, vertical: 10.0),
                           child: Column(
                             children: <Widget>[
                               ExpansionTile(
@@ -202,7 +203,6 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                 ),
                                 onTap: () {},
                               ),
-    
                               Divider(height: 10.0, color: Colors.grey),
                               ListTile(
                                 leading: Icon(Icons.close, color: Colors.black),
@@ -273,24 +273,25 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       Card(
                         elevation: 3.0,
                         child: Padding(
-                          padding: EdgeInsets.all(14.0),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 14.0, vertical: 10),
                           child: Column(
                             children: <Widget>[
-                              ListTile(
-                                  onTap: () {
-                                    Switch(
-                                      value: true,
-                                      onChanged: (bool value) {},
-                                    );
-                                  },
-                                  leading: Icon(Icons.notifications,
-                                      color: Colors.black),
-                                  title: Text(
-                                    "Notificações",
-                                    style: defaultFont(
-                                        16, FontWeight.normal, Colors.black),
-                                  )),
-                              Divider(height: 10.0, color: Colors.grey),
+                              // ListTile(
+                              //     onTap: () {
+                              //       Switch(
+                              //         value: true,
+                              //         onChanged: (bool value) {},
+                              //       );
+                              //     },
+                              //     leading: Icon(Icons.notifications,
+                              //         color: Colors.black),
+                              //     title: Text(
+                              //       "Notificações",
+                              //       style: defaultFont(
+                              //           16, FontWeight.normal, Colors.black),
+                              //     )),
+                              // Divider(height: 10.0, color: Colors.grey),
                               ListTile(
                                 leading: Icon(Icons.headset_mic,
                                     color: Colors.black),
@@ -299,8 +300,10 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                   style: defaultFont(
                                       16, FontWeight.normal, Colors.black),
                                 ),
-                                onTap: () {_suporte(context);},
-                              ),
+                                onTap: () {
+                                  _suporte(context);
+                                },
+                              )
                             ],
                           ),
                         ),
@@ -311,28 +314,54 @@ class _MyPerfilPageState extends State<PerfilPage> {
       ),
     ));
   }
-  Widget _suporte(BuildContext context){
+
+  Widget _suporte(BuildContext context) {
     showDialog(
-      context: context,
-      builder: (BuildContext context){
-        return AlertDialog(
-          title: Text("Suporte", style: TextStyle(fontSize: 20, color: porange),),
-          content: Column(
-              children: <Widget> [
-                Text("Escolha a opção de atendimento:", style: TextStyle(fontWeight: FontWeight.w500),),
-                IconButton(icon: Icon(Icons.android,size: 35,),onPressed: () {},),
-                Text("Atendimento Ligação",style: TextStyle(fontSize: 12),),
-                IconButton(icon: Icon(Icons.android,size: 35),onPressed: () {},),
-                Text("Atendimento Email",style: TextStyle(fontSize: 12),),
-                SizedBox(height:35),
-                 Text("Informações", style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: porange)), 
-                SizedBox(height:35),
-                Text("O FAQ da Plusfit é composto por assistentes que vão auxiliar bla bla bla bla bla bla bla bla")             
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              "Suporte",
+              style: TextStyle(fontSize: 20, color: porange),
+            ),
+            content: Column(
+              children: <Widget>[
+                Text(
+                  "Escolha a opção de atendimento:",
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.android,
+                    size: 35,
+                  ),
+                  onPressed: () {},
+                ),
+                Text(
+                  "Atendimento Ligação",
+                  style: TextStyle(fontSize: 12),
+                ),
+                IconButton(
+                  icon: Icon(Icons.android, size: 35),
+                  onPressed: () {},
+                ),
+                Text(
+                  "Atendimento Email",
+                  style: TextStyle(fontSize: 12),
+                ),
+                SizedBox(height: 35),
+                Text("Informações",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        color: porange)),
+                SizedBox(height: 35),
+                Text(
+                    "O FAQ da Plusfit é composto por assistentes que vão auxiliar bla bla bla bla bla bla bla bla")
               ],
             ),
-        );
-      }
-    );
+          );
+        });
   }
 
   Widget bordaEdit() {

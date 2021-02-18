@@ -120,9 +120,9 @@ class _LoginPageState extends State<LoginPage> {
                 800.0,
                 0.0,
                 Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: 60),
                   child: Container(
-                      height: (MediaQuery.of(context).size.height / 2) + 25,
+                      height: (MediaQuery.of(context).size.height / 2) + 50,
                       padding: EdgeInsets.only(top: 20, right: 10, left: 10),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -139,59 +139,72 @@ class _LoginPageState extends State<LoginPage> {
                             SizedBox(
                               height: 10,
                             ),
-                            TextFormField(
-                              validator: validateemail,
-                              controller: emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              obscureText: false,
-                              style: defaultFont(
-                                  16, FontWeight.normal, pgreytextfield),
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30)),
-                                  prefixIcon: Icon(Icons.account_circle_sharp),
-                                  labelText: 'Email',
-                                  labelStyle: defaultFont(
-                                      16, FontWeight.normal, pgreytextfield)),
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, right: 15),
+                              child: TextFormField(
+                                validator: validateemail,
+                                controller: emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                obscureText: false,
+                                style: defaultFont(
+                                    16, FontWeight.normal, pgreytextfield),
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    prefixIcon:
+                                        Icon(Icons.account_circle_sharp),
+                                    labelText: 'Email',
+                                    labelStyle: defaultFont(
+                                        16, FontWeight.normal, pgreytextfield)),
+                              ),
                             ),
                             SizedBox(
                               height: 20,
                             ),
-                            TextFormField(
-                              validator: validatepass,
-                              controller: passwordController,
-                              keyboardType: TextInputType.visiblePassword,
-                              obscureText: _obscureText,
-                              style: defaultFont(
-                                  16, FontWeight.normal, pgreytextfield),
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30)),
-                                  prefixIcon: Icon(Icons.lock_outline),
-                                  suffixIcon: IconButton(
-                                    onPressed: _toggle,
-                                    icon: Icon(_viewpass),
-                                  ),
-                                  labelText: 'Senha',
-                                  labelStyle: defaultFont(
-                                      16, FontWeight.normal, pgreytextfield)),
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, right: 15),
+                              child: TextFormField(
+                                validator: validatepass,
+                                controller: passwordController,
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText: _obscureText,
+                                style: defaultFont(
+                                    16, FontWeight.normal, pgreytextfield),
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    prefixIcon: Icon(Icons.lock_outline),
+                                    suffixIcon: IconButton(
+                                      onPressed: _toggle,
+                                      icon: Icon(_viewpass),
+                                    ),
+                                    labelText: 'Senha',
+                                    labelStyle: defaultFont(
+                                        16, FontWeight.normal, pgreytextfield)),
+                              ),
                             ),
                             SizedBox(
                               height: padbutton,
                             ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: porange,
-                                  textStyle: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                  minimumSize: Size(320, 50),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25))),
-                              onPressed: () {
-                                validateAndSubmit();
-                              },
-                              child: Text("Entrar"),
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, right: 15),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: porange,
+                                    textStyle: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                    minimumSize: Size(320, 50),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25))),
+                                onPressed: () {
+                                  validateAndSubmit();
+                                },
+                                child: Text("Entrar"),
+                              ),
                             ),
                             Column(
                               children: <Widget>[

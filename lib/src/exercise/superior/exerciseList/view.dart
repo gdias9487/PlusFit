@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
@@ -22,6 +24,7 @@ class ExercisesSuperior extends StatefulWidget {
 class _ExercisesSuperiorState extends State<ExercisesSuperior> {
   final String documentId;
   final String image;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -39,9 +42,6 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
         });
   }
 
-  double height = 100;
-  var tween = Tween(begin: 100, end: 200);
-
   _ExercisesSuperiorState(this.documentId, this.image);
 
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
@@ -49,21 +49,18 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
       var nome = document['nome'];
       var series = document['series'];
       var repeticoes = document['repeticoes'];
-      return ExerciseContainer(
+      return WorkoutContainer(
           action: () {
-            _showDialog(
-                context, exerciseInfo(context, nome, series, repeticoes));
-            setState(() {
-              expansion();
-            });
+            //_showDialog(context, exerciseInfo(context, nome, series, repeticoes));
           },
           width: 1,
-          height: height,
-          top: 20,
+          height: 100,
+          top: 0,
           left: 30,
           right: 30,
-          bottom: 0.0,
+          bottom: 20,
           text: "$nome",
+          subtext: "$series series de $repeticoes repetições",
           image: "assets/signup.jpg");
     }).toList();
   }
@@ -124,7 +121,9 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
                       child: CircularProgressIndicator(),
                     );
                   default:
-                    return ListView(children: makeListWidget(snapshot));
+                    return ListView(
+                        padding: EdgeInsets.only(top: 20),
+                        children: makeListWidget(snapshot));
                 }
               }),
         ),
