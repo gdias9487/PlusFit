@@ -10,6 +10,8 @@ import 'package:plusfit/components/constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../../components/constants.dart';
+import '../../components/constants.dart';
+import '../../components/constants.dart';
 
 var profilephoto = GetUserImage(FirebaseAuth.instance.currentUser.email);
 var profilename = GetUserName(FirebaseAuth.instance.currentUser.email);
@@ -202,6 +204,22 @@ class _MyPerfilPageState extends State<PerfilPage> {
                               ),
                               Divider(height: 10.0, color: Colors.grey),
                               ListTile(
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.black,
+                                  size: 16,
+                                ),
+                                leading: Icon(Icons.headset_mic_sharp,
+                                    color: Colors.black),
+                                title: Text(
+                                  "Suporte",
+                                  style: defaultFont(
+                                      16, FontWeight.normal, Colors.black),
+                                ),
+                                onTap: () {_suporte(context);},
+                              ),
+                              Divider(height: 10.0, color: Colors.grey),
+                              ListTile(
                                 leading: Icon(Icons.close, color: Colors.black),
                                 title: Text(
                                   "Desconectar",
@@ -307,6 +325,29 @@ class _MyPerfilPageState extends State<PerfilPage> {
         ],
       ),
     ));
+  }
+  Widget _suporte(BuildContext context){
+    showDialog(
+      context: context,
+      builder: (BuildContext context){
+        return AlertDialog(
+          title: Text("Suporte", style: TextStyle(fontSize: 20, color: porange),),
+          content: Column(
+              children: <Widget> [
+                Text("Escolha a opção de atendimento:", style: TextStyle(fontWeight: FontWeight.w500),),
+                IconButton(icon: Icon(Icons.android,size: 35,),onPressed: () {},),
+                Text("Atendimento Ligação",style: TextStyle(fontSize: 12),),
+                IconButton(icon: Icon(Icons.android,size: 35),onPressed: () {},),
+                Text("Atendimento Email",style: TextStyle(fontSize: 12),),
+                SizedBox(height:35),
+                 Text("Informações", style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: porange)), 
+                SizedBox(height:35),
+                Text("O FAQ da Plusfit é composto por assistentes que vão auxiliar bla bla bla bla bla bla bla bla")             
+              ],
+            ),
+        );
+      }
+    );
   }
 
   Widget bordaEdit() {
