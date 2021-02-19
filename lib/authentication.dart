@@ -165,3 +165,9 @@ class AuthenticationService {
     }
   }
 }
+
+void updateProfilePhoto(FirebaseAuth user) {
+  user.currentUser.updateProfile(
+      photoURL:
+          "https://firebasestorage.googleapis.com/v0/b/plusfit-2fbeb.appspot.com/o/profilephotos%2Fdefaultprofilephoto.jpg?alt=media&token=750228f5-9d08-48e9-a966-a2a945adc55d");
+}

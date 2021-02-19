@@ -27,7 +27,9 @@ class _ExercisesInferiorPageState extends State<ExercisesInferior> {
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
       var nome = document['nome'];
-      return ExerciseContainer(
+      var series = document['series'];
+      var repeticoes = document['repeticoes'];
+      return WorkoutContainer(
         width: 1,
         height: 100,
         top: 0,
@@ -35,6 +37,7 @@ class _ExercisesInferiorPageState extends State<ExercisesInferior> {
         right: 30,
         bottom: 20.0,
         text: "$nome",
+        subtext: "$series series de $repeticoes repetições",
         image: "assets/signup.jpg",
       );
     }).toList();

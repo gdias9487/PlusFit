@@ -41,7 +41,7 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
                 context,
                 transitionAnimation(
                     ExercisesCardio(
-                        documentId: (document['Nome'].toString()),
+                        documentId: (document['doc'].toString()),
                         image: (document['image'].toString())),
                     1.0,
                     0.0));

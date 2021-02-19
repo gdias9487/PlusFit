@@ -1,28 +1,27 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:plusfit/widgets/AlertDialog.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 import 'package:plusfit/widgets/animations.dart';
 
 class ExercisesSuperior extends StatefulWidget {
   ExercisesSuperior(
-      {Key key, this.title, @required this.documentId, this.image})
+      {Key key, this.title, this.nome, @required this.documentId, this.image})
       : super(key: key);
 
   final String title;
   final String documentId;
+  final String nome;
   final String image;
 
   @override
   _ExercisesSuperiorState createState() =>
-      _ExercisesSuperiorState(documentId, image);
+      _ExercisesSuperiorState(documentId, nome, image);
 }
 
 class _ExercisesSuperiorState extends State<ExercisesSuperior> {
   final String documentId;
+  final String nome;
   final String image;
 
   @override
@@ -42,7 +41,7 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
         });
   }
 
-  _ExercisesSuperiorState(this.documentId, this.image);
+  _ExercisesSuperiorState(this.documentId, this.nome, this.image);
 
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
@@ -101,7 +100,7 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 20, bottom: 10),
                     child: Text(
-                      '$documentId',
+                      '$nome',
                       style: defaultFont(30, FontWeight.bold, Colors.white),
                     ),
                   ),

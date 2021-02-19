@@ -11,9 +11,6 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../../components/constants.dart';
 
-var profilephoto = GetUserImage(FirebaseAuth.instance.currentUser.email);
-var profilename = GetUserName(FirebaseAuth.instance.currentUser.email);
-
 class PerfilPage extends StatefulWidget {
   PerfilPage({Key key, this.title}) : super(key: key);
 
@@ -24,7 +21,8 @@ class PerfilPage extends StatefulWidget {
 }
 
 class _MyPerfilPageState extends State<PerfilPage> {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final user = FirebaseAuth.instance.currentUser;
+
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   // ignore: unused_field
@@ -42,21 +40,19 @@ class _MyPerfilPageState extends State<PerfilPage> {
   }
 
   Future uploadImageToFirebase(BuildContext context) async {
-    String fileName = _firebaseAuth.currentUser.email;
+    String fileName = user.email;
     Reference firebaseStorageRef =
         FirebaseStorage.instance.ref().child('profilephotos/$fileName');
     UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
-    taskSnapshot.ref.getDownloadURL().then((value) => setState(() {
-          profilephoto = GetUserImage(_firebaseAuth.currentUser.email);
-        }));
+    taskSnapshot.ref.getDownloadURL().then((value) => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
     logoff(firebaseUser) {
-      _firebaseAuth.signOut();
-      print(_firebaseAuth.currentUser);
+      FirebaseAuth.instance.signOut();
+      print(user);
       Navigator.pushNamedAndRemoveUntil(
           context, '/login', (Route<dynamic> route) => false);
     }
@@ -70,10 +66,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
           });
     }
 
-    _fetchData() {
-      profilephoto = GetUserImage(_firebaseAuth.currentUser.email);
-      profilename = GetUserName(_firebaseAuth.currentUser.email);
-    }
+    _fetchData() {}
 
     initState() {
       super.initState();
@@ -104,7 +97,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                     child: Align(
                         alignment: Alignment.center,
                         child: GestureDetector(
-                          child: profilephoto,
+                          child: getUserImage(user),
                           onTap: () {
                             _showDialog(bordaEdit());
                           },
@@ -120,7 +113,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                            profilename,
+                            GetUserName(user.email),
                             SizedBox(
                               height: 10,
                             ),
@@ -416,10 +409,14 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           borderRadius: BorderRadius.circular(35))),
                   onPressed: () {
                     uploadImageToFirebase(context);
+                    print(FirebaseStorage.instance
+                        .ref()
+                        .child('profilephotos/${user.email}')
+                        .getDownloadURL());
                     FirebaseFirestore.instance
                         .collection("usuarios")
-                        .doc(_firebaseAuth.currentUser.email)
-                        .update({"image": _firebaseAuth.currentUser.email});
+                        .doc(user.email)
+                        .update({"image": user.email});
                   },
                   child: Text(
                     "Salvar",

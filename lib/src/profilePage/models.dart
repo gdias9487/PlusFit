@@ -202,61 +202,18 @@ class GetUserEmail extends StatelessWidget {
   }
 }
 
-class GetUserImage extends StatelessWidget {
-  final String documentId;
-
-  GetUserImage(this.documentId);
-
-  @override
-  Widget build(BuildContext context) {
-    CollectionReference users =
-        FirebaseFirestore.instance.collection('usuarios');
-
-    return FutureBuilder<DocumentSnapshot>(
-      future: users.doc(documentId).get(),
-      builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("",
-              style: defaultFont(16, FontWeight.bold, Colors.white));
-        }
-
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data.data();
-          var image = data["image"].toString();
-          return FutureBuilder(
-            future:
-                FireStorageService.getImage(context, "profilephotos/$image"),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done)
-                return CircleAvatar(
-                  radius: 82,
-                  backgroundColor: Colors.white,
-                  child: FadeAnimation(
-                      0.8,
-                      1,
-                      30,
-                      0.0,
-                      CircleAvatar(
-                        radius: 80,
-                        backgroundImage: snapshot.data.image,
-                      )),
-                );
-              if (snapshot.connectionState == ConnectionState.waiting)
-                return CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    radius: 80,
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.white,
-                    ));
-
-              return CircleAvatar();
-            },
-          );
-        }
-
-        return Text("", style: defaultFont(16, FontWeight.bold, Colors.white));
-      },
-    );
-  }
+Widget getUserImage(user) {
+  return CircleAvatar(
+    radius: 82,
+    backgroundColor: Colors.white,
+    child: FadeAnimation(
+        0.8,
+        1,
+        30,
+        0.0,
+        CircleAvatar(
+          radius: 80,
+          backgroundImage: NetworkImage(user.photoURL),
+        )),
+  );
 }

@@ -20,7 +20,8 @@ class _SuperiorPageState extends State<SuperiorPage> {
       var nome = document['Nome'];
       var nivel = document['Nivel'];
       var image = document['image'];
-
+      var doc = document['doc'];
+      print(doc);
       return ExerciseContainer(
           color: dificult(nivel),
           width: 1,
@@ -37,8 +38,10 @@ class _SuperiorPageState extends State<SuperiorPage> {
                 context,
                 transitionAnimation(
                     ExercisesSuperior(
-                        documentId: (document['Nome'].toString()),
-                        image: (document['image'].toString())),
+                      documentId: (document['doc'].toString()),
+                      image: (document['image'].toString()),
+                      nome: document['Nome'],
+                    ),
                     1.0,
                     0.0));
           });

@@ -24,6 +24,6 @@ class PFUser {
 }
 
 addInfo(email) {
-  var user = PFUser(email, "", "", "", "");
+  var user = PFUser(email, "", "", "", "defaultprofilephoto.jpg");
   _firestore.collection("usuarios").doc(email).set(user.toMap());
 }

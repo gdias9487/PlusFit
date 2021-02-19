@@ -41,7 +41,7 @@ class _InferiorPageState extends State<InferiorPage> {
                 context,
                 transitionAnimation(
                     ExercisesInferior(
-                        documentId: (document['Nome'].toString()),
+                        documentId: (document['doc'].toString()),
                         image: (document['image'].toString())),
                     1.0,
                     0.0));

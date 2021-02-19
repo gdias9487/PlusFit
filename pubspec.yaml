@@ -47,8 +47,6 @@ flutter:
   assets:
     - assets/
     - assets/superior/
-    - assets/superior/gifs/
     - assets/inferior/
-    - assets/inferior/gifs/
     - assets/cardio/  
-    - assets/cardio/gifs/
+    - assets/exercicios/

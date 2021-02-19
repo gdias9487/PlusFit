@@ -240,7 +240,7 @@ class WorkoutContainer extends StatelessWidget {
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage(
-                                "assets/superior/gifs/flexao_diamante_com_joelho_no_chao.gif")),
+                                "assets/exercicios/flexao_diamante_com_joelho_no_chao.gif")),
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -258,7 +258,7 @@ class WorkoutContainer extends StatelessWidget {
                       child: Text(text,
                           textAlign: TextAlign.start,
                           style:
-                              defaultFont(15, FontWeight.bold, Colors.amber)),
+                              defaultFont(14, FontWeight.bold, Colors.amber)),
                     ),
                     SizedBox(
                       height: 10,

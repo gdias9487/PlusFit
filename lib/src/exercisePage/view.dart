@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/src/exercise/cardiovascular/view.dart';
@@ -16,6 +17,8 @@ class ExercisePage extends StatefulWidget {
   @override
   _ExercisePageState createState() => _ExercisePageState();
 }
+
+final user = FirebaseAuth.instance.currentUser;
 
 class _ExercisePageState extends State<ExercisePage> {
   @override
