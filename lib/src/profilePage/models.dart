@@ -14,104 +14,6 @@ final TextEditingController nome = TextEditingController();
 final TextEditingController peso = TextEditingController();
 final TextEditingController altura = TextEditingController();
 
-showInfo() {
-  return editInfo;
-}
-
-List editInfo = <Widget>[
-  Container(
-      child: Column(children: <Widget>[
-    TextFormField(
-      controller: nome,
-      keyboardType: TextInputType.name,
-      obscureText: false,
-      style: defaultFont(14, FontWeight.normal, pgreytextfield),
-      decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-          prefixIcon: Icon(Icons.account_circle_sharp),
-          labelText: 'Nome',
-          labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
-    ),
-    SizedBox(
-      height: 10,
-    ),
-    Row(children: <Widget>[
-      Flexible(
-          child: TextFormField(
-        controller: peso,
-        keyboardType: TextInputType.number,
-        obscureText: false,
-        style: defaultFont(14, FontWeight.normal, pgreytextfield),
-        decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-            prefixIcon: Icon(Icons.account_circle_sharp),
-            labelText: 'Peso',
-            labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
-      )),
-      SizedBox(
-        width: 5,
-      ),
-      Flexible(
-          child: TextFormField(
-        controller: altura,
-        keyboardType: TextInputType.number,
-        obscureText: false,
-        style: defaultFont(14, FontWeight.normal, pgreytextfield),
-        decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-            prefixIcon: Icon(Icons.account_circle_sharp),
-            labelText: 'Altura',
-            labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
-      ))
-    ]),
-    SizedBox(
-      height: 10,
-    ),
-    TextButton(
-        style: TextButton.styleFrom(
-            minimumSize: Size(100, 35),
-            backgroundColor: porange,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(35))),
-        onPressed: () {
-          setInfo(_firebase.currentUser.email, nome, peso, altura);
-        },
-        child: Text(
-          "Salvar",
-          style: defaultFont(14, FontWeight.bold, Colors.white),
-        ))
-  ])),
-];
-List editPass = <Widget>[
-  Container(
-      child: Column(children: <Widget>[
-    TextFormField(
-      controller: changepass,
-      keyboardType: TextInputType.name,
-      obscureText: false,
-      style: defaultFont(14, FontWeight.normal, pgreytextfield),
-      decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-          prefixIcon: Icon(Icons.account_circle_sharp),
-          labelText: 'Email',
-          labelStyle: defaultFont(16, FontWeight.normal, pgreytextfield)),
-    ),
-    TextButton(
-        style: TextButton.styleFrom(
-            minimumSize: Size(100, 35),
-            backgroundColor: porange,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(35))),
-        onPressed: () {
-          setInfo(_firebase.currentUser.email, nome, peso, altura);
-        },
-        child: Text(
-          "Alterar",
-          style: defaultFont(14, FontWeight.bold, Colors.white),
-        ))
-  ]))
-];
-
 class PFUser {
   String email;
   String name;
@@ -158,6 +60,7 @@ class GetUserName extends StatelessWidget {
 
           return Text(
             data["nome"].toString(),
+            key: UniqueKey(),
             style: defaultFont(25, FontWeight.bold, Colors.white),
           );
         }
@@ -166,54 +69,4 @@ class GetUserName extends StatelessWidget {
       },
     );
   }
-}
-
-class GetUserEmail extends StatelessWidget {
-  final String documentId;
-
-  GetUserEmail(this.documentId);
-
-  @override
-  Widget build(BuildContext context) {
-    CollectionReference users =
-        FirebaseFirestore.instance.collection('usuarios');
-
-    return FutureBuilder<DocumentSnapshot>(
-      future: users.doc(documentId).get(),
-      builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("",
-              style: defaultFont(16, FontWeight.bold, Colors.white));
-        }
-
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data.data();
-
-          return Text(
-            data["email"].toString(),
-            style: defaultFont(16, FontWeight.bold, Colors.white),
-          );
-        }
-
-        return Text("", style: defaultFont(16, FontWeight.bold, Colors.white));
-      },
-    );
-  }
-}
-
-Widget getUserImage(user) {
-  return CircleAvatar(
-    radius: 82,
-    backgroundColor: Colors.white,
-    child: FadeAnimation(
-        0.8,
-        1,
-        30,
-        0.0,
-        CircleAvatar(
-          radius: 80,
-          backgroundImage: NetworkImage(user.photoURL),
-        )),
-  );
 }

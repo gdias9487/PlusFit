@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import '../../authentication.dart';
 import '../../components/constants.dart';
 
 String downloadUrl;
@@ -166,7 +167,95 @@ class _MyPerfilPageState extends State<PerfilPage> {
                             children: <Widget>[
                               ExpansionTile(
                                 onExpansionChanged: (value) {},
-                                children: showInfo(),
+                                children: <Widget>[
+                                  Container(
+                                      child: Column(children: <Widget>[
+                                    TextFormField(
+                                      controller: nome,
+                                      keyboardType: TextInputType.name,
+                                      obscureText: false,
+                                      style: defaultFont(14, FontWeight.normal,
+                                          pgreytextfield),
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30)),
+                                          prefixIcon:
+                                              Icon(Icons.account_circle_sharp),
+                                          labelText: 'Nome',
+                                          labelStyle: defaultFont(
+                                              16,
+                                              FontWeight.normal,
+                                              pgreytextfield)),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(children: <Widget>[
+                                      Flexible(
+                                          child: TextFormField(
+                                        controller: peso,
+                                        keyboardType: TextInputType.number,
+                                        obscureText: false,
+                                        style: defaultFont(14,
+                                            FontWeight.normal, pgreytextfield),
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30)),
+                                            prefixIcon: Icon(
+                                                Icons.account_circle_sharp),
+                                            labelText: 'Peso',
+                                            labelStyle: defaultFont(
+                                                16,
+                                                FontWeight.normal,
+                                                pgreytextfield)),
+                                      )),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Flexible(
+                                          child: TextFormField(
+                                        controller: altura,
+                                        keyboardType: TextInputType.number,
+                                        obscureText: false,
+                                        style: defaultFont(14,
+                                            FontWeight.normal, pgreytextfield),
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30)),
+                                            prefixIcon: Icon(
+                                                Icons.account_circle_sharp),
+                                            labelText: 'Altura',
+                                            labelStyle: defaultFont(
+                                                16,
+                                                FontWeight.normal,
+                                                pgreytextfield)),
+                                      ))
+                                    ]),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    TextButton(
+                                        style: TextButton.styleFrom(
+                                            minimumSize: Size(100, 35),
+                                            backgroundColor: porange,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(35))),
+                                        onPressed: () {
+                                          setInfo(
+                                              user.email, nome, peso, altura);
+                                          setState(() {});
+                                        },
+                                        child: Text(
+                                          "Salvar",
+                                          style: defaultFont(14,
+                                              FontWeight.bold, Colors.white),
+                                        ))
+                                  ])),
+                                ],
                                 trailing: Icon(
                                   Icons.arrow_forward_ios,
                                   color: Colors.black,
@@ -194,7 +283,46 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                   style: defaultFont(
                                       16, FontWeight.normal, Colors.black),
                                 ),
-                                children: editPass,
+                                children: <Widget>[
+                                  Container(
+                                      child: Column(children: <Widget>[
+                                    TextFormField(
+                                      controller: changepass,
+                                      keyboardType: TextInputType.name,
+                                      obscureText: false,
+                                      style: defaultFont(14, FontWeight.normal,
+                                          pgreytextfield),
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30)),
+                                          prefixIcon:
+                                              Icon(Icons.account_circle_sharp),
+                                          labelText: 'Email',
+                                          labelStyle: defaultFont(
+                                              16,
+                                              FontWeight.normal,
+                                              pgreytextfield)),
+                                    ),
+                                    TextButton(
+                                        style: TextButton.styleFrom(
+                                            minimumSize: Size(100, 35),
+                                            backgroundColor: porange,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(35))),
+                                        onPressed: () {
+                                          setInfo(
+                                              user.email, nome, peso, altura);
+                                          setState(() {});
+                                        },
+                                        child: Text(
+                                          "Alterar",
+                                          style: defaultFont(14,
+                                              FontWeight.bold, Colors.white),
+                                        ))
+                                  ]))
+                                ],
                               ),
                               Divider(height: 10.0, color: Colors.grey),
                               ListTile(
@@ -245,15 +373,36 @@ class _MyPerfilPageState extends State<PerfilPage> {
                               ),
                               Divider(height: 10.0, color: Colors.grey),
                               ListTile(
-                                leading:
-                                    Icon(Icons.block_outlined, color: porange),
-                                title: Text(
-                                  "Desativar conta",
-                                  style: defaultFont(
-                                      16, FontWeight.normal, Colors.red),
-                                ),
-                                onTap: () {},
-                              ),
+                                  leading: Icon(Icons.block_outlined,
+                                      color: porange),
+                                  title: Text(
+                                    "Desativar conta",
+                                    style: defaultFont(
+                                        16, FontWeight.normal, Colors.red),
+                                  ),
+                                  onTap: () {
+                                    _showDialog(Alert_Box(
+                                      buttons: <Widget>[
+                                        TextButton(
+                                            onPressed: () {
+                                              deleteAccount(context);
+                                            },
+                                            child: Text("Sim",
+                                                style: defaultFont(14,
+                                                    FontWeight.bold, porange))),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text("Não",
+                                                style: defaultFont(14,
+                                                    FontWeight.bold, porange))),
+                                      ],
+                                      title: "Deletar Conta",
+                                      text:
+                                          "Você deseja deleter permanentemente sua conta?",
+                                    ));
+                                  }),
                             ],
                           ),
                         ),

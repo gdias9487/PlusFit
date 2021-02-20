@@ -20,8 +20,7 @@ class _SuperiorPageState extends State<SuperiorPage> {
       var nome = document['Nome'];
       var nivel = document['Nivel'];
       var image = document['image'];
-      var doc = document['doc'];
-      print(doc);
+      var tempo = document['tempo'];
       return ExerciseContainer(
           color: dificult(nivel),
           width: 1,
@@ -32,7 +31,7 @@ class _SuperiorPageState extends State<SuperiorPage> {
           bottom: 0.0,
           image: "assets/superior/$image",
           text: "$nome",
-          subtext: "Nivel: $nivel",
+          subtext: "Nivel: $nivel\nDuração: $tempo minutos",
           action: () {
             Navigator.push(
                 context,
@@ -49,6 +48,7 @@ class _SuperiorPageState extends State<SuperiorPage> {
   }
 
   @override
+  String dropdownValue = "Nenhum";
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -79,6 +79,35 @@ class _SuperiorPageState extends State<SuperiorPage> {
               width: MediaQuery.of(context).size.width,
               height: 100,
               child: Image.asset('assets/superiores.png'),
+            ),
+            Align(
+              alignment: Alignment(0.8, 0),
+              child: DropdownButton(
+                value: dropdownValue,
+                dropdownColor: Colors.white,
+                icon: Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (String newValue) {
+                  setState(() {
+                    dropdownValue = newValue;
+                  });
+                },
+                items: <String>[].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: defaultFont(16, FontWeight.bold, porange),
+                    ),
+                  );
+                }).toList(),
+              ),
             ),
             Flexible(
               child: StreamBuilder(
