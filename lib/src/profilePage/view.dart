@@ -477,46 +477,86 @@ class _MyPerfilPageState extends State<PerfilPage> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              "Suporte",
-              style: TextStyle(fontSize: 20, color: porange),
-            ),
-            content: Column(
-              children: <Widget>[
-                Text(
-                  "Escolha a opção de atendimento:",
-                  style: TextStyle(fontWeight: FontWeight.w500),
+          return Container(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 150, bottom: 150),
+              child: AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                title: Row(
+                  children: [
+                    Spacer(),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Suporte",
+                        style: defaultFont(20, FontWeight.bold, porange),
+                      ),
+                    ),
+                    Spacer(),
+                    IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        })
+                  ],
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.android,
-                    size: 35,
-                  ),
-                  onPressed: () {},
+                content: Column(
+                  children: <Widget>[
+                    Text(
+                      "Formas de antedimento:",
+                      style: defaultFont(20, FontWeight.w500, porange),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.call,
+                              size: 25,
+                            ),
+                            onPressed: () {},
+                          ),
+                          Text(
+                            "(81) 99530-3343",
+                            style:
+                                defaultFont(16, FontWeight.bold, Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.email, size: 25),
+                            onPressed: () {},
+                          ),
+                          Text(
+                            "plusultragrp@gmail.com",
+                            style:
+                                defaultFont(16, FontWeight.bold, Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 35),
+                    Text("Informações",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            color: porange)),
+                    SizedBox(height: 35),
+                    Text(
+                        " O FAQ da Plusfit é composto por assistentes que irão sanar todas as suas dúvidas sobre o aplicativo, além de receber sugestões e avisos sobre eventuais erros para correção.\n\n  Agradecemos desde já.\n\n  Supere seus limites, Plus Ultra!")
+                  ],
                 ),
-                Text(
-                  "Atendimento Ligação",
-                  style: TextStyle(fontSize: 12),
-                ),
-                IconButton(
-                  icon: Icon(Icons.android, size: 35),
-                  onPressed: () {},
-                ),
-                Text(
-                  "Atendimento Email",
-                  style: TextStyle(fontSize: 12),
-                ),
-                SizedBox(height: 35),
-                Text("Informações",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                        color: porange)),
-                SizedBox(height: 35),
-                Text(
-                    "O FAQ da Plusfit é composto por assistentes que vão auxiliar bla bla bla bla bla bla bla bla")
-              ],
+              ),
             ),
           );
         });
