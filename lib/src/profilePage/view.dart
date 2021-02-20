@@ -11,6 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../../components/constants.dart';
 
+String downloadUrl;
+
 class PerfilPage extends StatefulWidget {
   PerfilPage({Key key, this.title}) : super(key: key);
 
@@ -45,7 +47,12 @@ class _MyPerfilPageState extends State<PerfilPage> {
         FirebaseStorage.instance.ref().child('profilephotos/$fileName');
     UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
-    taskSnapshot.ref.getDownloadURL().then((value) => setState(() {}));
+    taskSnapshot.ref.getDownloadURL().then((String value) {
+      if (value != null) {
+        downloadUrl = value;
+      }
+      setState(() {});
+    });
   }
 
   @override
@@ -97,7 +104,21 @@ class _MyPerfilPageState extends State<PerfilPage> {
                     child: Align(
                         alignment: Alignment.center,
                         child: GestureDetector(
-                          child: getUserImage(user),
+                          child: CircleAvatar(
+                            key: UniqueKey(),
+                            radius: 82,
+                            backgroundColor: Colors.white,
+                            child: FadeAnimation(
+                                0.8,
+                                1,
+                                30,
+                                0.0,
+                                CircleAvatar(
+                                  key: UniqueKey(),
+                                  radius: 80,
+                                  backgroundImage: NetworkImage(user.photoURL),
+                                )),
+                          ),
                           onTap: () {
                             _showDialog(bordaEdit());
                           },
@@ -408,15 +429,12 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(35))),
                   onPressed: () {
-                    uploadImageToFirebase(context);
-                    print(FirebaseStorage.instance
-                        .ref()
-                        .child('profilephotos/${user.email}')
-                        .getDownloadURL());
-                    FirebaseFirestore.instance
-                        .collection("usuarios")
-                        .doc(user.email)
-                        .update({"image": user.email});
+                    setState(() {
+                      uploadImageToFirebase(context);
+                      user.updateProfile(photoURL: downloadUrl);
+                      imageCache.clear();
+                      imageCache.clearLiveImages();
+                    });
                   },
                   child: Text(
                     "Salvar",

@@ -62,7 +62,7 @@ class _SignupPageState extends State<SignupPage> {
                 email: _emailController.text.trim(),
                 password: _passwordController.text.trim())
             .then((value) {
-          addInfo(_firebase.currentUser.email);
+          updateProfilePhoto(_firebase);
           Navigator.popAndPushNamed(context, '/login');
         })
             // ignore: return_of_invalid_type_from_catch_error
