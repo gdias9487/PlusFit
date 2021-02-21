@@ -15,6 +15,34 @@ class SuperiorPage extends StatefulWidget {
 }
 
 class _SuperiorPageState extends State<SuperiorPage> {
+  _conection() {
+    if (dropdownValue != "Todos" && dropdownValue2 != "Todas") {
+      return FirebaseFirestore.instance
+          .collection('treinos')
+          .where('Nivel', isEqualTo: "$dropdownValue")
+          .where('tempo', isEqualTo:  "$dropdownValue2")
+          .where('Tipo', isEqualTo: 'superior')
+          .snapshots();
+    } else if(dropdownValue == "Todos" && dropdownValue2 != "Todas") {
+      return FirebaseFirestore.instance
+          .collection('treinos')
+          .where('tempo', isEqualTo:  "$dropdownValue2")
+          .where('Tipo', isEqualTo: 'superior')
+          .snapshots();
+    } else if(dropdownValue != "Todos" && dropdownValue2 == "Todas") {
+      return FirebaseFirestore.instance
+          .collection('treinos')
+          .where('Nivel', isEqualTo: "$dropdownValue")
+          .where('Tipo', isEqualTo: 'superior')
+          .snapshots();
+    }else{
+      return FirebaseFirestore.instance
+          .collection('treinos')
+          .where('Tipo', isEqualTo: 'superior')
+          .snapshots();
+    }
+  }
+
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
       var nome = document['Nome'];
@@ -38,8 +66,8 @@ class _SuperiorPageState extends State<SuperiorPage> {
                 transitionAnimation(
                     ExercisesSuperior(
                       documentId: (document['doc'].toString()),
-                      image: (document['image'].toString()),
-                      nome: document['Nome'],
+                      image: (image.toString()),
+                      nome: nome,
                     ),
                     1.0,
                     0.0));
@@ -48,7 +76,8 @@ class _SuperiorPageState extends State<SuperiorPage> {
   }
 
   @override
-  String dropdownValue = "Nenhum";
+  String dropdownValue = 'Todos';
+  String dropdownValue2 = 'Todas';
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -82,40 +111,88 @@ class _SuperiorPageState extends State<SuperiorPage> {
             ),
             Align(
               alignment: Alignment(0.8, 0),
-              child: DropdownButton(
-                value: dropdownValue,
-                dropdownColor: Colors.white,
-                icon: Icon(Icons.arrow_downward),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Colors.deepPurple),
-                underline: Container(
-                  height: 2,
-                  color: Colors.deepPurpleAccent,
-                ),
-                onChanged: (String newValue) {
-                  setState(() {
-                    dropdownValue = newValue;
-                  });
-                },
-                items: <String>[].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: defaultFont(16, FontWeight.bold, porange),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 20
+                  ),
+                  Text("Nivel: ",
+                  style: TextStyle(color: Colors.amber, fontSize: 16),
+                  ),
+                   SizedBox(
+                    width: 5
+                  ),
+                  Container(
+                    child: DropdownButton(
+                      value: dropdownValue,
+                      dropdownColor: Colors.white,
+                      icon: Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: TextStyle(color: Colors.amber),
+                      // underline: Container(
+                      //  height: 2,
+                      //  color: Colors.amber,
+                      //),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          dropdownValue = newValue;
+                        });
+                      },
+                      items: <String>['Todos', 'básico', 'intermediário', 'avançado']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(
+                            value,
+                            style: defaultFont(16, FontWeight.bold, porange),
+                          ),
+                        );
+                      }).toList(),
                     ),
-                  );
-                }).toList(),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Text('Duração: ', style: TextStyle(
+                    color: Colors.amber, fontSize: 16
+                  ),),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  DropdownButton(
+                      value: dropdownValue2,
+                      dropdownColor: Colors.white,
+                      icon: Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: TextStyle(color: Colors.amber),
+                      // underline: Container(
+                      //  height: 2,
+                      //  color: Colors.amber,s
+                      //),
+                      onChanged: (String newValue) {
+                        setState(() {
+                          dropdownValue2 = newValue;
+                        });
+                      },
+                      items: <String>['Todas', '15', '20', '25', '30', '35','40', '45','50']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(
+                            value,
+                            style: defaultFont(16, FontWeight.bold, porange),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                ],
               ),
             ),
             Flexible(
               child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection('treinos')
-                      // .where('Nivel', isEqualTo: nivel)
-                      .where('Tipo', isEqualTo: 'superior')
-                      .snapshots(),
+                  stream: _conection(),
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.waiting:

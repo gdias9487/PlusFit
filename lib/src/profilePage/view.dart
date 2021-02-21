@@ -479,7 +479,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
         builder: (BuildContext context) {
           return Container(
             child: Padding(
-              padding: const EdgeInsets.only(top: 150, bottom: 150),
+              padding: const EdgeInsets.only(top: 100, bottom: 50),
               child: AlertDialog(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
@@ -529,9 +529,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Row(
+                     Row(
                         children: [
                           IconButton(
                             icon: Icon(Icons.email, size: 25),
@@ -544,8 +542,8 @@ class _MyPerfilPageState extends State<PerfilPage> {
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(height: 35),
+                    
+                    SizedBox(height: 30),
                     Text("Informações",
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
