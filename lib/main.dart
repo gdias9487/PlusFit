@@ -14,7 +14,6 @@ import 'package:plusfit/src/resetPasswordPage/view.dart';
 import 'package:plusfit/src/aboutPage/view.dart';
 import 'package:plusfit/src/exercisePage/view.dart';
 import 'package:plusfit/src/signUpPage/view.dart';
-import 'package:plusfit/src/signUpPage2/view.dart';
 import 'package:plusfit/src/exercise/superior/view.dart';
 
 Future<void> main() async {
@@ -44,7 +43,6 @@ class PFApp extends StatelessWidget {
             '/reset': (context) => ResetPassword(),
             '/about': (context) => AboutPage(),
             '/exercises': (context) => ExercisePage(),
-            '/signup2': (context) => SignupprfPage(),
             '/perfil': (context) => PerfilPage(),
             '/superior': (context) => SuperiorPage(),
             '/inferior': (context) => InferiorPage(),

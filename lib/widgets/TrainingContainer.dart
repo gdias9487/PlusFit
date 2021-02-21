@@ -164,6 +164,7 @@ class WorkoutContainer extends StatelessWidget {
   final String subtext;
   final String image;
   final String gif;
+  final String descricao;
   final color;
   final action;
 
@@ -179,6 +180,7 @@ class WorkoutContainer extends StatelessWidget {
       this.left,
       this.gif,
       this.bottom,
+      this.descricao,
       this.subtext = '',
       this.image});
 
@@ -226,6 +228,7 @@ class WorkoutContainer extends StatelessWidget {
                               pageBuilder: (_, __, ___) => ExerciseInfo(
                                     tag: text,
                                     gif: '$gif',
+                                    descricao: descricao,
                                   )));
                     },
                     child: Container(

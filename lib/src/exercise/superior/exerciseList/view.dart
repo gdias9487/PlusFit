@@ -49,7 +49,7 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
       var series = document['series'];
       var repeticoes = document['repeticoes'];
       var gif = document['gif'];
-
+      var descricao = document['descricao'];
       return WorkoutContainer(
           action: () {
             //_showDialog(context, exerciseInfo(context, nome, series, repeticoes));
@@ -62,6 +62,7 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
           right: 30,
           bottom: 20,
           text: "$nome",
+          descricao: "$descricao",
           subtext: "$series series de $repeticoes repetições",
           image: "assets/signup.jpg");
     }).toList();

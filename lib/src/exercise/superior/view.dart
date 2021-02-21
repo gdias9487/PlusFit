@@ -20,22 +20,22 @@ class _SuperiorPageState extends State<SuperiorPage> {
       return FirebaseFirestore.instance
           .collection('treinos')
           .where('Nivel', isEqualTo: "$dropdownValue")
-          .where('tempo', isEqualTo:  "$dropdownValue2")
+          .where('tempo', isEqualTo: "$dropdownValue2")
           .where('Tipo', isEqualTo: 'superior')
           .snapshots();
-    } else if(dropdownValue == "Todos" && dropdownValue2 != "Todas") {
+    } else if (dropdownValue == "Todos" && dropdownValue2 != "Todas") {
       return FirebaseFirestore.instance
           .collection('treinos')
-          .where('tempo', isEqualTo:  "$dropdownValue2")
+          .where('tempo', isEqualTo: "$dropdownValue2")
           .where('Tipo', isEqualTo: 'superior')
           .snapshots();
-    } else if(dropdownValue != "Todos" && dropdownValue2 == "Todas") {
+    } else if (dropdownValue != "Todos" && dropdownValue2 == "Todas") {
       return FirebaseFirestore.instance
           .collection('treinos')
           .where('Nivel', isEqualTo: "$dropdownValue")
           .where('Tipo', isEqualTo: 'superior')
           .snapshots();
-    }else{
+    } else {
       return FirebaseFirestore.instance
           .collection('treinos')
           .where('Tipo', isEqualTo: 'superior')
@@ -113,15 +113,12 @@ class _SuperiorPageState extends State<SuperiorPage> {
               alignment: Alignment(0.8, 0),
               child: Row(
                 children: [
-                  SizedBox(
-                    width: 20
+                  SizedBox(width: 20),
+                  Text(
+                    "Nivel: ",
+                    style: TextStyle(color: Colors.amber, fontSize: 16),
                   ),
-                  Text("Nivel: ",
-                  style: TextStyle(color: Colors.amber, fontSize: 16),
-                  ),
-                   SizedBox(
-                    width: 5
-                  ),
+                  SizedBox(width: 5),
                   Container(
                     child: DropdownButton(
                       value: dropdownValue,
@@ -139,8 +136,12 @@ class _SuperiorPageState extends State<SuperiorPage> {
                           dropdownValue = newValue;
                         });
                       },
-                      items: <String>['Todos', 'básico', 'intermediário', 'avançado']
-                          .map<DropdownMenuItem<String>>((String value) {
+                      items: <String>[
+                        'Todos',
+                        'básico',
+                        'intermediário',
+                        'avançado'
+                      ].map<DropdownMenuItem<String>>((String value) {
                         return new DropdownMenuItem<String>(
                           value: value,
                           child: new Text(
@@ -154,39 +155,49 @@ class _SuperiorPageState extends State<SuperiorPage> {
                   SizedBox(
                     width: 30,
                   ),
-                  Text('Duração: ', style: TextStyle(
-                    color: Colors.amber, fontSize: 16
-                  ),),
+                  Text(
+                    'Duração: ',
+                    style: TextStyle(color: Colors.amber, fontSize: 16),
+                  ),
                   SizedBox(
                     width: 10,
                   ),
                   DropdownButton(
-                      value: dropdownValue2,
-                      dropdownColor: Colors.white,
-                      icon: Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: TextStyle(color: Colors.amber),
-                      // underline: Container(
-                      //  height: 2,
-                      //  color: Colors.amber,s
-                      //),
-                      onChanged: (String newValue) {
-                        setState(() {
-                          dropdownValue2 = newValue;
-                        });
-                      },
-                      items: <String>['Todas', '15', '20', '25', '30', '35','40', '45','50']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return new DropdownMenuItem<String>(
-                          value: value,
-                          child: new Text(
-                            value,
-                            style: defaultFont(16, FontWeight.bold, porange),
-                          ),
-                        );
-                      }).toList(),
-                    ),
+                    value: dropdownValue2,
+                    dropdownColor: Colors.white,
+                    icon: Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: TextStyle(color: Colors.amber),
+                    // underline: Container(
+                    //  height: 2,
+                    //  color: Colors.amber,s
+                    //),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dropdownValue2 = newValue;
+                      });
+                    },
+                    items: <String>[
+                      'Todas',
+                      '15',
+                      '20',
+                      '25',
+                      '30',
+                      '35',
+                      '40',
+                      '45',
+                      '50'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(
+                          value,
+                          style: defaultFont(16, FontWeight.bold, porange),
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ],
               ),
             ),

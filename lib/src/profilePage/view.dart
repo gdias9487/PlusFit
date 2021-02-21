@@ -170,11 +170,6 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                 children: <Widget>[
                                   ShowUserInfo(documentId: user.email),
                                 ],
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.black,
-                                  size: 16,
-                                ),
                                 leading:
                                     Icon(Icons.person, color: Colors.black),
                                 title: Text(
@@ -185,11 +180,6 @@ class _MyPerfilPageState extends State<PerfilPage> {
                               ),
                               Divider(height: 10.0, color: Colors.grey),
                               ExpansionTile(
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.black,
-                                  size: 16,
-                                ),
                                 leading:
                                     Icon(Icons.vpn_key, color: Colors.black),
                                 title: Text(
@@ -226,8 +216,8 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                                 borderRadius:
                                                     BorderRadius.circular(35))),
                                         onPressed: () {
-                                          setInfo(
-                                              user.email, nome, peso, altura);
+                                          setInfo(user.email, nomeController,
+                                              pesoController, alturaController);
                                           setState(() {});
                                         },
                                         child: Text(
@@ -240,11 +230,6 @@ class _MyPerfilPageState extends State<PerfilPage> {
                               ),
                               Divider(height: 10.0, color: Colors.grey),
                               ListTile(
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.black,
-                                  size: 16,
-                                ),
                                 leading: Icon(Icons.assignment_turned_in_sharp,
                                     color: Colors.black),
                                 title: Text(

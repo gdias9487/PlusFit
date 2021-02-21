@@ -69,11 +69,7 @@ class ExerciseInfo extends StatelessWidget {
   final String descricao;
   final String gif;
   @override
-  ExerciseInfo(
-      {this.tag,
-      this.gif,
-      this.descricao =
-          'Realizado em posição de prancha, com os braços estendidos e as palmas das mãos afastadas a largura dos ombros e alinhadas com os mesmos.'});
+  ExerciseInfo({this.tag, this.gif, this.descricao});
   Widget build(BuildContext context) {
     return Hero(
       flightShuttleBuilder: (context, anim, direction, fromContext, toContext) {

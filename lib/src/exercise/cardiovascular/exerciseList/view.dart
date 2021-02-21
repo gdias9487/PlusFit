@@ -9,20 +9,23 @@ class ExercisesCardio extends StatefulWidget {
   final String title;
   final String image;
   final String documentId;
+  final String name;
 
-  const ExercisesCardio({Key key, this.title, this.documentId, this.image})
+  const ExercisesCardio(
+      {Key key, this.title, this.documentId, this.image, this.name})
       : super(key: key);
 
   @override
   _ExercisesCardioPageState createState() =>
-      _ExercisesCardioPageState(documentId, image);
+      _ExercisesCardioPageState(documentId, image, name);
 }
 
 class _ExercisesCardioPageState extends State<ExercisesCardio> {
   final String documentId;
   final String image;
+  final String name;
 
-  _ExercisesCardioPageState(this.documentId, this.image);
+  _ExercisesCardioPageState(this.documentId, this.image, this.name);
 
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
@@ -30,6 +33,7 @@ class _ExercisesCardioPageState extends State<ExercisesCardio> {
       var series = document['series'];
       var repeticoes = document['repeticoes'];
       var gif = document['gif'];
+      var descricao = document['descricao'];
       return WorkoutContainer(
         gif: '$gif',
         width: 1,
@@ -41,6 +45,7 @@ class _ExercisesCardioPageState extends State<ExercisesCardio> {
         text: "$nome",
         subtext: "$series series de $repeticoes repetições",
         image: "assets/signup.jpg",
+        descricao: descricao,
       );
     }).toList();
   }
@@ -80,7 +85,7 @@ class _ExercisesCardioPageState extends State<ExercisesCardio> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 20, bottom: 10),
                     child: Text(
-                      '$documentId',
+                      '$name',
                       style: defaultFont(30, FontWeight.bold, Colors.white),
                     ),
                   ),

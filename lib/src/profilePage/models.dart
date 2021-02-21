@@ -8,11 +8,11 @@ import 'package:plusfit/widgets/animations.dart';
 import '../../storage.dart';
 
 var _firestore = FirebaseFirestore.instance;
-final FirebaseAuth _firebase = FirebaseAuth.instance;
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 final TextEditingController changepass = TextEditingController();
-final TextEditingController nome = TextEditingController();
-final TextEditingController peso = TextEditingController();
-final TextEditingController altura = TextEditingController();
+final TextEditingController nomeController = TextEditingController();
+final TextEditingController pesoController = TextEditingController();
+final TextEditingController alturaController = TextEditingController();
 
 class PFUser {
   String email;
@@ -27,11 +27,11 @@ class PFUser {
 }
 
 setInfo(email, nome, peso, altura) {
-  var user = PFUser(email, nome.text, peso.text, altura.text);
+  var user = PFUser(email, nome, peso, altura);
   _firestore.collection("usuarios").doc(email).update(user.toMap());
-  peso.clear();
-  nome.clear();
-  altura.clear();
+  pesoController.clear();
+  nomeController.clear();
+  alturaController.clear();
 }
 
 class GetUserName extends StatelessWidget {
@@ -80,12 +80,23 @@ class ShowUserInfo extends StatefulWidget {
 }
 
 class _ShowUserInfoState extends State<ShowUserInfo> {
-  double showname = 10;
-  double showheight = 10;
-  double showweight = 10;
-  double editname = 10;
-  double editheight = 10;
-  double editweight = 10;
+  var editname = Icon(
+    Icons.edit,
+    color: porange,
+    size: 20,
+  );
+
+  var editheight = Icon(
+    Icons.edit,
+    color: porange,
+    size: 20,
+  );
+  var editweight = Icon(
+    Icons.edit,
+    color: porange,
+    size: 20,
+  );
+
   @override
   Widget build(BuildContext context) {
     CollectionReference users =
@@ -106,122 +117,114 @@ class _ShowUserInfoState extends State<ShowUserInfo> {
           Map<String, dynamic> data = snapshot.data.data();
 
           return Container(
-            height: 300,
+            height: 400,
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(left: showname),
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.person,
-                          color: porange,
-                        ),
-                        Text(
-                          " Nome: ",
-                          key: UniqueKey(),
-                          style: defaultFont(16, FontWeight.bold, porange),
-                        ),
-                        Text(data["nome"].toString(),
-                            key: UniqueKey(),
-                            style:
-                                defaultFont(16, FontWeight.bold, Colors.black)),
-                        Spacer(),
-                        Align(
-                            alignment: Alignment.topRight,
-                            child: IconButton(
-                                icon: Icon(
-                                  Icons.edit,
-                                  size: 20,
-                                ),
-                                splashColor: Colors.white,
-                                focusColor: Colors.white,
-                                disabledColor: Colors.white,
-                                hoverColor: Colors.white,
-                                highlightColor: Colors.white,
-                                color: porange,
-                                onPressed: () {})),
-                      ],
-                    ),
+                ExpansionTile(
+                  trailing: editname,
+                  children: <Widget>[
+                    Container(
+                        child: TextFormField(
+                      controller: nomeController,
+                      //keyboardType: TextInputType.visiblePassword,
+                      //obscureText: _obscureText,
+                      style: defaultFont(16, FontWeight.normal, pgreytextfield),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          prefixIcon: Icon(Icons.person),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                setInfo(
+                                    _firebaseAuth.currentUser.email,
+                                    nomeController.text,
+                                    data["peso"].toString(),
+                                    data["altura"].toString());
+                              });
+                            },
+                            icon: Icon(Icons.save),
+                          ),
+                          labelText: 'Nome',
+                          labelStyle: defaultFont(
+                              16, FontWeight.normal, pgreytextfield)),
+                    )),
+                  ],
+                  title: Text(
+                    " Nome: " + data["nome"].toString(),
+                    style: defaultFont(16, FontWeight.bold, porange),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: showweight, top: 20),
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.line_weight,
-                          color: porange,
-                        ),
-                        Text(
-                          " Peso: ",
-                          key: UniqueKey(),
-                          style: defaultFont(16, FontWeight.bold, porange),
-                        ),
-                        Text(data["peso"].toString() + "kg",
-                            key: UniqueKey(),
-                            style:
-                                defaultFont(16, FontWeight.bold, Colors.black)),
-                        Spacer(),
-                        Align(
-                            alignment: Alignment.topRight,
-                            child: IconButton(
-                                icon: Icon(
-                                  Icons.edit,
-                                  size: 20,
-                                ),
-                                splashColor: Colors.white,
-                                focusColor: Colors.white,
-                                disabledColor: Colors.white,
-                                hoverColor: Colors.white,
-                                highlightColor: Colors.white,
-                                color: porange,
-                                onPressed: () {
-                                  setState(() {
-                                    showweight = 1000;
-                                  });
-                                })),
-                      ],
-                    ),
+                ExpansionTile(
+                  trailing: editweight,
+                  children: [
+                    Container(
+                        child: TextFormField(
+                      controller: pesoController,
+                      //keyboardType: TextInputType.visiblePassword,
+                      //obscureText: _obscureText,
+                      style: defaultFont(16, FontWeight.normal, pgreytextfield),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          prefixIcon: Icon(Icons.line_weight),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                setInfo(
+                                    _firebaseAuth.currentUser.email,
+                                    data["nome"].toString(),
+                                    pesoController.text,
+                                    data["altura"].toString());
+                              });
+                            },
+                            icon: Icon(
+                              Icons.save,
+                            ),
+                          ),
+                          labelText: 'Peso',
+                          labelStyle: defaultFont(
+                              16, FontWeight.normal, pgreytextfield)),
+                    )),
+                  ],
+                  title: Text(
+                    " Peso: " + data["peso"].toString() + "kg",
+                    style: defaultFont(16, FontWeight.bold, porange),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: showheight, top: 20),
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.height,
-                          color: porange,
-                        ),
-                        Text(
-                          "Altura: ",
-                          key: UniqueKey(),
-                          style: defaultFont(16, FontWeight.bold, porange),
-                        ),
-                        Text(data["altura"].toString() + "cm",
-                            key: UniqueKey(),
-                            style:
-                                defaultFont(16, FontWeight.bold, Colors.black)),
-                        Spacer(),
-                        Align(
-                            alignment: Alignment.topRight,
-                            child: IconButton(
-                                icon: Icon(
-                                  Icons.edit,
-                                  size: 20,
-                                ),
-                                splashColor: Colors.white,
-                                focusColor: Colors.white,
-                                disabledColor: Colors.white,
-                                hoverColor: Colors.white,
-                                highlightColor: Colors.white,
-                                color: porange,
-                                onPressed: () {})),
-                      ],
-                    ),
+                ExpansionTile(
+                  trailing: editheight,
+                  children: [
+                    Container(
+                        child: TextFormField(
+                      controller: alturaController,
+                      //keyboardType: TextInputType.visiblePassword,
+                      //obscureText: _obscureText,
+                      style: defaultFont(16, FontWeight.normal, pgreytextfield),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          prefixIcon: Icon(Icons.height),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                setInfo(
+                                    _firebaseAuth.currentUser.email,
+                                    data["nome"].toString(),
+                                    data["peso"].toString(),
+                                    alturaController.text);
+                              });
+                            },
+                            icon: Icon(Icons.save),
+                          ),
+                          labelText: 'Altura',
+                          labelStyle: defaultFont(
+                              16, FontWeight.normal, pgreytextfield)),
+                    )),
+                  ],
+                  title: Text(
+                    " Altura: " + data["altura"].toString() + "cm",
+                    style: defaultFont(16, FontWeight.bold, porange),
                   ),
                 ),
                 Padding(

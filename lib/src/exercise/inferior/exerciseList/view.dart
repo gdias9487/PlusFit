@@ -6,23 +6,26 @@ import 'package:plusfit/widgets/TrainingContainer.dart';
 import '../../../../storage.dart';
 
 class ExercisesInferior extends StatefulWidget {
-  ExercisesInferior({Key key, this.title, this.documentId, this.image})
+  ExercisesInferior(
+      {Key key, this.title, this.documentId, this.image, this.name})
       : super(key: key);
 
   final String title;
   final String documentId;
   final String image;
+  final String name;
 
   @override
   _ExercisesInferiorPageState createState() =>
-      _ExercisesInferiorPageState(documentId, image);
+      _ExercisesInferiorPageState(documentId, image, name);
 }
 
 class _ExercisesInferiorPageState extends State<ExercisesInferior> {
   final String documentId;
   final String image;
+  final String name;
 
-  _ExercisesInferiorPageState(this.documentId, this.image);
+  _ExercisesInferiorPageState(this.documentId, this.image, this.name);
 
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
@@ -30,6 +33,7 @@ class _ExercisesInferiorPageState extends State<ExercisesInferior> {
       var series = document['series'];
       var repeticoes = document['repeticoes'];
       var gif = document['gif'];
+      var descricao = document['descricao'];
       return WorkoutContainer(
         gif: '$gif',
         width: 1,
@@ -41,6 +45,7 @@ class _ExercisesInferiorPageState extends State<ExercisesInferior> {
         text: "$nome",
         subtext: "$series series de $repeticoes repetições",
         image: "assets/signup.jpg",
+        descricao: descricao,
       );
     }).toList();
   }
@@ -80,7 +85,7 @@ class _ExercisesInferiorPageState extends State<ExercisesInferior> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 20, bottom: 10),
                     child: Text(
-                      '$documentId',
+                      '$name',
                       style: defaultFont(30, FontWeight.bold, Colors.white),
                     ),
                   ),
