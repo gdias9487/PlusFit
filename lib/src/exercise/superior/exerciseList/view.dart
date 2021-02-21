@@ -48,11 +48,13 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
       var nome = document['nome'];
       var series = document['series'];
       var repeticoes = document['repeticoes'];
+      var gif = document['gif'];
 
       return WorkoutContainer(
           action: () {
             //_showDialog(context, exerciseInfo(context, nome, series, repeticoes));
           },
+          gif: '$gif',
           width: 1,
           height: 100,
           top: 0,

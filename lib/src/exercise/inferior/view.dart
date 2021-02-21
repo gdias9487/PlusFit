@@ -24,6 +24,7 @@ class _InferiorPageState extends State<InferiorPage> {
       var nome = document['Nome'];
       var nivel = document['Nivel'];
       var image = document['image'];
+      var tempo = document['tempo'];
 
       return ExerciseContainer(
           color: dificult(nivel),
@@ -34,7 +35,7 @@ class _InferiorPageState extends State<InferiorPage> {
           right: 20,
           bottom: 0.0,
           text: "$nome",
-          subtext: "Nivel: $nivel",
+          subtext: "Nivel: $nivel\nDuração: $tempo minutos",
           image: 'assets/inferior/$image',
           action: () {
             Navigator.push(

@@ -67,9 +67,11 @@ class _AnaliseState extends State<Analise> {
 class ExerciseInfo extends StatelessWidget {
   final String tag;
   final String descricao;
+  final String gif;
   @override
   ExerciseInfo(
       {this.tag,
+      this.gif,
       this.descricao =
           'Realizado em posição de prancha, com os braços estendidos e as palmas das mãos afastadas a largura dos ombros e alinhadas com os mesmos.'});
   Widget build(BuildContext context) {
@@ -107,20 +109,20 @@ class ExerciseInfo extends StatelessWidget {
                         bottomRight: Radius.circular(35),
                         topLeft: Radius.circular(35),
                         topRight: Radius.circular(35))),
-                height: 400,
+                height: 600,
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 0,
                 )),
             Padding(
-              padding: EdgeInsets.only(top: 0),
+              padding: EdgeInsets.only(top: 30),
               child: Container(
-                height: 250,
+                height: 350,
                 decoration: BoxDecoration(
                     //color: Colors.red[900],
                     image: DecorationImage(
-                        image: AssetImage("assets/superior/gifs/flexao.gif"),
+                        image: AssetImage("assets/exercicios/$gif"),
                         fit: BoxFit.cover)),
               ),
             ),
@@ -136,9 +138,9 @@ class ExerciseInfo extends StatelessWidget {
                   child: Icon(Icons.arrow_back_ios)),
             ),
             Padding(
-                padding: EdgeInsets.only(top: 200, left: 50),
+                padding: EdgeInsets.only(top: 350, left: 50),
                 child: Container(
-                    height: 150,
+                    height: 200,
                     width: 300,
                     decoration: BoxDecoration(
                         color: Colors.black,

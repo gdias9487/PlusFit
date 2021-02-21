@@ -237,23 +237,48 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    TextButton(
-                                        style: TextButton.styleFrom(
-                                            minimumSize: Size(100, 35),
-                                            backgroundColor: porange,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(35))),
-                                        onPressed: () {
-                                          setInfo(
-                                              user.email, nome, peso, altura);
-                                          setState(() {});
-                                        },
-                                        child: Text(
-                                          "Salvar",
-                                          style: defaultFont(14,
-                                              FontWeight.bold, Colors.white),
-                                        ))
+                                    Row(
+                                      children: [
+                                        TextButton(
+                                            style: TextButton.styleFrom(
+                                                minimumSize: Size(100, 35),
+                                                backgroundColor: porange,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            35))),
+                                            onPressed: () {
+                                              setState(() {});
+                                            },
+                                            child: Text(
+                                              "Cancelar",
+                                              style: defaultFont(
+                                                  14,
+                                                  FontWeight.bold,
+                                                  Colors.white),
+                                            )),
+                                        TextButton(
+                                            style: TextButton.styleFrom(
+                                                minimumSize: Size(100, 35),
+                                                backgroundColor: porange,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            35))),
+                                            onPressed: () {
+                                              setInfo(user.email, nome, peso,
+                                                  altura);
+                                              setState(() {});
+                                            },
+                                            child: Text(
+                                              "Salvar",
+                                              style: defaultFont(
+                                                  14,
+                                                  FontWeight.bold,
+                                                  Colors.white),
+                                            )),
+                                      ],
+                                    )
                                   ])),
                                 ],
                                 trailing: Icon(
@@ -510,40 +535,32 @@ class _MyPerfilPageState extends State<PerfilPage> {
                       "Formas de antedimento:",
                       style: defaultFont(20, FontWeight.w500, porange),
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.call,
-                              size: 25,
-                            ),
-                            onPressed: () {},
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.call,
+                            size: 25,
                           ),
-                          Text(
-                            "(81) 99530-3343",
-                            style:
-                                defaultFont(16, FontWeight.bold, Colors.black),
-                          ),
-                        ],
-                      ),
+                          onPressed: () {},
+                        ),
+                        Text(
+                          "(81) 99530-3343",
+                          style: defaultFont(16, FontWeight.bold, Colors.black),
+                        ),
+                      ],
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.email, size: 25),
-                            onPressed: () {},
-                          ),
-                          Text(
-                            "plusultragrp@gmail.com",
-                            style:
-                                defaultFont(16, FontWeight.bold, Colors.black),
-                          ),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.email, size: 25),
+                          onPressed: () {},
+                        ),
+                        Text(
+                          "plusultragrp@gmail.com",
+                          style: defaultFont(16, FontWeight.bold, Colors.black),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 35),
                     Text("Informações",

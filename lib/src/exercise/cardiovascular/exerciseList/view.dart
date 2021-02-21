@@ -29,7 +29,9 @@ class _ExercisesCardioPageState extends State<ExercisesCardio> {
       var nome = document['nome'];
       var series = document['series'];
       var repeticoes = document['repeticoes'];
+      var gif = document['gif'];
       return WorkoutContainer(
+        gif: '$gif',
         width: 1,
         height: 100,
         top: 0,

@@ -24,6 +24,7 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
       var nome = document['Nome'];
       var nivel = document['Nivel'];
       var image = document['image'];
+      var tempo = document['tempo'];
 
       return ExerciseContainer(
           color: dificult(nivel),
@@ -34,7 +35,7 @@ class _CardiovascularPageState extends State<CardiovascularPage> {
           right: 20,
           bottom: 0.0,
           text: "$nome",
-          subtext: "Nivel: $nivel",
+          subtext: "Nivel: $nivel\nDuração: $tempo minutos",
           image: 'assets/cardio/$image',
           action: () {
             Navigator.push(

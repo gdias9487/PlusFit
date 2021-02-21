@@ -223,8 +223,10 @@ class WorkoutContainer extends StatelessWidget {
                           PageRouteBuilder(
                               opaque: false,
                               transitionDuration: Duration(seconds: 1),
-                              pageBuilder: (_, __, ___) =>
-                                  ExerciseInfo(tag: text)));
+                              pageBuilder: (_, __, ___) => ExerciseInfo(
+                                    tag: text,
+                                    gif: '$gif',
+                                  )));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -239,8 +241,7 @@ class WorkoutContainer extends StatelessWidget {
                         ),
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage(
-                                "assets/exercicios/flexao_diamante_com_joelho_no_chao.gif")),
+                            image: AssetImage("assets/exercicios/$gif")),
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -258,7 +259,7 @@ class WorkoutContainer extends StatelessWidget {
                       child: Text(text,
                           textAlign: TextAlign.start,
                           style:
-                              defaultFont(14, FontWeight.bold, Colors.amber)),
+                              defaultFont(13, FontWeight.bold, Colors.amber)),
                     ),
                     SizedBox(
                       height: 10,
@@ -268,7 +269,7 @@ class WorkoutContainer extends StatelessWidget {
                       child: Text(subtext,
                           textAlign: TextAlign.left,
                           style:
-                              defaultFont(14, FontWeight.normal, Colors.amber)),
+                              defaultFont(13, FontWeight.normal, Colors.amber)),
                     ),
                   ],
                 ),
