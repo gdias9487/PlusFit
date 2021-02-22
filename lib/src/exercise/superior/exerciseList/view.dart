@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 import 'package:plusfit/widgets/animations.dart';
+import 'package:plusfit/widgets/AlertDialog.dart';
 
 class ExercisesSuperior extends StatefulWidget {
   ExercisesSuperior(
@@ -23,6 +24,17 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
   final String documentId;
   final String nome;
   final String image;
+
+  void _showDialog1(text) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Alert_Box(
+            title: "Novidades em Breve",
+            text: "Função ainda será implementada",
+          );
+        });
+  }
 
   @override
   void initState() {
@@ -129,6 +141,26 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
                         children: makeListWidget(snapshot));
                 }
               }),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            //color: Colors.white,
+            height: 60,
+            width: MediaQuery.of(context).size.width,
+            child: ElevatedButton(
+                child: Text("iniciar"),
+                style: ElevatedButton.styleFrom(
+                  primary: porange,
+                  textStyle: defaultFont(20, FontWeight.bold, Colors.black),
+                  minimumSize: Size(370, 50),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
+                ),
+                onPressed: () {
+                  _showDialog1('Função Ainda Será Implementada');
+                }),
+          ),
         ),
       ]),
     ));
