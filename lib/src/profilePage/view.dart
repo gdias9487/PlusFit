@@ -237,7 +237,12 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                   style: defaultFont(
                                       16, FontWeight.normal, Colors.black),
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (conxtext) => Treinos()));
+                                },
                               ),
                               Divider(height: 10.0, color: Colors.grey),
                               ListTile(
@@ -523,5 +528,31 @@ class _MyPerfilPageState extends State<PerfilPage> {
             ],
           ),
         ));
+  }
+}
+
+class Treinos extends StatefulWidget {
+  @override
+  _TreinosState createState() => _TreinosState();
+}
+
+class _TreinosState extends State<Treinos> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Stack(
+        children: <Widget>[
+          FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: porange,
+              ))
+        ],
+      ),
+    );
   }
 }
