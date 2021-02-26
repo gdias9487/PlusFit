@@ -15,6 +15,7 @@ class SuperiorPage extends StatefulWidget {
 }
 
 class _SuperiorPageState extends State<SuperiorPage> {
+  
   _conection() {
     if (dropdownValue != "Todos" && dropdownValue2 != "Todas") {
       return FirebaseFirestore.instance
@@ -133,7 +134,7 @@ class _SuperiorPageState extends State<SuperiorPage> {
                       //),
                       onChanged: (String newValue) {
                         setState(() {
-                          dropdownValue = newValue;
+                          dropdownValue = newValue;                                                                                                                                 
                         });
                       },
                       items: <String>[

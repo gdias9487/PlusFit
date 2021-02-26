@@ -1,14 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/src/profilePage/models.dart';
+import 'package:plusfit/src/profilePage/controller.dart';
+// import 'package:plusfit/src/resetPasswordPage/controller.dart';
 import 'package:plusfit/widgets/AlertDialog.dart';
 import 'package:plusfit/widgets/animations.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:plusfit/components/constants.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plusfit/widgets/TrainingContainer.dart';
 import 'dart:io';
+import 'dart:convert';
 import '../../authentication.dart';
 import '../../components/constants.dart';
 
@@ -28,11 +33,14 @@ class _MyPerfilPageState extends State<PerfilPage> {
 
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  Controller controller = Controller();
+  ShowUserInfo _showinfo = ShowUserInfo();
   // ignore: unused_field
   final ImagePicker _picker = ImagePicker();
   File _imageFile;
 
   final picker = ImagePicker();
+  var nome;
 
   Future pickImage(ImageSource source) async {
     final pickedFile = await picker.getImage(source: source);
@@ -537,21 +545,196 @@ class Treinos extends StatefulWidget {
 }
 
 class _TreinosState extends State<Treinos> {
+  final _formKey = GlobalKey<FormState>();
+
+  Controller _controller = Controller();
+
+  final TextEditingController _pesoController = TextEditingController();
+  final TextEditingController _alturaController = TextEditingController();
+
+  var indicativo;
+  var dic = {};
+  String dropdownValue = 'Todos';
+  String dropdownValue2 = 'Todas';
+
+  _conection(imc) {
+      return FirebaseFirestore.instance
+          .collection('treinos')
+          .where('indicativo', isEqualTo: imc)
+          .snapshots();
+  }
+
+  _validateConection() {
+    if (!_formKey.currentState.validate()) return;
+    indicativo = _controller
+        .call(path: '/TreinoIndicado', params: {'params': jsonEncode(dic)});
+  }
+
+  _setValue() {
+    dic['peso'] = _pesoController.text.trim();
+    dic['altura'] = _alturaController.text.trim();
+  }
+
+  List<Widget> makeListWidget(AsyncSnapshot snapshot) {
+    return snapshot.data.docs.map<Widget>((document) {
+      var nome = document['Nome'];
+      var nivel = document['Nivel'];
+      var image = document['image'];
+      var tipo = document['Tipo'];
+      var tempo = document['tempo'];
+      return ExerciseContainer(
+        color: dificult(nivel),
+        width: 1,
+        height: 100,
+        top: 20,
+        left: 20,
+        right: 20,
+        bottom: 0.0,
+        image: "assets/$tipo/$image",
+        text: "$nome",
+        subtext: "Nivel: $nivel\nDuração: $tempo minutos",
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Stack(
-        children: <Widget>[
-          FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: porange,
-              ))
-        ],
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Sugestão de Treino'),
+        ),
+        body: Form(
+          key: _formKey,
+          child: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/back_treinos.png"),
+                    fit: BoxFit.cover)),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 15,
+                          left: 10,
+                          right: 10,
+                          bottom: 10,
+                        ),
+                        child: TextFormField(
+                          validator: (String value) {
+                            return value.isEmpty ? 'Peso Inválido' : null;
+                          },
+                          controller: _pesoController,
+                          keyboardType: TextInputType.number,
+                          obscureText: false,
+                          style: defaultFont(
+                              14, FontWeight.normal, pgreytextfield),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              prefixIcon: Icon(Icons.account_circle_sharp),
+                              labelText: 'Peso (em Kg)',
+                              labelStyle: defaultFont(
+                                  16, FontWeight.normal, pgreytextfield)),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 0,
+                          left: 10,
+                          right: 10,
+                          bottom: 10,
+                        ),
+                        child: TextFormField(
+                          validator: (String value) {
+                            return value.isEmpty ? 'Altura Inválida' : null;
+                          },
+                          controller: _alturaController,
+                          keyboardType: TextInputType.number,
+                          obscureText: false,
+                          style: defaultFont(
+                              14, FontWeight.normal, pgreytextfield),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              prefixIcon: Icon(Icons.account_circle_sharp),
+                              labelText: 'Altura (em centímetros)',
+                              labelStyle: defaultFont(
+                                  16, FontWeight.normal, pgreytextfield)),
+                        ),
+                      ),
+                      
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 0,
+                          left: 10,
+                          right: 10,
+                          bottom: 10,
+                        ),
+                        child: Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton(
+                              child: Text("Buscar"),
+                              style: ElevatedButton.styleFrom(
+                                primary: porange,
+                                textStyle: defaultFont(
+                                    20, FontWeight.bold, Colors.black),
+                                minimumSize: Size(370, 50),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25)),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _setValue();
+                                  _validateConection();
+                                });
+                              }),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(height: 10.0, color: Colors.black),
+                FutureBuilder(
+                    future: indicativo,
+                    builder: (BuildContext context, AsyncSnapshot snapshot1) {
+                      if (snapshot1.hasData) {
+                        var data = snapshot1.data;
+                        return Flexible(
+                          child: StreamBuilder(
+                              stream: _conection(data['imc'].toString()),
+                              builder: (context, snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.waiting:
+                                    return Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+
+                                  default:
+                                    return ListView(
+                                        children: makeListWidget(snapshot));
+                                }
+                              }),
+                        );
+                      } else {
+                        return Container(
+                          height: 0,
+                          width: 0,
+                        );
+                      }
+                    }),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

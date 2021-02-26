@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:plusfit/components/constants.dart';
 import 'package:plusfit/src/profilePage/view.dart';
 import 'package:plusfit/widgets/animations.dart';
@@ -46,10 +49,10 @@ class GetUserName extends StatelessWidget {
 
     // ignore: await_only_futures
 
-    return FutureBuilder<DocumentSnapshot>(
+    return FutureBuilder(
       future: users.doc(documentId).get(),
       builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasError) {
           return Text("",
               style: defaultFont(25, FontWeight.bold, Colors.white));
@@ -117,7 +120,7 @@ class _ShowUserInfoState extends State<ShowUserInfo> {
           Map<String, dynamic> data = snapshot.data.data();
 
           return Container(
-            height: 400,
+            height: 165,
             child: Column(
               children: <Widget>[
                 ExpansionTile(
@@ -155,80 +158,8 @@ class _ShowUserInfoState extends State<ShowUserInfo> {
                     style: defaultFont(16, FontWeight.bold, porange),
                   ),
                 ),
-                ExpansionTile(
-                  trailing: editweight,
-                  children: [
-                    Container(
-                        child: TextFormField(
-                      controller: pesoController,
-                      //keyboardType: TextInputType.visiblePassword,
-                      //obscureText: _obscureText,
-                      style: defaultFont(16, FontWeight.normal, pgreytextfield),
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          prefixIcon: Icon(Icons.line_weight),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                setInfo(
-                                    _firebaseAuth.currentUser.email,
-                                    data["nome"].toString(),
-                                    pesoController.text,
-                                    data["altura"].toString());
-                              });
-                            },
-                            icon: Icon(
-                              Icons.save,
-                            ),
-                          ),
-                          labelText: 'Peso',
-                          labelStyle: defaultFont(
-                              16, FontWeight.normal, pgreytextfield)),
-                    )),
-                  ],
-                  title: Text(
-                    " Peso: " + data["peso"].toString() + "kg",
-                    style: defaultFont(16, FontWeight.bold, porange),
-                  ),
-                ),
-                ExpansionTile(
-                  trailing: editheight,
-                  children: [
-                    Container(
-                        child: TextFormField(
-                      controller: alturaController,
-                      //keyboardType: TextInputType.visiblePassword,
-                      //obscureText: _obscureText,
-                      style: defaultFont(16, FontWeight.normal, pgreytextfield),
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          prefixIcon: Icon(Icons.height),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                setInfo(
-                                    _firebaseAuth.currentUser.email,
-                                    data["nome"].toString(),
-                                    data["peso"].toString(),
-                                    alturaController.text);
-                              });
-                            },
-                            icon: Icon(Icons.save),
-                          ),
-                          labelText: 'Altura',
-                          labelStyle: defaultFont(
-                              16, FontWeight.normal, pgreytextfield)),
-                    )),
-                  ],
-                  title: Text(
-                    " Altura: " + data["altura"].toString() + "cm",
-                    style: defaultFont(16, FontWeight.bold, porange),
-                  ),
-                ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 20),
+                  padding: const EdgeInsets.only(left: 10, top: 10),
                   child: Container(
                     child: Row(
                       children: [

@@ -1,112 +1,43 @@
-// Container(
-//                                       child: Column(children: <Widget>[
-//                                     TextFormField(
-//                                       controller: nome,
-//                                       keyboardType: TextInputType.name,
-//                                       obscureText: false,
-//                                       style: defaultFont(14, FontWeight.normal,
-//                                           pgreytextfield),
-//                                       decoration: InputDecoration(
-//                                           border: OutlineInputBorder(
-//                                               borderRadius:
-//                                                   BorderRadius.circular(30)),
-//                                           prefixIcon:
-//                                               Icon(Icons.account_circle_sharp),
-//                                           labelText: 'Nome',
-//                                           labelStyle: defaultFont(
-//                                               16,
-//                                               FontWeight.normal,
-//                                               pgreytextfield)),
-//                                     ),
-//                                     SizedBox(
-//                                       height: 10,
-//                                     ),
-//                                     Row(children: <Widget>[
-//                                       Flexible(
-//                                           child: TextFormField(
-//                                         controller: peso,
-//                                         keyboardType: TextInputType.number,
-//                                         obscureText: false,
-//                                         style: defaultFont(14,
-//                                             FontWeight.normal, pgreytextfield),
-//                                         decoration: InputDecoration(
-//                                             border: OutlineInputBorder(
-//                                                 borderRadius:
-//                                                     BorderRadius.circular(30)),
-//                                             prefixIcon: Icon(
-//                                                 Icons.account_circle_sharp),
-//                                             labelText: 'Peso',
-//                                             labelStyle: defaultFont(
-//                                                 16,
-//                                                 FontWeight.normal,
-//                                                 pgreytextfield)),
-//                                       )),
-//                                       SizedBox(
-//                                         width: 5,
-//                                       ),
-//                                       Flexible(
-//                                           child: TextFormField(
-//                                         controller: altura,
-//                                         keyboardType: TextInputType.number,
-//                                         obscureText: false,
-//                                         style: defaultFont(14,
-//                                             FontWeight.normal, pgreytextfield),
-//                                         decoration: InputDecoration(
-//                                             border: OutlineInputBorder(
-//                                                 borderRadius:
-//                                                     BorderRadius.circular(30)),
-//                                             prefixIcon: Icon(
-//                                                 Icons.account_circle_sharp),
-//                                             labelText: 'Altura',
-//                                             labelStyle: defaultFont(
-//                                                 16,
-//                                                 FontWeight.normal,
-//                                                 pgreytextfield)),
-//                                       ))
-//                                     ]),
-//                                     SizedBox(
-//                                       height: 10,
-//                                     ),
-//                                     Row(
-//                                       children: [
-//                                         TextButton(
-//                                             style: TextButton.styleFrom(
-//                                                 minimumSize: Size(100, 35),
-//                                                 backgroundColor: porange,
-//                                                 shape: RoundedRectangleBorder(
-//                                                     borderRadius:
-//                                                         BorderRadius.circular(
-//                                                             35))),
-//                                             onPressed: () {
-//                                               setState(() {});
-//                                             },
-//                                             child: Text(
-//                                               "Cancelar",
-//                                               style: defaultFont(
-//                                                   14,
-//                                                   FontWeight.bold,
-//                                                   Colors.white),
-//                                             )),
-//                                         TextButton(
-//                                             style: TextButton.styleFrom(
-//                                                 minimumSize: Size(100, 35),
-//                                                 backgroundColor: porange,
-//                                                 shape: RoundedRectangleBorder(
-//                                                     borderRadius:
-//                                                         BorderRadius.circular(
-//                                                             35))),
-//                                             onPressed: () {
-//                                               setInfo(user.email, nome, peso,
-//                                                   altura);
-//                                               setState(() {});
-//                                             },
-//                                             child: Text(
-//                                               "Salvar",
-//                                               style: defaultFont(
-//                                                   14,
-//                                                   FontWeight.bold,
-//                                                   Colors.white),
-//                                             )),
-//                                       ],
-//                                     )
-//                                   ]))
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:mvc_pattern/mvc_pattern.dart';
+
+
+const default_server = '7ca5364fcb5f.ngrok.io';
+
+const default_headers = {
+  HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
+};
+
+ //final Controller controller = Controller._();
+
+class Controller extends ControllerMVC {
+  Controller();
+
+  bool isOK(http.Response response) {
+    return response.statusCode >= 200 && response.statusCode < 300;
+  }
+
+  bool isFail(http.Response response) {
+    return !isOK(response);
+  }
+
+  Future call(
+      {String server = default_server,
+      String path,
+      Map<String, String> params,
+      Map<String, String> headers = default_headers,
+
+      Future process(json)}) async {
+      var uri = Uri.https(server, path, params);
+      var response = http.get(uri, headers: headers);
+
+      var res = await response;
+      if (isOK(res)) {
+        return jsonDecode(res.body);
+      } else {
+        throw Exception('Falha ao chamar a api REST.');
+      }
+  }
+}
