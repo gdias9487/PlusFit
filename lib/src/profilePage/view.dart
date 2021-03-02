@@ -241,7 +241,23 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                 leading: Icon(Icons.assignment_turned_in_sharp,
                                     color: Colors.black),
                                 title: Text(
-                                  "Treinos",
+                                  "Sugestão de Treinos",
+                                  style: defaultFont(
+                                      16, FontWeight.normal, Colors.black),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (conxtext) => Treinos()));
+                                },
+                              ),
+                              Divider(height: 10.0, color: Colors.grey),
+                              ListTile(
+                                leading: Icon(Icons.assignment_turned_in_sharp,
+                                    color: Colors.black),
+                                title: Text(
+                                  "Treinos Concluidos",
                                   style: defaultFont(
                                       16, FontWeight.normal, Colors.black),
                                 ),
@@ -558,10 +574,10 @@ class _TreinosState extends State<Treinos> {
   String dropdownValue2 = 'Todas';
 
   _conection(imc) {
-      return FirebaseFirestore.instance
-          .collection('treinos')
-          .where('indicativo', isEqualTo: imc)
-          .snapshots();
+    return FirebaseFirestore.instance
+        .collection('treinos')
+        .where('indicativo', isEqualTo: imc)
+        .snapshots();
   }
 
   _validateConection() {
@@ -670,7 +686,6 @@ class _TreinosState extends State<Treinos> {
                                   16, FontWeight.normal, pgreytextfield)),
                         ),
                       ),
-                      
                       Padding(
                         padding: EdgeInsets.only(
                           top: 0,
