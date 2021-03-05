@@ -262,10 +262,7 @@ class _MyPerfilPageState extends State<PerfilPage> {
                                       16, FontWeight.normal, Colors.black),
                                 ),
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (conxtext) => Treinos()));
+                                  Navigator.pushNamed(context, '/base');
                                 },
                               ),
                               Divider(height: 10.0, color: Colors.grey),
@@ -749,6 +746,85 @@ class _TreinosState extends State<Treinos> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class Concluidos extends StatefulWidget {
+  @override
+  _ConcluidosState createState() => _ConcluidosState();
+}
+
+class _ConcluidosState extends State<Concluidos> {
+  final _formKey = GlobalKey<FormState>();
+
+  Controller _controller = Controller();
+
+  final TextEditingController _pesoController = TextEditingController();
+  final TextEditingController _alturaController = TextEditingController();
+
+  var indicativo;
+  var dic = {};
+  String dropdownValue = 'Todos';
+  String dropdownValue2 = 'Todas';
+
+  _conection(imc) {
+    return FirebaseFirestore.instance
+        .collection('treinos')
+        .where('indicativo', isEqualTo: imc)
+        .snapshots();
+  }
+
+  _validateConection() {
+    if (!_formKey.currentState.validate()) return;
+    indicativo = _controller
+        .call(path: '/TreinoIndicado', params: {'params': jsonEncode(dic)});
+  }
+
+  _setValue() {
+    dic['peso'] = _pesoController.text.trim();
+    dic['altura'] = _alturaController.text.trim();
+  }
+
+  List<Widget> makeListWidget(AsyncSnapshot snapshot) {
+    return snapshot.data.docs.map<Widget>((document) {
+      var nome = document['Nome'];
+      var nivel = document['Nivel'];
+      var image = document['image'];
+      var tipo = document['Tipo'];
+      var tempo = document['tempo'];
+      return ExerciseContainer(
+        color: dificult(nivel),
+        width: 1,
+        height: 100,
+        top: 20,
+        left: 20,
+        right: 20,
+        bottom: 0.0,
+        image: "assets/$tipo/$image",
+        text: "$nome",
+        subtext: "Nivel: $nivel\nDuração: $tempo minutos",
+      );
+    }).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Treinos Concluidos'),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/back_treinos.png"),
+                  fit: BoxFit.cover)),
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
         ),
       ),
     );

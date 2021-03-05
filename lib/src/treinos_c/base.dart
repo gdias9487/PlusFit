@@ -1,44 +1,44 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
-import 'package:plusfit/src/exercise/superior/exerciseList/view.dart';
+import 'package:plusfit/src/treinos_c/concluidos.dart';
 import 'package:plusfit/widgets/TrainingContainer.dart';
 import 'package:plusfit/widgets/animations.dart';
 
-class SuperiorPage extends StatefulWidget {
-  SuperiorPage({Key key, this.title}) : super(key: key);
+class BasePage extends StatefulWidget {
+  BasePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _SuperiorPageState createState() => _SuperiorPageState();
+  _BasePageState createState() => _BasePageState();
 }
 
-class _SuperiorPageState extends State<SuperiorPage> {
+class _BasePageState extends State<BasePage> {
   _conection() {
     if (dropdownValue != "Todos" && dropdownValue2 != "Todas") {
       return FirebaseFirestore.instance
           .collection('treinos')
           .where('Nivel', isEqualTo: "$dropdownValue")
           .where('tempo', isEqualTo: "$dropdownValue2")
-          .where('Tipo', isEqualTo: 'superior')
+          .where('concluido', isEqualTo: 'sim')
           .snapshots();
     } else if (dropdownValue == "Todos" && dropdownValue2 != "Todas") {
       return FirebaseFirestore.instance
           .collection('treinos')
           .where('tempo', isEqualTo: "$dropdownValue2")
-          .where('Tipo', isEqualTo: 'superior')
+          .where('concluido', isEqualTo: 'sim')
           .snapshots();
     } else if (dropdownValue != "Todos" && dropdownValue2 == "Todas") {
       return FirebaseFirestore.instance
           .collection('treinos')
           .where('Nivel', isEqualTo: "$dropdownValue")
-          .where('Tipo', isEqualTo: 'superior')
+          .where('concluido', isEqualTo: 'sim')
           .snapshots();
     } else {
       return FirebaseFirestore.instance
           .collection('treinos')
-          .where('Tipo', isEqualTo: 'superior')
+          .where('concluido', isEqualTo: 'sim')
           .snapshots();
     }
   }
@@ -64,7 +64,7 @@ class _SuperiorPageState extends State<SuperiorPage> {
             Navigator.push(
                 context,
                 transitionAnimation(
-                    ExercisesSuperior(
+                    ExercisesConc(
                       documentId: (document['doc'].toString()),
                       image: (image.toString()),
                       nome: nome,
@@ -83,7 +83,7 @@ class _SuperiorPageState extends State<SuperiorPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Treinos Superiores',
+          'Treinos concluidos',
           style: defaultFont(18, FontWeight.bold, Colors.white),
         ),
         actions: [],
@@ -107,7 +107,6 @@ class _SuperiorPageState extends State<SuperiorPage> {
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 100,
-              child: Image.asset('assets/superiores.png'),
             ),
             Align(
               alignment: Alignment(0.8, 0),

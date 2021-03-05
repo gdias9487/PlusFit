@@ -28,17 +28,17 @@ class _ExercisesCardioPageState extends State<ExercisesCardio> {
 
   _ExercisesCardioPageState(this.documentId, this.image, this.name);
 
-     void _showDialog1() {
+  void _showDialog1() {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return Alert_Box(
-            title: "Novidades em Breve",
-            text: "Função ainda será implementada",
+            title: "Conclusão de Treinos",
+            text: "Treino concluído com Sucesso!",
           );
         });
   }
-  
+
   List<Widget> makeListWidget(AsyncSnapshot snapshot) {
     return snapshot.data.docs.map<Widget>((document) {
       var nome = document['nome'];
@@ -124,25 +124,38 @@ class _ExercisesCardioPageState extends State<ExercisesCardio> {
                 }
               }),
         ),
+        SizedBox(
+          height: 10,
+        ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
             //color: Colors.white,
             height: 60,
-            width: MediaQuery.of(context).size.width,
+            width: 200,
             child: ElevatedButton(
-                child: Text("iniciar"),
+                child: Center(
+                    child: Text("Concluir Treino",
+                        style: TextStyle(
+                          color: Colors.lightGreenAccent[400],
+                        ))),
                 style: ElevatedButton.styleFrom(
                   primary: porange,
-                  textStyle: defaultFont(20, FontWeight.bold, Colors.black),
+                  textStyle: defaultFont(20, FontWeight.bold, Colors.green),
                   minimumSize: Size(370, 50),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25)),
                 ),
                 onPressed: () {
-                  _showDialog1();
+                  var db = FirebaseFirestore.instance;
+                  db.collection("treinos").doc("$documentId").update({
+                    "concluido": "sim",
+                  });
                 }),
           ),
+        ),
+        SizedBox(
+          height: 20,
         ),
       ]),
     ));

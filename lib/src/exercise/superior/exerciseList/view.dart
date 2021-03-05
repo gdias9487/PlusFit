@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:plusfit/components/constants.dart';
@@ -14,6 +16,7 @@ class ExercisesSuperior extends StatefulWidget {
   final String documentId;
   final String nome;
   final String image;
+  var db = FirebaseFirestore.instance;
 
   @override
   _ExercisesSuperiorState createState() =>
@@ -30,8 +33,8 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
         context: context,
         builder: (BuildContext context) {
           return Alert_Box(
-            title: "Novidades em Breve",
-            text: "Função ainda será implementada",
+            title: "Conclusão de Treinos",
+            text: "Treino Concluído com Sucesso!",
           );
         });
   }
@@ -62,6 +65,7 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
       var repeticoes = document['repeticoes'];
       var gif = document['gif'];
       var descricao = document['descricao'];
+
       return WorkoutContainer(
           action: () {
             //_showDialog(context, exerciseInfo(context, nome, series, repeticoes));
@@ -142,25 +146,38 @@ class _ExercisesSuperiorState extends State<ExercisesSuperior> {
                 }
               }),
         ),
+        SizedBox(
+          height: 10,
+        ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
             //color: Colors.white,
             height: 60,
-            width: MediaQuery.of(context).size.width,
+            width: 200,
             child: ElevatedButton(
-                child: Text("iniciar"),
+                child: Center(
+                    child: Text("Concluir Treino",
+                        style: TextStyle(
+                          color: Colors.lightGreenAccent[400],
+                        ))),
                 style: ElevatedButton.styleFrom(
                   primary: porange,
-                  textStyle: defaultFont(20, FontWeight.bold, Colors.black),
+                  textStyle: defaultFont(20, FontWeight.bold, Colors.green),
                   minimumSize: Size(370, 50),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25)),
                 ),
                 onPressed: () {
-                  _showDialog1('Função Ainda Será Implementada');
+                  var db = FirebaseFirestore.instance;
+                  db.collection("treinos").doc("$documentId").update({
+                    "concluido": "sim",
+                  });
                 }),
           ),
+        ),
+        SizedBox(
+          height: 20,
         ),
       ]),
     ));

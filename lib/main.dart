@@ -15,6 +15,7 @@ import 'package:plusfit/src/aboutPage/view.dart';
 import 'package:plusfit/src/exercisePage/view.dart';
 import 'package:plusfit/src/signUpPage/view.dart';
 import 'package:plusfit/src/exercise/superior/view.dart';
+import 'package:plusfit/src/treinos_c/base.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +48,7 @@ class PFApp extends StatelessWidget {
             '/superior': (context) => SuperiorPage(),
             '/inferior': (context) => InferiorPage(),
             '/cardio': (context) => CardiovascularPage(),
+            '/base': (context) => BasePage(),
           },
           title: 'PlusFit v1.0',
           theme: ThemeData(
